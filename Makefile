@@ -4,29 +4,16 @@ CC = cc
 
 CFLAGS = -g -Wall -Wextra -Werror -I includes
 
+INCLUDE = -I include/
+
 HEADER = minishell.h
 
-BUILTINS = pwd cd export env unset echo
+MAIN = main.c map_checker.c
 
-ENV = handle_variable export_utils
-
-EXEC = exec exit
-
-MAIN = main manager signal redirections
-
-PARSING = init_data init_data_utils
-
-TOOLS = free_utils libutils ft_split_enhanced tools
-
-PIPEX = ft_exec_cmd pipex utils find_path
+GNL = get_net_line get_next_line_utils
 
 SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
-	$(addsuffix .c, $(addprefix srcs/tools/, $(TOOLS))) \
-	$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
-	$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
-	$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
-	$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
-	$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
+
 	  
 
 OBJ = $(SRC:c=o)
@@ -34,7 +21,7 @@ OBJ = $(SRC:c=o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;32mMinishell Compiled !"
+	@echo "\033[0;32mCub3d compiled"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline
 	@echo "\n\033[0m./minishell to execute the program !"
 
