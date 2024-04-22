@@ -6,21 +6,23 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:12:26 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/22 16:27:27 by arpages          ###   ########.fr       */
+/*   Updated: 2024/04/22 17:29:13 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubed.h"
+#include "../../include/cubed.h"
 
 /* this funtiom copy a file gave in struct map_info->map_path
 	in the variable char **global */
-void	copy_file(t_map_info *map_info, int j)
+void	copy_file(t_map_info *map_info)
 {
 	int		fd;
+	int		j;
 	char	*temp;
 
+	j = 0;
 	map_info->height = 0;
-	fd = open(map_info->map_path, O_RDWR); int i = 1;
+	fd = open(map_info->map_path, O_RDWR);
 	temp = get_next_line(fd);
 	while (temp != NULL)
 	{
@@ -47,6 +49,7 @@ void get_map(t_map_info *map_info)
 	int i;
 	char **map;
 
+	map = NULL;
 	i = map_info->height;
 	while (is_map_part(map_info->global[i]) == 0)
 		i--;
@@ -55,17 +58,18 @@ void get_map(t_map_info *map_info)
 		map = tab_realloc(map, 1, map_info->global[i]);
 		i--;
 	}
+	map_info->map = map;
 }
 
-char **tab_realloc(char **tab, unsigned int m_size, char *content)
+/* classic realloc funtion*/
+char **tab_realloc(char **tab, int m_size, char *content)
 {
 	int i;
-	int size;
 	char **new_tab;
 
-	int i = 0;
+	i = 0;
 	new_tab = malloc(sizeof(char *) * (tab_size(tab) + m_size + 1));
-	while (tab[i] != NULL)
+	while (tab != NULL && tab[i] != NULL)
 	{
 		new_tab[i] = tab[i];
 		i++;
@@ -76,15 +80,19 @@ char **tab_realloc(char **tab, unsigned int m_size, char *content)
 		i++;
 	}
 	new_tab[i] = NULL;
-	free(tab);
+	if (tab != NULL)
+		free(tab);
 	return(new_tab);
 }
 
+/* checke if the line contain part of a map*/
 int is_map_part(char *line)
 {
 	int i;
 
 	i = 0;
+	if (line == NULL)
+		return (0);
 	while(line[i] != '\0')
 	{
 		if (line[i] == '1')
@@ -94,11 +102,14 @@ int is_map_part(char *line)
 	return (0);
 }
 
+/*return size of a tab*/
 int tab_size(char **tab)
 {
 	int i;
 
 	i = 0;
+	if(tab == NULL)
+		return (0);
 	while (tab[i] != NULL)
 		i++;
 	return (i);

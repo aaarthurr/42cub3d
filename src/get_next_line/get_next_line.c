@@ -6,11 +6,11 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:35:57 by arpages           #+#    #+#             */
-/*   Updated: 2023/10/29 17:52:30 by arpages          ###   ########.fr       */
+/*   Updated: 2024/04/22 17:01:16 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+# include "../../include/cubed.h"
 
 void	clean_lst(t_list **lst)
 {

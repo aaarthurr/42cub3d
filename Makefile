@@ -1,4 +1,4 @@
-NAME = minishell
+NAME = cub3d
 
 CC = cc
 
@@ -6,13 +6,14 @@ CFLAGS = -g -Wall -Wextra -Werror -I includes
 
 INCLUDE = -I include/
 
-HEADER = minishell.h
+HEADER = cubed.h
 
-MAIN = main.c map_checker.c
+MAIN = main map_checker mapping
 
-GNL = get_net_line get_next_line_utils
+GNL = get_next_line get_next_line_utils
 
-SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
+SRC = 	$(addsuffix .c, $(addprefix src/main/, $(MAIN))) \
+		$(addsuffix .c, $(addprefix src/get_next_line/, $(GNL))) \
 
 	  
 
@@ -22,7 +23,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "\033[0;32mCub3d compiled"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -lreadline
+	@$(CC) $(CFLAGS) $(OBJ) -o $@
 	@echo "\n\033[0m./minishell to execute the program !"
 
 %.o: %.c
