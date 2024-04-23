@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:09:32 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 13:51:26 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:32:20 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,18 @@ void	print_tab(char **tab)
         printf("%s\n", tab[i]);
 		i++;
 	}
+}
+
+int ft_strchr(char c, char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }

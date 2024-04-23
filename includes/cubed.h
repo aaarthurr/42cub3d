@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 
 # include "get_next_line.h"
 #include "../minilibx/mlx.h"
@@ -30,12 +31,25 @@ typedef struct map_info_s
 	int height;
 }			t_map_info;
 
-typedef struct ray_s
+typedef struct s_ray
 {
 	float x;
 	float y;
 		
 }			t_ray;
+
+typedef struct s_player
+{
+	//vecteur position
+	double	posX;
+	double	posY;
+	//direction du joueur
+	int dirX;
+	int dirY;
+	//plan de la camera
+	int planX;
+	int	planY
+}			t_player;
 
 typedef struct data_s
 {
@@ -56,11 +70,13 @@ void	copy_file(t_map_info *map_info);
 void	get_map(t_map_info *map_info);
 int		is_map_part(char *line);
 
+int check_walls(t_data *data);
 
 /* utils */
 //tools.c
 int		ft_strlen(char *str);
 int		tab_size(char **tab);
+int		ft_strchr(char c, char *str)
 void	print_tab(char **tab);
 char	**tab_realloc(char **tab, int m_size, char *content);
 
