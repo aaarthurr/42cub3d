@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:09:32 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 13:10:33 by arpages          ###   ########.fr       */
+/*   Updated: 2024/04/23 13:51:26 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ int tab_size(char **tab)
 	while (tab[i] != NULL)
 		i++;
 	return (i);
+}
+
+int	ft_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i] != '\0')
+		i++;
+	return(i);
 }
 
 void	print_tab(char **tab)
