@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:04:05 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 12:52:11 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/04/23 13:10:31 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,4 @@ int main(int argc, char **argv)
         get_map(&data.map_info);
         print_tab(data.map_info.map);
     }
-}
-
-void	print_tab(char **tab)
-{
-	int		i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-        printf("%s\n", tab[i]);
-		i++;
-	}
 }

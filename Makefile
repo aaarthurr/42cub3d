@@ -6,7 +6,9 @@ CFLAGS = -g -Wall -Wextra -Werror -I includes
 
 HEADER = cub3d.h
 
-MAIN = main
+MAIN = main init checker start
+
+UTILS = tools
 
 MAP = map_checker mapping
 
@@ -15,10 +17,10 @@ GNL = get_next_line get_next_line_utils
 SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 	$(addsuffix .c, $(addprefix srcs/get_next_line/, $(GNL))) \
 	$(addsuffix .c, $(addprefix srcs/map/, $(MAP))) \
-	#$(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
-	$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
-	$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
-	$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
+	$(addsuffix .c, $(addprefix srcs/utils/, $(UTILS))) \
+	#$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
+	#$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
+	#$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  
 
 OBJ = $(SRC:c=o)
