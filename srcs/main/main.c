@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:04:05 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 15:45:49 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:22:00 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
-
+/*
 void	raycasting_try(t_data *data)
 {
 	data->player.posX = 22;
@@ -47,6 +47,7 @@ void	game_manager(t_data *data)
 	data->win = mlx_new_window(data->mlx, data->win_height, data->win_height, "Backroom cub3d");
 	mlx_loop(data->mlx);
 }
+*/
 
 int main(int argc, char **argv)
 {
@@ -61,8 +62,9 @@ int main(int argc, char **argv)
         //print_tab(data.map_info.global);
         get_map(&data.map_info);
         print_tab(data.map_info.map);
-        if (check_walls(&data) == 0)
+        if (check_walls(&data) == 1)
             printf("error\n");
+        printf("%f . %f\n", data.player.posX, data.player.posY);
 		//game_manager(&data);
     }
 	return (0);

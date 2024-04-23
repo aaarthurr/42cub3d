@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:09:32 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 15:32:20 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:02:40 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ void	print_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-        printf("%s\n", tab[i]);
+        printf("%s", tab[i]);
 		i++;
 	}
+	printf("\n");
 }
 
 int ft_strchr(char c, char *str)

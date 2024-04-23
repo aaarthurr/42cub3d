@@ -6,7 +6,7 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 13:22:47 by arpages          ###   ########.fr       */
+/*   Updated: 2024/04/23 16:21:07 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,10 @@ int is_map_part(char *line)
 		i++;
 	}
 	return (0);
+}
+
+void set_pos(t_data *data, int x, int y)
+{
+	data->player.posX = (double)x + 0.5;
+	data->player.posY = (double)y + 0.5;
 }

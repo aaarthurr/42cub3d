@@ -48,7 +48,7 @@ typedef struct s_player
 	int dirY;
 	//plan de la camera
 	int planX;
-	int	planY
+	int	planY;
 }			t_player;
 
 typedef struct data_s
@@ -57,7 +57,7 @@ typedef struct data_s
 	void		*win;
 	int			win_height;
 	int			win_width;
-	
+	t_player	player;
 	t_map_info  map_info;
 	t_ray		ray;
 }				t_data;
@@ -70,13 +70,17 @@ void	copy_file(t_map_info *map_info);
 void	get_map(t_map_info *map_info);
 int		is_map_part(char *line);
 
-int check_walls(t_data *data);
+int		check_walls(t_data *data);
+
+int		check_walls_bis(t_data *data, int x, int y);
+
+void	set_pos(t_data *data, int x, int y);
 
 /* utils */
 //tools.c
 int		ft_strlen(char *str);
 int		tab_size(char **tab);
-int		ft_strchr(char c, char *str)
+int		ft_strchr(char c, char *str);
 void	print_tab(char **tab);
 char	**tab_realloc(char **tab, int m_size, char *content);
 
