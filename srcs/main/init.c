@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 16:21:07 by arpages          ###   ########.fr       */
+/*   Updated: 2024/04/24 16:14:52 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+
+void	get_all(char **argv, t_data *data)
+{
+	if (check_file(argv[1]))
+		return;
+	data->map_info.map_path = argv[1];
+    copy_file(&data->map_info);
+    get_map(&data->map_info);
+}
+
 
 /* this funtiom copy a file gave in struct map_info->map_path
 	in the variable char **global */

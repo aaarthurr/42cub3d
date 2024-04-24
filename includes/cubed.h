@@ -62,26 +62,44 @@ typedef struct data_s
 	t_ray		ray;
 }				t_data;
 
-/* main */
-//main.c
+/*------srcs/main/game_manager------*/
+int     game_manager(t_data *data);
 
-//init.c
+/*------srcs/main/init-----*/
+void	get_all(char **argv, t_data *data);
 void	copy_file(t_map_info *map_info);
 void	get_map(t_map_info *map_info);
 int		is_map_part(char *line);
 
-int		check_walls(t_data *data);
+/*------srcs/main/checker.c-----*/
+int		check_map(t_data *data);
+int		check_file(char *str);
 
+/*------srcs/map/map_checker*/
+int		check_walls(t_data *data);
 int		check_walls_bis(t_data *data, int x, int y);
 
 void	set_pos(t_data *data, int x, int y);
 
-/* utils */
-//tools.c
-int		ft_strlen(char *str);
-int		tab_size(char **tab);
-int		ft_strchr(char c, char *str);
+/*------srcs/main/error.c-----*/
+void	error_manager(char *line, int code);
+
+/*------srcs/raycasting/raycasting.c---*/
+void    raycasting(t_data *data);
+
+/*------srcs/utils/free_manager----- */
+void    free_mapinfo(t_data *data);
+void    free_tab(char **tab);
+
+/*------srcs/utils/tools*/
 void	print_tab(char **tab);
 char	**tab_realloc(char **tab, int m_size, char *content);
+int		tab_size(char **tab);
+
+
+/*--------srcs/utils/ft_tools.c*/
+int		ft_strlen(char *str);
+int		ft_strchr(char c, char *str);
+int		ft_strncmp(const char *str1, const char *str2, unsigned int n);
 
 #endif

@@ -10,9 +10,11 @@ LIBPATH = minilibx
 
 HEADER = cub3d.h
 
-MAIN = main init checker start
+MAIN = main init checker game_manager error
 
-UTILS = tools
+RAYCASTING = raycasting
+
+UTILS = tools tools_bis ft_tools free_manager
 
 MAP = map_checker mapping
 
@@ -20,9 +22,9 @@ GNL = get_next_line get_next_line_utils
 
 SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 	$(addsuffix .c, $(addprefix srcs/get_next_line/, $(GNL))) \
-	$(addsuffix .c, $(addprefix srcs/map/, $(MAP))) \
 	$(addsuffix .c, $(addprefix srcs/utils/, $(UTILS))) \
-	#$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
+	$(addsuffix .c, $(addprefix srcs/map/, $(MAP))) \
+	#$(addsuffix .c, $(addprefix srcs/raycasting/, $(RAYCASTING))) \
 	#$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
 	#$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  
