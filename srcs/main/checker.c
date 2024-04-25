@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:21:00 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/24 16:26:40 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/04/25 13:17:53 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ int check_file(char *str)
 
 	i = ft_strlen(str);
 	if (ft_strncmp(str + (i - 4), ".cub", 4) != 0)
+	{
 		error_manager("file name should end with .cub", 101);
+		return(1);
+	}
 	i = open(str, O_RDONLY);
 	if (i == -1)
+	{
 		error_manager("Error while opening file", 102);
+		return(1);
+	}
 	close(i);
 	return (0);
 }

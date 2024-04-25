@@ -37,7 +37,7 @@ $(NAME): $(OBJ)
 	@echo "\033[0;32mMinilibx Compiled !"
 	make -sC $(LIBPATH)
 	@echo "\033[0;32mCub3d Compiled !"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I. $(OBJS) $(MLXFLAGS) 
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I. $(OBJS) $(MLXFLAGS) -lm
 	@echo "\n\033[0m./cub3d to execute the program !"
 
 %.o: %.c

@@ -44,8 +44,8 @@ typedef struct s_player
 	double	posX;
 	double	posY;
 	//direction du joueur
-	int dirX;
-	int dirY;
+	double dirX;
+	double dirY;
 	//plan de la camera
 	int planX;
 	int	planY;
@@ -70,6 +70,7 @@ void	get_all(char **argv, t_data *data);
 void	copy_file(t_map_info *map_info);
 void	get_map(t_map_info *map_info);
 int		is_map_part(char *line);
+void	set_pos(t_data *data, int x, int y, char dir);
 
 /*------srcs/main/checker.c-----*/
 int		check_map(t_data *data);
@@ -78,8 +79,6 @@ int		check_file(char *str);
 /*------srcs/map/map_checker*/
 int		check_walls(t_data *data);
 int		check_walls_bis(t_data *data, int x, int y);
-
-void	set_pos(t_data *data, int x, int y);
 
 /*------srcs/main/error.c-----*/
 void	error_manager(char *line, int code);

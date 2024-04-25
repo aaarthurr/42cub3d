@@ -6,7 +6,7 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:58:21 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 16:23:10 by arpages          ###   ########.fr       */
+/*   Updated: 2024/04/25 15:18:22 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int check_walls(t_data *data)
 			if (ft_strchr(data->map_info.map[y][x], " 10NSEW") == 0)
 				return (1);
 			if (ft_strchr(data->map_info.map[y][x], "NSEW") == 1)
-				set_pos(data, x ,y);
+				set_pos(data, x ,y, data->map_info.map[y][x]);
 			if (ft_strchr(data->map_info.map[y][x], "0NSEW") == 1)
 			{
 				if (check_walls_bis(data, x, y) == 1)
