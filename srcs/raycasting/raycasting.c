@@ -17,7 +17,7 @@
 
 void    raycasting(t_data *data);
 {
-    t_ray	ray;
+  t_ray	ray;
 	int		x;
 	double temps = 0 ; //heure de la trame actuelle
    	double oldTime = 0; //heure de l'image précédente
