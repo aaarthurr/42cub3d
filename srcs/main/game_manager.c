@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/04/26 15:42:29 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/04/27 11:12:14 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,43 +205,28 @@ int     close_window(t_data *data)
 
 int     event(int keycode, t_data *data)
 {
-    
-
-    
-
-
-
-    /*for (int i =0; i++; i= 500)
-    {
-        int negger = (data->win_height / 2) + data->player.dirX * 100;
-        int neggus = (data->win_width / 2) + data->player.dirY * 100;
-        draw_line(data->win_height / 2, data->win_width / 2, negger, neggus , data->mlx, data->win);
-        rotate_player(data, 0.001);
-    }*/
 	printf("%d\n", keycode);
-    
- 
-    if (keycode == KEY_ESC)
+	if (keycode == KEY_ESC)
         close_window(data);
     if (keycode == KEY_S)
     {
-        move_player(data, 0, 0.1);
+        move_player(data, -1, 0);
     }
     if (keycode == KEY_W)
     {
-        move_player(data, 0, -0.1);
+        move_player(data, 1, 0);
     }
     if (keycode == KEY_A)
     {
-       move_player(data, -0.1, 0);
+       move_player(data, 0, 1);
     }
     if (keycode == KEY_D)
     {
-        move_player(data, 0.1, 0);
+        move_player(data, 0, -1);
     }
-	if (keycode == KEY_LEFT)
-		rotate_player(data, 0.2);
 	if (keycode == KEY_RIGHT)
+		rotate_player(data, 0.2);
+	if (keycode == KEY_LEFT)
 		rotate_player(data, -0.2);
     draw_grid(data, data->map_info.map);
     draw_circle(data);
@@ -250,11 +235,12 @@ int     event(int keycode, t_data *data)
     return (0);
 }
 
-void move_player(t_data *data, double x, double y)
+void move_player(t_data *data, int x, int y)
 {
-    data->player.posX += x;
-    data->player.posY += y;
-
+    data->player.posX += (data->player.dirX * x) / 10;
+    data->player.posY += (data->player.dirY * x) / 10;
+	data->player.posX += (data->player.dirY * -y) / 10;
+    data->player.posY += (data->player.dirX * y) / 10;
 }
 void rotate_player(t_data *data, double angle)
 {
@@ -287,7 +273,7 @@ int     game_manager(t_data *data)
     draw_circle(data);
   
     //mlx_mouse_hook(data->win, mouse_move, &data);
-    mlx_key_hook(data->win, event, data);
+	mlx_hook(data->win, 2, 1L << 0, event, data);
 	mlx_loop(data->mlx);
     return (0);
 }

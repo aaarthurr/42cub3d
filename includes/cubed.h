@@ -64,7 +64,7 @@ typedef struct data_s
 
 /*------srcs/main/game_manager------*/
 int     game_manager(t_data *data);
-void	move_player(t_data *data, double x, double y);
+void	move_player(t_data *data, int x, int y);
 void	rotate_player(t_data *data, double angle);
 
 /*------srcs/main/init-----*/
