@@ -22,6 +22,17 @@
 # include "get_next_line.h"
 #include "../minilibx/mlx.h"
 
+typedef struct key_info_s
+{
+	int key_w;
+	int key_a;
+	int key_s;
+	int key_d;
+	int key_left;
+	int key_right;
+	int key_esc;
+}			t_key_info;
+
 typedef struct map_info_s
 {
 	char *map_path;
@@ -60,12 +71,14 @@ typedef struct data_s
 	t_player	player;
 	t_map_info  map_info;
 	t_ray		ray;
+	t_key_info	key_info;
 }				t_data;
 
 /*------srcs/main/game_manager------*/
 int     game_manager(t_data *data);
 void	move_player(t_data *data, int x, int y);
 void	rotate_player(t_data *data, double angle);
+int		multi_key(t_data *data);
 
 /*------srcs/main/init-----*/
 void	get_all(char **argv, t_data *data);
@@ -73,6 +86,7 @@ void	copy_file(t_map_info *map_info);
 void	get_map(t_map_info *map_info);
 int		is_map_part(char *line);
 void	set_pos(t_data *data, int x, int y, char dir);
+void	set_keys(t_data *data);
 
 /*------srcs/main/checker.c-----*/
 int		check_map(t_data *data);

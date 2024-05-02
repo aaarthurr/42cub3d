@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/04/27 11:12:14 by arthur           ###   ########.fr       */
+/*   Updated: 2024/05/02 18:32:30 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 void draw_circle(t_data *data) 
 {
     int cell_x = (int)(data->player.posX * CELL_SIZE); // Coordonnée x de la case
-    int cell_y = (int)(data->player.posY* CELL_SIZE); // Coordonnée y de la case
-    int draw_x = cell_x + CELL_SIZE / 2; // Centre x du cercle dans la case
-    int draw_y = cell_y + CELL_SIZE / 2; // Centre y du cercle dans la case
+    int cell_y = (int)(data->player.posY * CELL_SIZE); // Coordonnée y de la case
+    int draw_x = cell_x; // Centre x du cercle dans la case
+    int draw_y = cell_y; // Centre y du cercle dans la case
     int i, j;
 
     // Afficher un cercle rouge au centre de la case
@@ -95,7 +95,7 @@ void    printcase_where_0(t_data *data, char **map)
     {
         while (map[j][i] != '\0')
         {
-            if (map[j][i] == '0' || map[j][i] == 'S')
+            if (ft_strchr(map[j][i], "0NEWS") == 1)
             {
                 printcase(data, i, j, 0xFFFFFF);
             }
@@ -202,34 +202,76 @@ int     close_window(t_data *data)
         exit(0);
 }
 
-
-int     event(int keycode, t_data *data)
+int	key_pressed(int keycode, t_data *data)
 {
-	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
-        close_window(data);
+        data->key_info.key_esc = 1;
     if (keycode == KEY_S)
-    {
-        move_player(data, -1, 0);
-    }
+        data->key_info.key_s = 1;
     if (keycode == KEY_W)
-    {
-        move_player(data, 1, 0);
-    }
+        data->key_info.key_w = 1;
     if (keycode == KEY_A)
-    {
-       move_player(data, 0, 1);
-    }
+		data->key_info.key_a = 1;
     if (keycode == KEY_D)
-    {
-        move_player(data, 0, -1);
-    }
+	{
+        data->key_info.key_d = 1;
+	}
 	if (keycode == KEY_RIGHT)
-		rotate_player(data, 0.2);
+	{
+		data->key_info.key_right = 1;
+	}
 	if (keycode == KEY_LEFT)
+	{
+		data->key_info.key_left = 1;
+	}
+	multi_key(data);
+	return (0);
+}
+
+int	key_released(int keycode, t_data *data)
+{
+	if (keycode == KEY_ESC)
+        data->key_info.key_esc = 0;
+    if (keycode == KEY_S)
+        data->key_info.key_s = 0;
+    if (keycode == KEY_W)
+        data->key_info.key_w = 0;
+    if (keycode == KEY_A)
+    	data->key_info.key_a = 0;
+    if (keycode == KEY_D)
+	{
+        data->key_info.key_d = 0;
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		data->key_info.key_right = 0;
+	}
+	if (keycode == KEY_LEFT)
+	{
+		data->key_info.key_left = 0;
+	}
+	return (0);
+}
+
+
+int	multi_key(t_data *data)
+{
+	if (data->key_info.key_esc == 1)
+		close_window(data);
+	if (data->key_info.key_s == 1)
+		move_player(data, -1, 0);
+	if (data->key_info.key_w == 1)
+		move_player(data, 1, 0);
+	if (data->key_info.key_a == 1)
+		move_player(data, 0, 1);
+	if (data->key_info.key_d == 1)
+		move_player(data, 0, -1);
+	if (data->key_info.key_left == 1)
+		rotate_player(data, 0.2);
+	if (data->key_info.key_right == 1)
 		rotate_player(data, -0.2);
-    draw_grid(data, data->map_info.map);
-    draw_circle(data);
+	draw_grid(data, data->map_info.map);
+	draw_circle(data);
 	
 	printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);
@@ -237,10 +279,19 @@ int     event(int keycode, t_data *data)
 
 void move_player(t_data *data, int x, int y)
 {
+	double prev_x;
+	double prev_y;
+
+	prev_x = data->player.posX;
+	prev_y = data->player.posY;
     data->player.posX += (data->player.dirX * x) / 10;
     data->player.posY += (data->player.dirY * x) / 10;
 	data->player.posX += (data->player.dirY * -y) / 10;
     data->player.posY += (data->player.dirX * y) / 10;
+	if (data->map_info.map[(int)(data->player.posY)][(int)prev_x] == '1')
+      	data->player.posY = prev_y;
+	if (data->map_info.map[(int)prev_y][(int)(data->player.posX)] == '1')
+      	data->player.posX = prev_x;
 }
 void rotate_player(t_data *data, double angle)
 {
@@ -261,8 +312,6 @@ int     game_manager(t_data *data)
 {
     data->win_height = 480;
 	data->win_width = 640;
-    data->player.posX = 1.5;
-    data->player.posY = 1.5;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_height, data->win_height, "Backroom cub3d"); 
 
@@ -271,9 +320,11 @@ int     game_manager(t_data *data)
     printf("%d\n",tab_size(data->map_info.map));
     draw_grid(data, data->map_info.map);
     draw_circle(data);
+	multi_key(data);
   
     //mlx_mouse_hook(data->win, mouse_move, &data);
-	mlx_hook(data->win, 2, 1L << 0, event, data);
+	mlx_hook(data->win, 2, 1L << 0, key_pressed, data);	
+	mlx_hook(data->win, 3, 1L << 1, key_released, data);
 	mlx_loop(data->mlx);
     return (0);
 }

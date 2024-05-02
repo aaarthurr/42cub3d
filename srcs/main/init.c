@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/25 15:15:20 by arpages          ###   ########.fr       */
+/*   Updated: 2024/05/02 15:37:57 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ int is_map_part(char *line)
 
 void set_pos(t_data *data, int x, int y, char dir)
 {
+	printf("%d %d\n",x ,y);
 	data->player.dirX = 0;
 	data->player.dirY = 0;
-	data->player.posX = (double)x + 0.5;
-	data->player.posY = (double)y + 0.5;
+	data->player.posX = ((double)x) + 0.5;
+	data->player.posY = ((double)y)+ 0.5;
 	if (dir == 'S')
 		data->player.dirY = 1;
 	else if (dir == 'N')
@@ -107,4 +108,15 @@ void set_pos(t_data *data, int x, int y, char dir)
 		data->player.dirX = -1;
 	else if (dir == 'W')
 		data->player.dirX = 1;
+}
+
+void set_keys(t_data *data)
+{
+	data->key_info.key_w = 0;
+	data->key_info.key_a = 0;
+	data->key_info.key_s = 0;
+	data->key_info.key_d = 0;
+	data->key_info.key_left = 0;
+	data->key_info.key_right = 0;
+	data->key_info.key_esc = 0;
 }
