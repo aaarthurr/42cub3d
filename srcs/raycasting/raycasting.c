@@ -12,3 +12,16 @@
 
 #include "cubed.h"
 
+void	send_rays(t_data *data)
+{
+
+}
+
+void	one_ray(t_data *data, int dx, int dy)
+{
+	t_raystate raystate;
+
+	raystate.posX = data->player.posX;
+	raystate.posY = data->player.posY;
+
+}

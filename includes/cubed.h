@@ -74,6 +74,16 @@ typedef struct data_s
 	t_key_info	key_info;
 }				t_data;
 
+
+typedef struct raystate_s
+{
+	double			posX;
+	double			posY;
+	int				lst_hit;
+	double			lst_x;
+	double			lst_y;
+}				t_raystate;
+
 /*------srcs/main/game_manager------*/
 int     game_manager(t_data *data);
 void	move_player(t_data *data, int x, int y);
