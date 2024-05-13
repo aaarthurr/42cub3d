@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/05/02 18:32:30 by arthur           ###   ########.fr       */
+/*   Updated: 2024/05/13 14:19:13 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,28 @@ void draw_circle(t_data *data)
         int pixel_y = (int)(draw_y + dy * t);
         mlx_pixel_put(data->mlx, data->win, pixel_x, pixel_y, 0x000000); // Noir
     }
+
+	end_x = end_x + data->player.planX * 25; // Coordonnée x de l'extrémité du trait
+    end_y = end_y + data->player.planY * 25; // Coordonnée y de l'extrémité du trait
+	
+	draw_x = end_x + -(data->player.planX * 25) * 2; // Coordonnée x de l'extrémité du trait
+    draw_y = end_y + -(data->player.planY * 25) * 2; // Coordonnée y de l'extrémité du trait
+
+    // Dessiner la ligne pixel par pixel
+    dx = end_x - draw_x;
+    dy = end_y - draw_y;
+    length = sqrt(dx * dx + dy * dy); // Longueur de la ligne
+    dx /= length; // Normaliser le vecteur direction x
+    dy /= length; // Normaliser le vecteur direction y
+
+    // Dessiner la ligne pixel par pixel
+    for (double t = 0; t < length; ++t) {
+        int pixel_x = (int)(draw_x + dx * t);
+        int pixel_y = (int)(draw_y + dy * t);
+        mlx_pixel_put(data->mlx, data->win, pixel_x, pixel_y, 0x000000); // Noir
+    }
 }
+
 void printcase(t_data *data, int i, int j, int color)
 {
     int x;
@@ -253,7 +274,6 @@ int	key_released(int keycode, t_data *data)
 	return (0);
 }
 
-
 int	multi_key(t_data *data)
 {
 	if (data->key_info.key_esc == 1)
@@ -263,9 +283,9 @@ int	multi_key(t_data *data)
 	if (data->key_info.key_w == 1)
 		move_player(data, 1, 0);
 	if (data->key_info.key_a == 1)
-		move_player(data, 0, 1);
-	if (data->key_info.key_d == 1)
 		move_player(data, 0, -1);
+	if (data->key_info.key_d == 1)
+		move_player(data, 0, 1);
 	if (data->key_info.key_left == 1)
 		rotate_player(data, 0.2);
 	if (data->key_info.key_right == 1)
@@ -284,14 +304,14 @@ void move_player(t_data *data, int x, int y)
 
 	prev_x = data->player.posX;
 	prev_y = data->player.posY;
-    data->player.posX += (data->player.dirX * x) / 10;
-    data->player.posY += (data->player.dirY * x) / 10;
+	data->player.posX += (data->player.dirX * x) / 10;
+	data->player.posY += (data->player.dirY * x) / 10;
 	data->player.posX += (data->player.dirY * -y) / 10;
-    data->player.posY += (data->player.dirX * y) / 10;
+	data->player.posY += (data->player.dirX * y) / 10;
 	if (data->map_info.map[(int)(data->player.posY)][(int)prev_x] == '1')
-      	data->player.posY = prev_y;
+		data->player.posY = prev_y;
 	if (data->map_info.map[(int)prev_y][(int)(data->player.posX)] == '1')
-      	data->player.posX = prev_x;
+		data->player.posX = prev_x;
 }
 void rotate_player(t_data *data, double angle)
 {
@@ -302,11 +322,11 @@ void rotate_player(t_data *data, double angle)
 	c_y = data->player.dirY;
 	data->player.dirX = (c_x * cos(angle)) - (c_y * sin(angle));
 	data->player.dirY = (c_x * sin(angle)) + (c_y * cos(angle));
+	c_x = data->player.planX;
+	c_y = data->player.planY;
+	data->player.planX = (c_x * cos(angle)) - (c_y * sin(angle));
+	data->player.planY = (c_x * sin(angle)) + (c_y * cos(angle));
 }
-
-
-
-
 
 int     game_manager(t_data *data)
 {

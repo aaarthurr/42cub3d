@@ -55,11 +55,11 @@ typedef struct s_player
 	double	posX;
 	double	posY;
 	//direction du joueur
-	double dirX;
-	double dirY;
+	double	dirX;
+	double	dirY;
 	//plan de la camera
-	int planX;
-	int	planY;
+	double	planX;
+	double	planY;
 }			t_player;
 
 typedef struct data_s
@@ -87,6 +87,7 @@ void	get_map(t_map_info *map_info);
 int		is_map_part(char *line);
 void	set_pos(t_data *data, int x, int y, char dir);
 void	set_keys(t_data *data);
+void	set_vector(t_data *data, int x, int y);
 
 /*------srcs/main/checker.c-----*/
 int		check_map(t_data *data);

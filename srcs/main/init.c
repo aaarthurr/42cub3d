@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/05/02 15:37:57 by arthur           ###   ########.fr       */
+/*   Updated: 2024/05/13 14:23:54 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	copy_file(t_map_info *map_info)
 }
 
 /* this fontion create a char ** with only the map part contained in the file*/
-void get_map(t_map_info *map_info)
+void	get_map(t_map_info *map_info)
 {
 	int size;
 	int i;
@@ -93,24 +93,30 @@ int is_map_part(char *line)
 	return (0);
 }
 
-void set_pos(t_data *data, int x, int y, char dir)
+void	set_pos(t_data *data, int x, int y, char dir)
 {
 	printf("%d %d\n",x ,y);
-	data->player.dirX = 0;
-	data->player.dirY = 0;
 	data->player.posX = ((double)x) + 0.5;
 	data->player.posY = ((double)y)+ 0.5;
 	if (dir == 'S')
-		data->player.dirY = 1;
+		set_vector(data, 0, 1);
 	else if (dir == 'N')
-		data->player.dirY = -1;
+		set_vector(data, 0, -1);
 	else if (dir == 'E')
-		data->player.dirX = -1;
+		set_vector(data, 1, 0);
 	else if (dir == 'W')
-		data->player.dirX = 1;
+		set_vector(data, -1, 0);
 }
 
-void set_keys(t_data *data)
+void	set_vector(t_data *data, int x, int y)
+{
+	data->player.dirX = x;
+	data->player.dirY = y;
+	data->player.planX = y * 0.66;
+	data->player.planY = x * 0.66;
+}
+
+void	set_keys(t_data *data)
 {
 	data->key_info.key_w = 0;
 	data->key_info.key_a = 0;
