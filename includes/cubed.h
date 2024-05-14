@@ -77,11 +77,17 @@ typedef struct data_s
 
 typedef struct raystate_s
 {
-	double			posX;
-	double			posY;
-	int				lst_hit;
-	double			lst_x;
-	double			lst_y;
+	int		hit;
+	int		side;
+	int		mapX;
+	int		mapY;
+	int		stepX;
+	int		stepY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
 }				t_raystate;
 
 /*------srcs/main/game_manager------*/
@@ -111,7 +117,10 @@ int		check_walls_bis(t_data *data, int x, int y);
 void	error_manager(char *line, int code);
 
 /*------srcs/raycasting/raycasting.c---*/
-void    raycasting(t_data *data);
+void	send_rays(t_data *data);
+void	one_ray(t_data *data, double rdX, double rdY);
+void	calculate_init_dist(t_data *data, t_raystate *raystate, int rdx, int rdy);
+void	ray_loop(t_data *data, t_raystate *raystate);
 
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);

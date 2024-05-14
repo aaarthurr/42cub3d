@@ -24,7 +24,7 @@ SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 	$(addsuffix .c, $(addprefix srcs/get_next_line/, $(GNL))) \
 	$(addsuffix .c, $(addprefix srcs/utils/, $(UTILS))) \
 	$(addsuffix .c, $(addprefix srcs/map/, $(MAP))) \
-	#$(addsuffix .c, $(addprefix srcs/raycasting/, $(RAYCASTING))) \
+	$(addsuffix .c, $(addprefix srcs/raycasting/, $(RAYCASTING))) \
 	#$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
 	#$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  

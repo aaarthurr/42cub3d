@@ -6,7 +6,7 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/05/13 14:19:13 by arpages          ###   ########.fr       */
+/*   Updated: 2024/05/14 13:57:24 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,6 +292,7 @@ int	multi_key(t_data *data)
 		rotate_player(data, -0.2);
 	draw_grid(data, data->map_info.map);
 	draw_circle(data);
+    send_rays(data);
 	
 	printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);
