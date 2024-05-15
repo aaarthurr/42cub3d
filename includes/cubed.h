@@ -33,6 +33,16 @@ typedef struct key_info_s
 	int key_esc;
 }			t_key_info;
 
+typedef struct img_s
+{
+	void	*img_ptr;
+	char	*img_char;
+	int		bits_pix;
+	int		endian;
+	int		len;
+}				t_img;
+
+
 typedef struct map_info_s
 {
 	char *map_path;
@@ -72,11 +82,13 @@ typedef struct data_s
 	t_map_info  map_info;
 	t_ray		ray;
 	t_key_info	key_info;
+	t_img		img;
 }				t_data;
 
 
 typedef struct raystate_s
 {
+	int		x;
 	int		hit;
 	int		side;
 	int		mapX;
@@ -95,6 +107,7 @@ int     game_manager(t_data *data);
 void	move_player(t_data *data, int x, int y);
 void	rotate_player(t_data *data, double angle);
 int		multi_key(t_data *data);
+void	generate_base_img(t_data *data);
 
 /*------srcs/main/init-----*/
 void	get_all(char **argv, t_data *data);
@@ -118,9 +131,14 @@ void	error_manager(char *line, int code);
 
 /*------srcs/raycasting/raycasting.c---*/
 void	send_rays(t_data *data);
-void	one_ray(t_data *data, double rdX, double rdY);
-void	calculate_init_dist(t_data *data, t_raystate *raystate, int rdx, int rdy);
+void	one_ray(t_data *data, double rdX, double rdY, int x);
+void	calculate_init_dist(t_data *data, t_raystate *raystate, double rdx, double rdy);
 void	ray_loop(t_data *data, t_raystate *raystate);
+void	draw_line_2(t_data *data, t_raystate *raystate, int x);
+
+void    pixel_put_opti(t_img *img, int x, int y, int color);
+void	drawVerticalLine(t_img *img, int x, int yMin, int yMax, int color, int height);
+void	clearScreen(t_img *img, int width, int height);
 
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);

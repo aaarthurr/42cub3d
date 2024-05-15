@@ -12,49 +12,50 @@
 
 #include "cubed.h"
 
-void draw_scaled_vector(void *mlx_ptr, void *win_ptr, double x_origin, double y_origin, double x_vector, double y_vector);
-
 void	send_rays(t_data *data)
 {
 	int		x;
+	double	camx;
 	double	raydirx;
 	double	raydiry;
-	double	camx;
 
 	x = 0;
 	//printf("{%f, %f}\n", data->player.posX, data->player.posY);
 	while (x < data->win_width)
 	{
-		camx = 2 * x / (double)(data->win_width) - 1;
-		raydirx = data->player.dirX + data->player.planX * camx;
-		raydiry = data->player.dirY + data->player.planY * camx;
-		one_ray(data, raydirx, raydiry);
+		camx = ((2 * x) / (double)(data->win_width)) - 1;
+		raydirx = data->player.dirX + (data->player.planX * camx);
+		raydiry = data->player.dirY + (data->player.planY * camx);
+		one_ray(data, raydirx, raydiry, x);
 		x++;
-		draw_scaled_vector(data->mlx, data->win, data->player.posX * 50, data->player.posY * 50, raydirx, raydiry);
 		//printf("{%f, %f}\n", raydirx, raydiry);
 	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 }
 
-void	one_ray(t_data *data, double rdX, double rdY)
+void	one_ray(t_data *data, double rdX, double rdY, int x)
 {
 	t_raystate	raystate;
 
+	raystate.x = x;
 	raystate.hit = 0;
 	raystate.mapX = (int)(data->player.posX);
 	raystate.mapY = (int)(data->player.posY);
 	if (rdX == 0)
 		raystate.deltaDistX = 1e30;
 	else
-		raystate.deltaDistX = fabs((double)(1 / rdX));
+		raystate.deltaDistX = fabs(1 / rdX);
 	if (rdY == 0)
 		raystate.deltaDistY = 1e30;
 	else
-		raystate.deltaDistY = fabs((double)(1 / rdY));
+		raystate.deltaDistY = fabs(1 / rdY);
 	calculate_init_dist(data, &raystate, rdX, rdY);
 	ray_loop(data, &raystate);
+	if (x == 0 || x == 630)
+		printf("---%f\n", raystate.perpWallDist);
 }
 
-void	calculate_init_dist(t_data *data, t_raystate *raystate, int rdx, int rdy)
+void	calculate_init_dist(t_data *data, t_raystate *raystate, double rdx, double rdy)
 {
 	if (rdx < 0)
 	{
@@ -100,26 +101,28 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 			raystate->hit = 1;
 	}
 	//printf("vectors -> {%f, %f}\n", raystate->sideDistX , raystate->sideDistY);
-	draw_scaled_vector(data->mlx, data->win, data->player.posX * 50, data->player.posY * 50, raystate->sideDistX / raystate->deltaDistX, raystate->sideDistY / raystate->deltaDistY);
+	if (raystate->side == 0)
+		raystate->perpWallDist = (raystate->sideDistX - raystate->deltaDistX);
+	else
+		raystate->perpWallDist = (raystate->sideDistY - raystate->deltaDistY);
+	draw_line_2(data, raystate, raystate->x);
 }
 
-void draw_scaled_vector(void *mlx_ptr, void *win_ptr, double x_origin, double y_origin, double x_vector, double y_vector)
+void draw_line_2(t_data *data, t_raystate *raystate, int x)
 {
-    double x = x_origin;
-    double y = y_origin;
-    double scaled_x = x_origin + x_vector * 50;
-    double scaled_y = y_origin + y_vector * 50;
+	int line_height;
+	int l_start;
+	int l_end;
 
-    double dx = scaled_x - x_origin;
-    double dy = scaled_y - y_origin;
-    double step = fmax(fabs(dx), fabs(dy)); // Determine la plus grande valeur absolue entre dx et dy
-    double x_increment = dx / step;
-    double y_increment = dy / step;
-
-    for (int i = 0; i < step; i++)
-    {
-        mlx_pixel_put(mlx_ptr, win_ptr, round(x), round(y), 0xFF0000); // Dessine un pixel rouge à la position actuelle
-        x += x_increment;
-        y += y_increment;
-    }
+	line_height = (int)(data->win_height / raystate->perpWallDist);
+	l_start = -line_height / 2 + data->win_height / 2;
+	if (l_start < 0)
+		l_start = 0;
+	l_end = line_height / 2 + data->win_height / 2;
+	if (l_end >= data->win_height)
+		l_end = data->win_height - 1;
+	int side = 0xFF0000;
+	if (raystate->side == 1)
+		side = 0x008000;
+	drawVerticalLine(&(data->img), x, l_start, l_end, side, data->win_height);
 }
