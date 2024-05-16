@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/05/15 19:30:16 by arpages          ###   ########.fr       */
+/*   Updated: 2024/05/15 20:32:08 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,8 +149,8 @@ void ft_test(t_data *data)
 
 int     game_manager(t_data *data)
 {
-	data->win_height = 960;
-	data->win_width = 1280;
+	data->win_height = 500;
+	data->win_width = 500;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_height, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);
