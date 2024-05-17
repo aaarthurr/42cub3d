@@ -70,6 +70,8 @@ typedef struct s_player
 	//plan de la camera
 	double	planX;
 	double	planY;
+
+	int		speed;
 }			t_player;
 
 typedef struct data_s

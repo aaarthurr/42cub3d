@@ -105,8 +105,11 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 		raystate->perpWallDist = (raystate->sideDistX - raystate->deltaDistX);
 	else
 		raystate->perpWallDist = (raystate->sideDistY - raystate->deltaDistY);
+	printf("%f\n", raystate->perpWallDist);
 	draw_line_2(data, raystate, raystate->x);
 }
+
+int assombrirCouleur(int couleurOriginale, int assombrissement);
 
 void draw_line_2(t_data *data, t_raystate *raystate, int x)
 {
@@ -124,5 +127,30 @@ void draw_line_2(t_data *data, t_raystate *raystate, int x)
 	int side = 0xFF0000;
 	if (raystate->side == 1)
 		side = 0x008000;
+	side = assombrirCouleur(side, (int)(raystate->perpWallDist * 5));
 	drawVerticalLine(&(data->img), x, l_start, l_end, side, data->win_height);
+}
+
+int assombrirCouleur(int couleurOriginale, int assombrissement) {
+    // Extraire les composantes RVB de la couleur originale
+    int rouge = (couleurOriginale >> 16) & 0xFF;
+    int vert = (couleurOriginale >> 8) & 0xFF;
+    int bleu = couleurOriginale & 0xFF;
+
+    // Assombrir chaque composante RVB en soustrayant l'assombrissement
+    rouge -= assombrissement ;
+    vert -= assombrissement ;
+    bleu -= assombrissement ;
+
+	//* (int)(257 / (bleu + 1)))
+
+    // S'assurer que les valeurs RVB restent dans la plage valide (0-255)
+    if (rouge < 0) rouge = 0;
+    if (vert < 0) vert = 0;
+    if (bleu < 0) bleu = 0;
+
+    // Reconstruire la nouvelle valeur de couleur
+    int nouvelleCouleur = (rouge << 16) | (vert << 8) | bleu;
+    
+    return nouvelleCouleur;
 }
