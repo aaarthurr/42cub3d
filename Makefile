@@ -12,7 +12,7 @@ HEADER = cub3d.h
 
 MAIN = main init checker game_manager error
 
-RAYCASTING = raycasting opti
+RAYCASTING = raycasting opti textures
 
 UTILS = tools tools_bis ft_tools free_manager
 

@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/05/17 00:59:19 by arthur           ###   ########.fr       */
+/*   Updated: 2024/05/29 15:04:22 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,20 @@ int	key_released(int keycode, t_data *data)
 	return (0);
 }
 
+void ft_test_pix(t_data *data)
+{
+    // Boucle extérieure : 64 itérations
+    for (int i = 0; i < 64; i++) {
+        // Boucle intérieure : 64 itérations
+        for (int j = 0; j < 64; j++) {
+            // Ici, vous pouvez insérer le code que vous souhaitez exécuter à chaque itération
+			pixel_put_opti(&data->img, i, j, get_pixel_color(&data->texture.wall, i, j));
+            printf("i = %d, j = %d\n", i, j);
+        }
+    }
+	
+}
+
 int	multi_key(t_data *data)
 {
 	//usleep(15000);
@@ -96,6 +110,7 @@ int	multi_key(t_data *data)
 	//draw_grid(data, data->map_info.map);
 	//draw_circle(data);
     send_rays(data);
+	//ft_test_pix(data);
 	
 	printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);
@@ -143,11 +158,13 @@ void ft_test(t_data *data)
 
 int     game_manager(t_data *data)
 {
-	data->win_height = 500;
-	data->win_width = 500;
+	data->win_height = 800;
+	data->win_width = 800;
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->win_height, data->win_height, "Backroom cub3d"); 
+	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);
+	get_image(data);
+	create_image(data);
 
 	printf("%d\n",tab_size(data->map_info.map));
 
@@ -162,4 +179,5 @@ void	generate_base_img(t_data *data)
 {
 	data->img.img_ptr = mlx_new_image(data->mlx, data->win_width, data->win_height);
 	data->img.img_char = mlx_get_data_addr(data->img.img_ptr, &(data->img.bits_pix), &(data->img.len), &(data->img.endian));
+	//printf("INFO -> %d, %d ,%d\n", data->img.len, data->img.bits_pix, data->img.endian);
 }

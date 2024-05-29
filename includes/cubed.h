@@ -40,6 +40,7 @@ typedef struct img_s
 	int		bits_pix;
 	int		endian;
 	int		len;
+	int		global_color;
 }				t_img;
 
 
@@ -52,12 +53,10 @@ typedef struct map_info_s
 	int height;
 }			t_map_info;
 
-typedef struct s_ray
+typedef struct	texture_s
 {
-	float x;
-	float y;
-		
-}			t_ray;
+	t_img	wall;
+}			t_texture;
 
 typedef struct s_player
 {
@@ -82,14 +81,15 @@ typedef struct data_s
 	int			win_width;
 	t_player	player;
 	t_map_info  map_info;
-	t_ray		ray;
 	t_key_info	key_info;
 	t_img		img;
+	t_texture	texture;
 }				t_data;
-
 
 typedef struct raystate_s
 {
+	double	rayDirX;
+	double	rayDirY;
 	int		x;
 	int		hit;
 	int		side;
@@ -97,6 +97,9 @@ typedef struct raystate_s
 	int		mapY;
 	int		stepX;
 	int		stepY;
+	int		texX;
+	int		line_height;
+	double	wallX;
 	double	sideDistX;
 	double	sideDistY;
 	double	deltaDistX;
@@ -136,10 +139,10 @@ void	send_rays(t_data *data);
 void	one_ray(t_data *data, double rdX, double rdY, int x);
 void	calculate_init_dist(t_data *data, t_raystate *raystate, double rdx, double rdy);
 void	ray_loop(t_data *data, t_raystate *raystate);
-void	draw_line_2(t_data *data, t_raystate *raystate, int x);
+void	get_line_data(t_data *data, t_raystate *raystate);
 
 void    pixel_put_opti(t_img *img, int x, int y, int color);
-void	drawVerticalLine(t_img *img, int x, int yMin, int yMax, int color, int height);
+void	drawVerticalLine(t_data *data, t_raystate *raystate, int yMin, int yMax, t_img *img);
 void	clearScreen(t_img *img, int width, int height);
 
 /*------srcs/utils/free_manager----- */
@@ -156,5 +159,15 @@ int		tab_size(char **tab);
 int		ft_strlen(char *str);
 int		ft_strchr(char c, char *str);
 int		ft_strncmp(const char *str1, const char *str2, unsigned int n);
+
+int		get_pixel_color(t_img *img, int x, int y);
+
+int		assombrirCouleur(int couleurOriginale, int assombrissement);
+
+void	get_image(t_data *data);
+void	create_image(t_data *data);
+
+int		get_smoothed_color(t_img *img, int color, double power);
+int		blend_color(t_img *img);
 
 #endif

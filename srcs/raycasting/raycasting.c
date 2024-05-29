@@ -41,6 +41,8 @@ void	one_ray(t_data *data, double rdX, double rdY, int x)
 	raystate.hit = 0;
 	raystate.mapX = (int)(data->player.posX);
 	raystate.mapY = (int)(data->player.posY);
+	raystate.rayDirX = rdX;
+	raystate.rayDirY = rdY;
 	if (rdX == 0)
 		raystate.deltaDistX = 1e30;
 	else
@@ -51,8 +53,6 @@ void	one_ray(t_data *data, double rdX, double rdY, int x)
 		raystate.deltaDistY = fabs(1 / rdY);
 	calculate_init_dist(data, &raystate, rdX, rdY);
 	ray_loop(data, &raystate);
-	if (x == 0 || x == 630)
-		printf("---%f\n", raystate.perpWallDist);
 }
 
 void	calculate_init_dist(t_data *data, t_raystate *raystate, double rdx, double rdy)
@@ -105,30 +105,39 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 		raystate->perpWallDist = (raystate->sideDistX - raystate->deltaDistX);
 	else
 		raystate->perpWallDist = (raystate->sideDistY - raystate->deltaDistY);
-	printf("%f\n", raystate->perpWallDist);
-	draw_line_2(data, raystate, raystate->x);
+	if (raystate->x == 250)
+		printf("%f\n", raystate->perpWallDist);
+	get_line_data(data, raystate);
 }
 
-int assombrirCouleur(int couleurOriginale, int assombrissement);
-
-void draw_line_2(t_data *data, t_raystate *raystate, int x)
+void get_line_data(t_data *data, t_raystate *raystate)
 {
 	int line_height;
 	int l_start;
 	int l_end;
 
 	line_height = (int)(data->win_height / raystate->perpWallDist);
+	raystate->line_height = line_height;
 	l_start = -line_height / 2 + data->win_height / 2;
 	if (l_start < 0)
 		l_start = 0;
 	l_end = line_height / 2 + data->win_height / 2;
 	if (l_end >= data->win_height)
 		l_end = data->win_height - 1;
-	int side = 0xFF0000;
-	if (raystate->side == 1)
-		side = 0x008000;
-	side = assombrirCouleur(side, (int)(raystate->perpWallDist * 5));
-	drawVerticalLine(&(data->img), x, l_start, l_end, side, data->win_height);
+	//part2
+	if (raystate->side == 0)
+		raystate->wallX = data->player.posY + (raystate->perpWallDist * raystate->rayDirY);
+	else
+		raystate->wallX = data->player.posX + (raystate->perpWallDist * raystate->rayDirX);
+	raystate->wallX -= floor(raystate->wallX);
+	//printf("wall it at %f coordinate", raystate->wallX);
+
+	raystate->texX = (int)(raystate->wallX * (double)(512));
+	if (raystate->side == 0 && raystate->rayDirX > 0)
+		raystate->texX = 512 - raystate->texX - 1;
+	if (raystate->side == 1 && raystate->rayDirY < 0)
+		raystate->texX = 512 - raystate->texX - 1;
+	drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.wall));
 }
 
 int assombrirCouleur(int couleurOriginale, int assombrissement) {
