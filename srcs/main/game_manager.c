@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/05/29 15:04:22 by arthur           ###   ########.fr       */
+/*   Updated: 2024/05/30 14:07:15 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ void ft_test_pix(t_data *data)
 
 int	multi_key(t_data *data)
 {
-	//usleep(15000);
+	size_t	frame_time;
+	int		frame_lenght;
+	int		fps;
+
 	if (data->key_info.key_esc == 1)
 		close_window(data);
 	if (data->key_info.key_s == 1)
@@ -107,12 +110,16 @@ int	multi_key(t_data *data)
 		rotate_player(data, 0.02);
 	if (data->key_info.key_right == 1)
 		rotate_player(data, -0.02);
-	//draw_grid(data, data->map_info.map);
-	//draw_circle(data);
     send_rays(data);
-	//ft_test_pix(data);
-	
-	printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
+	frame_lenght = get_current_time() - data->last_frame;
+	if (frame_lenght < 10)
+		usleep((10 - frame_lenght) * 1000);
+	frame_time = get_current_time();
+	fps = 1000 / (frame_time - data->last_frame);
+	data->last_frame = frame_time;
+	printf("fps -> %d\n", fps);
+	//mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, ft_itoa(fps));
+	//printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);
 }
 
@@ -158,8 +165,8 @@ void ft_test(t_data *data)
 
 int     game_manager(t_data *data)
 {
-	data->win_height = 800;
-	data->win_width = 800;
+	data->win_height = 500;
+	data->win_width = 500;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);
@@ -167,6 +174,7 @@ int     game_manager(t_data *data)
 	create_image(data);
 
 	printf("%d\n",tab_size(data->map_info.map));
+	data->last_frame = get_current_time();
 
 	send_rays(data);
 	//mlx_mouse_hook(data->win, mouse_move, &data);

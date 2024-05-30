@@ -105,8 +105,6 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 		raystate->perpWallDist = (raystate->sideDistX - raystate->deltaDistX);
 	else
 		raystate->perpWallDist = (raystate->sideDistY - raystate->deltaDistY);
-	if (raystate->x == 250)
-		printf("%f\n", raystate->perpWallDist);
 	get_line_data(data, raystate);
 }
 

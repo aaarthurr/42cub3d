@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:09:32 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/26 11:58:01 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/05/30 13:39:42 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,14 @@ void	print_tab(char **tab)
 		i++;
 	}
 	printf("\n");
+}
+
+//return time in milisecond
+size_t	get_current_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		printf("gettimeofday() error\n");
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
