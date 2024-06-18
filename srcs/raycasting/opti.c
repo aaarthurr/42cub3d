@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/05/29 15:23:56 by arthur           ###   ########.fr       */
+/*   Updated: 2024/06/07 17:51:42 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	double	texPos;
 	
 	// Starting texture coordinate
-	step = 1.0 * 512 / raystate->line_height;
+	step = 1.0 * TEX_SIZE / raystate->line_height;
 	texPos = (lStart - data->win_height / 2 + raystate->line_height / 2) * step;
 	y = 0;
+
 	//printf(" %d <-> %d -> x = %d\n", lStart, lEnd, raystate->x);
 	while (y < lStart)
 	{
@@ -40,11 +41,11 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	while(y < lEnd)
 	{
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-		int texY = (int)texPos & (512 - 1);
+		int texY = (int)texPos & (TEX_SIZE - 1);
 		texPos += step;
 		color = get_pixel_color(img, raystate->texX, texY);
-		//color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
-		//color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
+		color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
+		color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
 		pixel_put_opti(&(data->img), raystate->x, y, color);
 		y++;
 	}
@@ -99,10 +100,10 @@ int	blend_color(t_img *img)
     colors[1] = 0;
     colors[2] = 0;
 	i = 0;
-	while (offset_x < 500)
+	while (offset_x < TEX_SIZE)
 	{
 		offset_y = 0;
-		while (offset_y < 500)
+		while (offset_y < TEX_SIZE)
 		{
 			temp_color = get_pixel_color(img, offset_x, offset_y);
 			colors[0] += (temp_color >> 16) & 0xFF;
@@ -124,7 +125,7 @@ int get_pixel_color(t_img *img, int x, int y)
 {
     int color;
 
-    if (x < 0 || x >= 512 || y < 0 || y >= 512)
+    if (x < 0 || x >= TEX_SIZE || y < 0 || y >= TEX_SIZE)
     {
         fprintf(stderr, "Les coordonnées sont en dehors des limites de l'image.\n");
         return -1;

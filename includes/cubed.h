@@ -25,6 +25,8 @@
 
 # include "struct.h"
 
+# define TEX_SIZE 256
+
 /*------srcs/main/game_manager------*/
 int     game_manager(t_data *data);
 void	move_player(t_data *data, int x, int y);

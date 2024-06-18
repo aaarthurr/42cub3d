@@ -116,10 +116,10 @@ void get_line_data(t_data *data, t_raystate *raystate)
 
 	line_height = (int)(data->win_height / raystate->perpWallDist);
 	raystate->line_height = line_height;
-	l_start = -line_height / 2 + data->win_height / 2;
+	l_start = (-line_height / 2 + data->win_height / 2);
 	if (l_start < 0)
 		l_start = 0;
-	l_end = line_height / 2 + data->win_height / 2;
+	l_end = (line_height / 2 + data->win_height / 2);
 	if (l_end >= data->win_height)
 		l_end = data->win_height - 1;
 	//part2
@@ -130,11 +130,11 @@ void get_line_data(t_data *data, t_raystate *raystate)
 	raystate->wallX -= floor(raystate->wallX);
 	//printf("wall it at %f coordinate", raystate->wallX);
 
-	raystate->texX = (int)(raystate->wallX * (double)(512));
+	raystate->texX = (int)(raystate->wallX * (double)(TEX_SIZE));
 	if (raystate->side == 0 && raystate->rayDirX > 0)
-		raystate->texX = 512 - raystate->texX - 1;
+		raystate->texX = TEX_SIZE - raystate->texX - 1;
 	if (raystate->side == 1 && raystate->rayDirY < 0)
-		raystate->texX = 512 - raystate->texX - 1;
+		raystate->texX = TEX_SIZE - raystate->texX - 1;
 	drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.wall));
 }
 
