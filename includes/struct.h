@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/06/26 15:05:11 by arpages          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:20:16 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_player
 	int		is_jumping;
 
 	int		speed;
+	double	jump_speed;
 }			t_player;
 
 typedef struct data_s
@@ -96,6 +97,8 @@ typedef struct raystate_s
 	int		stepY;
 	int		texX;
 	int		line_height;
+	int		calculated_len;
+	int		offset;
 	double	wallX;
 	double	sideDistX;
 	double	sideDistY;

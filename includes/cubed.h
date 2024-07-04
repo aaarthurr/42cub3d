@@ -67,7 +67,7 @@ void    pixel_put_opti(t_img *img, int x, int y, int color);
 void	drawVerticalLine(t_data *data, t_raystate *raystate, int yMin, int yMax, t_img *img);
 void	clearScreen(t_img *img, int width, int height);
 
-void	reajust_line(t_data *data, int *l_start, int *l_end);
+void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end);
 
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);

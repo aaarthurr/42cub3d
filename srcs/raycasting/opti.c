@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opti.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/06/26 14:35:10 by arpages          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:09:23 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	
 	// Starting texture coordinate
 	step = 1.0 * TEX_SIZE / raystate->line_height;
-	texPos = (lStart - data->win_height / 2 + raystate->line_height / 2) * step;
+	texPos = ((lStart - raystate->offset) - data->win_height / 2 + raystate->line_height / 2) * step;
 	y = 0;
 
 	//printf(" %d <-> %d -> x = %d\n", lStart, lEnd, raystate->x);

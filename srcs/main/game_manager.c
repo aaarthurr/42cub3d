@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/06/26 14:34:49 by arpages          ###   ########.fr       */
+/*   Updated: 2024/07/04 17:37:31 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == KEY_LEFT)
 		data->key_info.key_left = 1;
 	if (keycode == KEY_SHIFT)
-	 	data->player.speed = 30;
+	 	data->player.speed = 10;
 	if (keycode == KEY_SPACE_BAR)
 	 	data->key_info.key_jump = 1;
 	return (0);
@@ -147,21 +147,28 @@ void move_player(t_data *data, int x, int y)
 
 void	jump(t_data *data)
 {
-	if (data->player.posZ > 0.4 && data->player.is_falling == 0)
+	if (data->player.jump_speed < 0.001)
+		data->player.jump_speed = 0.001;
+	printf("%f - %f - %d\n", data->player.posZ, data->player.jump_speed, data->player.is_falling);
+	if (data->player.posZ > 0.25 && data->player.is_falling == 0)
 	{
-		data->player.posZ -= 0.01;
-		if (data->player.posZ <= 0.4)
+		data->player.posZ -= data->player.jump_speed;
+		data->player.jump_speed -= 0.0005;
+		if (data->player.posZ <= 0.25)
 		{
 			data->player.is_falling = 1;
 		}
 	}
-	else if (data->player.posZ < 0.7)
+	else if (data->player.posZ < 0.65)
 	{
-		data->player.posZ += 0.01;
-		if (data->player.posZ >= 0.7)
+		data->player.posZ += data->player.jump_speed;
+		data->player.jump_speed += 0.0005;
+		if (data->player.posZ >= 0.65)
 		{
+			data->player.posZ = 0.65;
 			data->player.is_falling = 0;
 			data->key_info.key_jump = 0;
+			data->player.jump_speed = 0.02;
 		}
 	}
 }
