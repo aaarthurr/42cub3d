@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/05/30 13:21:15 by arthur           ###   ########.fr       */
+/*   Updated: 2024/06/26 15:05:11 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct key_info_s
 	int key_left;
 	int key_right;
 	int key_esc;
+	int key_jump;
 }			t_key_info;
 
 typedef struct img_s
@@ -54,12 +55,16 @@ typedef struct s_player
 	//vecteur position
 	double	posX;
 	double	posY;
+	double	posZ;
 	//direction du joueur
 	double	dirX;
 	double	dirY;
 	//plan de la camera
 	double	planX;
 	double	planY;
+
+	int		is_falling;
+	int		is_jumping;
 
 	int		speed;
 }			t_player;

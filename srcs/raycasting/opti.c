@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opti.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/06/07 17:51:42 by arthur           ###   ########.fr       */
+/*   Updated: 2024/06/26 14:35:10 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 		int texY = (int)texPos & (TEX_SIZE - 1);
 		texPos += step;
 		color = get_pixel_color(img, raystate->texX, texY);
-		color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
+		//color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
 		color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
 		pixel_put_opti(&(data->img), raystate->x, y, color);
 		y++;

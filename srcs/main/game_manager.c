@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/05/30 14:07:15 by arthur           ###   ########.fr       */
+/*   Updated: 2024/06/26 14:34:49 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 #define GRID_SIZE 20
 #define KEY_ESC 65307
-#define KEY_A 97
-#define KEY_D 100
+#define KEY_A 100
+#define KEY_D 97
 #define KEY_S 115
 #define KEY_W 119
+#define KEY_SPACE_BAR 32
 #define KEY_LEFT 65361
 #define KEY_RIGHT 65363
 #define KEY_SHIFT 65505
@@ -52,6 +53,8 @@ int	key_pressed(int keycode, t_data *data)
 		data->key_info.key_left = 1;
 	if (keycode == KEY_SHIFT)
 	 	data->player.speed = 30;
+	if (keycode == KEY_SPACE_BAR)
+	 	data->key_info.key_jump = 1;
 	return (0);
 }
 
@@ -110,6 +113,8 @@ int	multi_key(t_data *data)
 		rotate_player(data, 0.02);
 	if (data->key_info.key_right == 1)
 		rotate_player(data, -0.02);
+	if (data->key_info.key_jump == 1)
+		jump(data);
     send_rays(data);
 	frame_lenght = get_current_time() - data->last_frame;
 	if (frame_lenght < 10)
@@ -139,6 +144,28 @@ void move_player(t_data *data, int x, int y)
 	if (data->map_info.map[(int)prev_y][(int)(data->player.posX)] == '1')
 		data->player.posX = prev_x;
 }
+
+void	jump(t_data *data)
+{
+	if (data->player.posZ > 0.4 && data->player.is_falling == 0)
+	{
+		data->player.posZ -= 0.01;
+		if (data->player.posZ <= 0.4)
+		{
+			data->player.is_falling = 1;
+		}
+	}
+	else if (data->player.posZ < 0.7)
+	{
+		data->player.posZ += 0.01;
+		if (data->player.posZ >= 0.7)
+		{
+			data->player.is_falling = 0;
+			data->key_info.key_jump = 0;
+		}
+	}
+}
+
 void rotate_player(t_data *data, double angle)
 {
 	double c_x;

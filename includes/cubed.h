@@ -34,6 +34,8 @@ void	rotate_player(t_data *data, double angle);
 int		multi_key(t_data *data);
 void	generate_base_img(t_data *data);
 
+void	jump(t_data *data);
+
 /*------srcs/main/init-----*/
 void	get_all(char **argv, t_data *data);
 void	copy_file(t_map_info *map_info);
@@ -64,6 +66,8 @@ void	get_line_data(t_data *data, t_raystate *raystate);
 void    pixel_put_opti(t_img *img, int x, int y, int color);
 void	drawVerticalLine(t_data *data, t_raystate *raystate, int yMin, int yMax, t_img *img);
 void	clearScreen(t_img *img, int width, int height);
+
+void	reajust_line(t_data *data, int *l_start, int *l_end);
 
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);

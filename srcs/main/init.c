@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/05/22 19:24:48 by arthur           ###   ########.fr       */
+/*   Updated: 2024/06/26 15:01:25 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ void	set_vector(t_data *data, int x, int y)
 	data->player.planX = y * 0.66;
 	data->player.planY = x * 0.66;
 	data->player.speed = 50;
+	data->player.posZ = 0.7;
+	data->player.is_falling = 0;
+	data->player.is_jumping = 0;
 }
 
 void	set_keys(t_data *data)
@@ -126,4 +129,5 @@ void	set_keys(t_data *data)
 	data->key_info.key_left = 0;
 	data->key_info.key_right = 0;
 	data->key_info.key_esc = 0;
+	data->key_info.key_jump = 0;
 }

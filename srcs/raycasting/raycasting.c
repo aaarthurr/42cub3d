@@ -122,6 +122,7 @@ void get_line_data(t_data *data, t_raystate *raystate)
 	l_end = (line_height / 2 + data->win_height / 2);
 	if (l_end >= data->win_height)
 		l_end = data->win_height - 1;
+	reajust_line(data, &l_start, &l_end);
 	//part2
 	if (raystate->side == 0)
 		raystate->wallX = data->player.posY + (raystate->perpWallDist * raystate->rayDirY);
@@ -136,6 +137,27 @@ void get_line_data(t_data *data, t_raystate *raystate)
 	if (raystate->side == 1 && raystate->rayDirY < 0)
 		raystate->texX = TEX_SIZE - raystate->texX - 1;
 	drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.wall));
+}
+
+void	reajust_line(t_data *data, int *l_start, int *l_end)
+{
+	int len;
+	int mid_pix;
+	int offset;
+
+	len = *l_end - *l_start;
+	mid_pix = round(len * data->player.posZ);
+	offset = (len / 2) - mid_pix;
+	*l_start += offset;
+	*l_end += offset;
+	if (*l_start < 0)
+		*l_start = 0;
+	if (*l_end < 0)
+		*l_end = 0;
+	if (*l_start > data->win_height)
+		*l_start = data->win_height;
+	if (*l_end > data->win_height)
+		*l_end = data->win_height;
 }
 
 int assombrirCouleur(int couleurOriginale, int assombrissement) {
