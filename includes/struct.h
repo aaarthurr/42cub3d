@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/07/04 17:20:16 by arthur           ###   ########.fr       */
+/*   Updated: 2024/07/09 15:25:21 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_player
 	//plan de la camera
 	double	planX;
 	double	planY;
+
+	int		walk_phase;
 
 	int		is_falling;
 	int		is_jumping;

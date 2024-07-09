@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/07/04 17:37:31 by arthur           ###   ########.fr       */
+/*   Updated: 2024/07/09 16:11:22 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == KEY_LEFT)
 		data->key_info.key_left = 1;
 	if (keycode == KEY_SHIFT)
-	 	data->player.speed = 10;
+	 	data->player.speed = 40;
 	if (keycode == KEY_SPACE_BAR)
 	 	data->key_info.key_jump = 1;
 	return (0);
@@ -98,7 +98,7 @@ int	multi_key(t_data *data)
 	size_t	frame_time;
 	int		frame_lenght;
 	int		fps;
-
+	
 	if (data->key_info.key_esc == 1)
 		close_window(data);
 	if (data->key_info.key_s == 1)
@@ -128,66 +128,6 @@ int	multi_key(t_data *data)
     return (0);
 }
 
-void move_player(t_data *data, int x, int y)
-{
-	double prev_x;
-	double prev_y;
-
-	prev_x = data->player.posX;
-	prev_y = data->player.posY;
-	data->player.posX += (data->player.dirX * x) / data->player.speed;
-	data->player.posY += (data->player.dirY * x) / data->player.speed;
-	data->player.posX += (data->player.dirY * -y) / data->player.speed;
-	data->player.posY += (data->player.dirX * y) / data->player.speed;
-	if (data->map_info.map[(int)(data->player.posY)][(int)prev_x] == '1')
-		data->player.posY = prev_y;
-	if (data->map_info.map[(int)prev_y][(int)(data->player.posX)] == '1')
-		data->player.posX = prev_x;
-}
-
-void	jump(t_data *data)
-{
-	if (data->player.jump_speed < 0.001)
-		data->player.jump_speed = 0.001;
-	printf("%f - %f - %d\n", data->player.posZ, data->player.jump_speed, data->player.is_falling);
-	if (data->player.posZ > 0.25 && data->player.is_falling == 0)
-	{
-		data->player.posZ -= data->player.jump_speed;
-		data->player.jump_speed -= 0.0005;
-		if (data->player.posZ <= 0.25)
-		{
-			data->player.is_falling = 1;
-		}
-	}
-	else if (data->player.posZ < 0.65)
-	{
-		data->player.posZ += data->player.jump_speed;
-		data->player.jump_speed += 0.0005;
-		if (data->player.posZ >= 0.65)
-		{
-			data->player.posZ = 0.65;
-			data->player.is_falling = 0;
-			data->key_info.key_jump = 0;
-			data->player.jump_speed = 0.02;
-		}
-	}
-}
-
-void rotate_player(t_data *data, double angle)
-{
-	double c_x;
-	double c_y;
-
-	c_x = data->player.dirX;
-	c_y = data->player.dirY;
-	data->player.dirX = (c_x * cos(angle)) - (c_y * sin(angle));
-	data->player.dirY = (c_x * sin(angle)) + (c_y * cos(angle));
-	c_x = data->player.planX;
-	c_y = data->player.planY;
-	data->player.planX = (c_x * cos(angle)) - (c_y * sin(angle));
-	data->player.planY = (c_x * sin(angle)) + (c_y * cos(angle));
-}
-
 void ft_test(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, key_pressed, data);	
@@ -200,7 +140,7 @@ void ft_test(t_data *data)
 int     game_manager(t_data *data)
 {
 	data->win_height = 500;
-	data->win_width = 500;
+	data->win_width = 700;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);

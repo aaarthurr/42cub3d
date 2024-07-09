@@ -10,7 +10,7 @@ LIBPATH = minilibx
 
 HEADER = cub3d.h
 
-MAIN = main init checker game_manager error
+MAIN = main init checker game_manager error move
 
 RAYCASTING = raycasting opti textures
 
