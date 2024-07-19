@@ -6,7 +6,7 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:22:13 by arpages           #+#    #+#             */
-/*   Updated: 2024/07/09 16:21:55 by arpages          ###   ########.fr       */
+/*   Updated: 2024/07/19 09:48:58 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	walk_height(t_data *data)
 	{
 		if (data->player.posZ >= 0.658)
 			data->player.walk_phase = -1;
-		data->player.posZ += (0.04 / data->player.speed);
+		data->player.posZ += (0.05 / data->player.speed);
 	}
 	else if (data->player.walk_phase == -1)
 	{
 		if (data->player.posZ <= 0.642)
 			data->player.walk_phase = 1;
-		data->player.posZ -= (0.04 / data->player.speed);
+		data->player.posZ -= (0.05 / data->player.speed);
 	}
 }
 
