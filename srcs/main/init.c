@@ -6,7 +6,7 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/07/09 16:08:05 by arpages          ###   ########.fr       */
+/*   Updated: 2024/07/21 17:14:06 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,13 @@ void	set_pos(t_data *data, int x, int y, char dir)
 	data->player.posX = ((double)x) + 0.5;
 	data->player.posY = ((double)y)+ 0.5;
 	if (dir == 'S')
-		set_vector(data, 0, 1);
-	else if (dir == 'N')
 		set_vector(data, 0, -1);
+	else if (dir == 'N')
+		set_vector(data, 0, 1);
 	else if (dir == 'E')
-		set_vector(data, 1, 0);
-	else if (dir == 'W')
 		set_vector(data, -1, 0);
+	else if (dir == 'W')
+		set_vector(data, 1, 0);
 }
 
 void	set_vector(t_data *data, int x, int y)

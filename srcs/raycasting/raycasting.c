@@ -127,7 +127,6 @@ void get_line_data(t_data *data, t_raystate *raystate)
 		raystate->wallX = data->player.posX + (raystate->perpWallDist * raystate->rayDirX);
 	raystate->wallX -= floor(raystate->wallX);
 	//printf("wall it at %f coordinate", raystate->wallX);
-
 	raystate->texX = (int)(raystate->wallX * (double)(TEX_SIZE));
 	if (raystate->side == 0 && raystate->rayDirX > 0)
 		raystate->texX = TEX_SIZE - raystate->texX - 1;

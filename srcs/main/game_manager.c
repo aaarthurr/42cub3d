@@ -6,7 +6,7 @@
 /*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/07/09 16:11:22 by arpages          ###   ########.fr       */
+/*   Updated: 2024/07/20 16:26:38 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == KEY_LEFT)
 		data->key_info.key_left = 1;
 	if (keycode == KEY_SHIFT)
-	 	data->player.speed = 40;
+	 	data->player.speed = 30;
 	if (keycode == KEY_SPACE_BAR)
 	 	data->key_info.key_jump = 1;
 	return (0);
@@ -90,7 +90,7 @@ void ft_test_pix(t_data *data)
             printf("i = %d, j = %d\n", i, j);
         }
     }
-	
+		
 }
 
 int	multi_key(t_data *data)
@@ -118,7 +118,7 @@ int	multi_key(t_data *data)
     send_rays(data);
 	frame_lenght = get_current_time() - data->last_frame;
 	if (frame_lenght < 10)
-		usleep((10 - frame_lenght) * 1000);
+	 	usleep((10 - frame_lenght) * 1000);
 	frame_time = get_current_time();
 	fps = 1000 / (frame_time - data->last_frame);
 	data->last_frame = frame_time;
