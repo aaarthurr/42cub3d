@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/07/04 17:09:23 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/19 13:29:16 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		int texY = (int)texPos & (TEX_SIZE - 1);
 		texPos += step;
+		
+		//color = 0x1FF4DE;
+		
 		color = get_pixel_color(img, raystate->texX, texY);
 		//color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
 		color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
@@ -124,13 +127,11 @@ int	blend_color(t_img *img)
 int get_pixel_color(t_img *img, int x, int y)
 {
     int color;
-
     if (x < 0 || x >= TEX_SIZE || y < 0 || y >= TEX_SIZE)
     {
         fprintf(stderr, "Les coordonnées sont en dehors des limites de l'image.\n");
         return -1;
     }
-
     int pixel_index = (y * img->len) + (x * (img->bits_pix / 8));
     color = *(int *)(img->img_char + pixel_index);
     return color;

@@ -155,7 +155,10 @@ void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end)
 		*l_end = data->win_height- 1;
 }
 
-int assombrirCouleur(int couleurOriginale, int assombrissement) {
+int assombrirCouleur(int couleurOriginale, int assombrissement)
+{
+	if (assombrissement < 1)
+		return(couleurOriginale);
     // Extraire les composantes RVB de la couleur originale
     int rouge = (couleurOriginale >> 16) & 0xFF;
     int vert = (couleurOriginale >> 8) & 0xFF;
