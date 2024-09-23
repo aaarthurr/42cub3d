@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/07/21 17:14:06 by arpages          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:38:46 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ int is_map_part(char *line)
 
 void	set_pos(t_data *data, int x, int y, char dir)
 {
-	printf("%d %d\n",x ,y);
+	data->player.IntposX = x;
+	data->player.IntposY = y;
 	data->player.posX = ((double)x) + 0.5;
 	data->player.posY = ((double)y)+ 0.5;
+	
 	if (dir == 'S')
 		set_vector(data, 0, -1);
 	else if (dir == 'N')

@@ -52,6 +52,8 @@ int		check_map(t_data *data);
 int		check_file(char *str);
 
 /*------srcs/map/map_checker*/
+int     check_elements(t_data *data);
+int	path_finding(t_data *data);
 int		check_walls(t_data *data);
 int		check_walls_bis(t_data *data, int x, int y);
 

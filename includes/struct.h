@@ -3,15 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/07/09 15:25:21 by arpages          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:22:51 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}				t_pos;
+
+typedef struct s_actpos
+{
+	int	act_x;
+	int	act_y;
+}				t_actpos;
+//pour path finding
 
 typedef struct key_info_s
 {
@@ -43,6 +56,7 @@ typedef struct map_info_s
 	char **info;
 	char **map;
 	int height;
+
 }			t_map_info;
 
 typedef struct	texture_s
@@ -52,6 +66,9 @@ typedef struct	texture_s
 
 typedef struct s_player
 {
+	// position en int
+	int	IntposX;
+	int	IntposY;
 	//vecteur position
 	double	posX;
 	double	posY;

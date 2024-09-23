@@ -10,13 +10,13 @@ LIBPATH = minilibx
 
 HEADER = cub3d.h
 
-MAIN = main init checker game_manager error move
+MAIN = main init game_manager error move
 
 RAYCASTING = raycasting opti textures
 
 UTILS = tools tools_bis ft_tools free_manager ft_itoa
 
-MAP = map_checker mapping
+MAP = map_checker mapping checker path_finding
 
 GNL = get_next_line get_next_line_utils
 

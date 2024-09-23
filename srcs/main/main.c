@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:04:05 by arpages           #+#    #+#             */
-/*   Updated: 2024/07/21 17:02:39 by arpages          ###   ########.fr       */
+/*   Updated: 2024/09/23 13:39:35 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int main(int argc, char **argv)
     else
     {
         get_all(argv, &data);
-        check_map(&data);
-	    set_keys(&data);
-		game_manager(&data);
+        if (check_map(&data) == 0)
+	    {
+            set_keys(&data);
+		    game_manager(&data);
+        }
     }
 	return (0);
 }
