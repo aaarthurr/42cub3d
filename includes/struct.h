@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/24 14:43:23 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:26:10 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,18 @@ typedef struct map_info_s
 }			t_map_info;
 
 typedef struct	texture_s
-{
-	t_img	wall;
-	
+{	
 	t_img	Nwall;
 	t_img	Swall;
 	t_img	Wwall;
 	t_img	Ewall;
+	t_img	ceiling;
 	char	*Nwall_path;
 	char	*Swall_path;
 	char	*Wwall_path;
 	char	*Ewall_path;
-	t_img	ceiling;
+	char	*ceiling_path;
+
 }			t_texture;
 
 typedef struct s_player

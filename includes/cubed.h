@@ -86,11 +86,12 @@ char	**tab_realloc(char **tab, int m_size, char *content);
 int		tab_size(char **tab);
 size_t	get_current_time(void);
 
+char	*ft_strdup(char *src);
+
 //------srcs/utils/ft_itoa.c*/
 char	*ft_itoa(int n);
 
 /*------srcs/utils/ft_tools.c*/
-int		ft_strlen(char *str);
 int		ft_strchr(char c, char *str);
 int		ft_strncmp(const char *str1, const char *str2, unsigned int n);
 char	*ft_strdup(char *s);
@@ -104,5 +105,7 @@ void	create_image(t_data *data);
 
 int		get_smoothed_color(t_img *img, int color, double power);
 int		blend_color(t_img *img);
+
+int check_path(t_data *data);
 
 #endif

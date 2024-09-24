@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/24 14:32:23 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/24 19:42:06 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@
 #define CELL_SIZE 50
 
 int     close_window(t_data *data)
-{
-        //free_player(data);
-        free_mapinfo(data);
-        mlx_destroy_window(data->mlx, data->win);
-        mlx_destroy_display(data->mlx);
-        free(data->mlx);
-        exit(0);
+{   
+    free_mapinfo(data);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	// printf("exiting\n");
+    exit(0);
 }
 
 int	key_pressed(int keycode, t_data *data)
@@ -79,20 +79,6 @@ int	key_released(int keycode, t_data *data)
 	return (0);
 }
 
-void ft_test_pix(t_data *data)
-{
-    // Boucle extérieure : 64 itérations
-    for (int i = 0; i < 64; i++) {
-        // Boucle intérieure : 64 itérations
-        for (int j = 0; j < 64; j++) {
-            // Ici, vous pouvez insérer le code que vous souhaitez exécuter à chaque itération
-			pixel_put_opti(&data->img, i, j, get_pixel_color(&data->texture.wall, i, j));
-            printf("i = %d, j = %d\n", i, j);
-        }
-    }
-		
-}
-
 int	multi_key(t_data *data)
 {
 	size_t	frame_time;
@@ -129,8 +115,9 @@ int	multi_key(t_data *data)
 	frame_time = get_current_time();
 	fps = 1000 / (frame_time - data->last_frame);
 	data->last_frame = frame_time;
-	printf("fps : %d\n", fps);
-	print_tab(data->map_info.map);
+	if (fps < 30)
+		printf("fps : %d\n", fps);
+	//print_tab(data->map_info.map);
 	//mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, ft_itoa(fps));
 	//printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);
@@ -141,6 +128,7 @@ void ft_test(t_data *data)
 	mlx_hook(data->win, 2, 1L << 0, key_pressed, data);	
 	mlx_hook(data->win, 3, 1L << 1, key_released, data);
 	mlx_hook(data->win, 6, (1L << 6), mouse_move, data);
+	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_loop_hook(data->mlx, multi_key, data);
 	mlx_loop(data->mlx);
 }
@@ -148,8 +136,9 @@ void ft_test(t_data *data)
 
 int     game_manager(t_data *data)
 {
+	//500 / 700
 	data->win_height = 500;
-	data->win_width = 700;
+	data->win_width = 780;
 	data->mouse.mouse_lock = 1;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 

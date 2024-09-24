@@ -26,16 +26,6 @@ int ft_strchr(char c, char *str)
 	return (0);
 }
 
-int ft_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	while(str[i] != '\0')
-		i++;
-	return(i);
-}
-
 int ft_strncmp(const char *str1, const char *str2, unsigned int n)
 {
 	unsigned char	*ptr1;

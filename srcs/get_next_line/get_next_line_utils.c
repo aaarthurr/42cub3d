@@ -5,53 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 18:35:48 by arpages           #+#    #+#             */
-/*   Updated: 2024/04/23 12:31:45 by leoherna         ###   ########.fr       */
+/*   Created: 2023/11/06 13:27:12 by leoherna          #+#    #+#             */
+/*   Updated: 2023/11/06 13:27:14 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cubed.h"
+#include "get_next_line.h"
 
-int	found_newline(t_list *temp)
+int	found_newline(t_list *stock)
 {
-	int		i;
 	t_list	*current;
+	int		i;
 
-	if (temp == NULL)
+	if (stock == NULL)
 		return (0);
-	current = ft_lst_get_last(temp);
+	current = lst_get_last(stock);
 	i = 0;
-	while (current->ctnt[i])
+	while (current -> content[i])
 	{
-		if (current->ctnt[i] == '\n')
+		if (current -> content[i] == '\n')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-t_list	*ft_lst_get_last(t_list *temp)
+t_list	*lst_get_last(t_list *stock)
 {
-	t_list	*current;
+	t_list	*last;
 
-	current = temp;
-	while (current && current->next)
-		current = current->next;
-	return (current);
+	last = stock;
+	while (last && last -> next)
+		last = last -> next;
+	return (last);
 }
 
-void	generate_line(char **line, t_list *temp)
+void	generate_line(char **line, t_list *stock)
 {
 	int	i;
 	int	len;
 
 	len = 0;
-	while (temp)
+	while (stock)
 	{
 		i = 0;
-		while (temp->ctnt[i])
+		while (stock -> content[i])
 		{
-			if (temp->ctnt[i] == '\n')
+			if (stock -> content[i] == '\n')
 			{
 				len++;
 				break ;
@@ -59,32 +59,34 @@ void	generate_line(char **line, t_list *temp)
 			len++;
 			i++;
 		}
-		temp = temp->next;
+		stock = stock -> next;
 	}
 	*line = malloc(sizeof(char) * (len + 1));
 }
 
-void	free_temp(t_list *temp)
+void	free_stock(t_list *stock)
 {
 	t_list	*current;
 	t_list	*next;
 
-	current = temp;
+	current = stock;
 	while (current)
 	{
-		free(current->ctnt);
-		next = current->next;
+		free(current -> content);
+		next = current -> next;
 		free(current);
 		current = next;
 	}
 }
 
-int	ft_len(const char *str)
+int	ft_strlen(const char *str)
 {
-	int	len;
+	int	i;
 
-	len = 0;
-	while (*(str++))
-		len++;
-	return (len);
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
 }

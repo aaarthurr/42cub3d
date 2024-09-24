@@ -109,6 +109,19 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 	get_line_data(data, raystate);
 }
 
+void which_texture(t_data *data, t_raystate *raystate, 	int l_start, int l_end)
+{
+	if (raystate->side == 0 && raystate->mapX > data->player.posX)
+		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Ewall));
+	if (raystate->side == 0 && raystate->mapX < data->player.posX)
+		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Wwall));
+	if (raystate->side == 1 && raystate->mapY > data->player.posY)
+		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Swall));
+	if (raystate->side == 1 && raystate->mapY < data->player.posY)
+		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Nwall));
+	//drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.wall));
+}
+
 void get_line_data(t_data *data, t_raystate *raystate)
 {
 	int line_height;
@@ -133,7 +146,9 @@ void get_line_data(t_data *data, t_raystate *raystate)
 		raystate->texX = TEX_SIZE - raystate->texX - 1;
 	if (raystate->side == 1 && raystate->rayDirY < 0)
 		raystate->texX = TEX_SIZE - raystate->texX - 1;
-	drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.wall));
+	//printf("%d\n", raystate->side);
+	//drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.wall));
+	which_texture(data, raystate, l_start, l_end);
 }
 
 void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end)

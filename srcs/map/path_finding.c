@@ -13,14 +13,16 @@
 #include "cubed.h"
 
 
-int count_line(char **map)
+int count_line(char **tab)
 {
-    int i;
+	int	j;
 
-    i = 0;
-    while (map[i][0])
-        i++;
-    return (i);
+	j = 0;
+	if (tab == NULL)
+		return (0);
+	while (tab[j] != NULL)
+		j++;
+	return (j);
 }
 
 
@@ -34,10 +36,14 @@ char	**duplicata_map(t_data *data)
     x = 0;
     y = 0;
 	//printf("taille de la map : %d\n", data->map_info.height);
+	data->map_info.height = count_line(data->map_info.map);
     nb_line = data->map_info.height;
+	printf("mapinfo height : %d\n", data->map_info.height);
     map = malloc(sizeof(char *) * (data->map_info.height + 1));
     while (y != nb_line)
     {
+		if (!data->map_info.map[y])
+			return (map);
         map[y] = malloc(sizeof(char) * (ft_strlen(data->map_info.map[y]) + 1));
         if (!map[y])
             return (NULL);
@@ -57,7 +63,6 @@ char	**duplicata_map(t_data *data)
 
 int should_i_be_here(int wcase , t_actpos act, char **map, t_data *data)
 {
-
 	if (wcase == 1)
     	if (act.act_y + 1 > data->map_info.height)
 			return (1);
@@ -128,6 +133,8 @@ void	path_free_map(t_data *data, char **map)
 	int	i;
 
 	i = data->map_info.height;
+	if (!map[0])
+		return ;
 	while (i != -1)
 	{
 		free(map[i]);
@@ -145,13 +152,17 @@ int	path_finding(t_data *data)
 	
 
 	map = duplicata_map(data);
+	if (!map)
+		return (1);
 	top = 1;
+	act.act_x = 0;
+	act.act_y = 0;
 	pos[0].x = data->player.IntposX;
 	pos[0].y = data->player.IntposY;
 	while (top > 0)
 	{
-		print_tab(map);
-		printf("-------------------------------------------\n           on bottom timeline\n-------------------------------------------\n");
+		//print_tab(map);
+		//printf("-------------------------------------------\n           on bottom timeline\n-------------------------------------------\n");
 		top--;
 		act.act_x = pos[top].x;
 		act.act_y = pos[top].y;

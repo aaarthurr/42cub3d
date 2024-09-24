@@ -12,23 +12,50 @@
 
 #include "cubed.h"
 
+void	free_img(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->texture.ceiling.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.Nwall.img_ptr);
+    mlx_destroy_image(data->mlx, data->texture.Swall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.Wwall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.Ewall.img_ptr);
+	mlx_destroy_image(data->mlx, data->img.img_ptr);
+}
+
+void	free_line(t_data *data)
+{
+	free_tab(data->map_info.global);
+	free_tab(data->map_info.map);
+	free_tab(data->map_info.info);
+
+	free(data->texture.Nwall_path);
+	free(data->texture.Swall_path);
+	free(data->texture.Wwall_path);
+	free(data->texture.Ewall_path);
+	//free(data->texture.ceiling_path);
+}
+
 void    free_mapinfo(t_data *data)
 {
-    free_tab(data->map_info.global);
-    free_tab(data->map_info.map);
-    free_tab(data->map_info.info);
-    //free(&data->map_info.map_path)
+	free_img(data);
+	free_line(data);
+	printf("salut %f\n", data->player.dirY);
 
 }
-void    free_tab(char **tab)
+void free_tab(char **tab)
 {
-        size_t  i;
+    int i;
 
-        i = 0;
-        while (tab[i])
-        {
-                free(tab[i]);
-                i++;
-        }
-        free(tab);
+    if (!tab)
+        return;
+
+    i = 0;
+    while (tab[i] != NULL)
+    {
+        free(tab[i]);
+        tab[i] = NULL; // Bonne pratique pour éviter des double free
+        i++;
+    }
+    free(tab);
+    tab = NULL; // Idem, bonne pratique pour sécuriser
 }

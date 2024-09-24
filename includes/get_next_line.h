@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 10:59:02 by arpages           #+#    #+#             */
-/*   Updated: 2023/10/29 17:51:10 by arpages          ###   ########.fr       */
+/*   Created: 2023/11/06 13:27:03 by leoherna          #+#    #+#             */
+/*   Updated: 2023/11/06 13:27:04 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 512
-# endif
-
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 typedef struct s_list
 {
-	char			*ctnt;
+	char			*content;
 	struct s_list	*next;
-}					t_list;
+}			t_list;
+
+int		found_newline(t_list *stock);
+int		ft_strlen(const char *str);
 
 char	*get_next_line(int fd);
 
-t_list	*ft_lst_get_last(t_list *temp);
+void	read_nstock(int fd, t_list **stock, int *readen);
+void	add_to_stock(t_list **stock, char *buf, int readed);
+void	extract_line(t_list *stock, char **line);
+void	generate_line(char **line, t_list *stock);
+void	clean_stock(t_list **stock);
+void	free_stock(t_list *stock);
 
-void	generate_line(char **line, t_list *temp);
-void	free_temp(t_list *temp);
-void	clean_lst(t_list **temp);
-void	extract(t_list *temp, char **line);
-void	add_to_lst(t_list **temp, char *buf, int read_line);
-void	read_lst(int fd, t_list **temp);
-
-int		found_newline(t_list *temp);
-int		ft_len(const char *str);
-
+t_list	*lst_get_last(t_list *stock);
 #endif
