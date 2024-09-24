@@ -38,7 +38,7 @@ int	mouse_move(int x, int y, t_data *data)
 	else if (x > (data->win_width / 2))
 		x_distance = x - (data->win_width / 2);
 	rot_coef = (double)x_distance / sensibilite;
-	if (data->mouse.mouse_lock == 1)
+	if (data->mouse.mouse_lock == 2)
 	{
 		printf("j'y suis sah\n");
 		rotate_player(data, rot_coef);

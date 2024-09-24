@@ -12,7 +12,7 @@ HEADER = cub3d.h
 
 MAIN = main init game_manager error move mouse_movement
 
-RAYCASTING = raycasting opti textures
+RAYCASTING = raycasting opti textures roof_cast
 
 UTILS = tools tools_bis ft_tools free_manager ft_itoa
 

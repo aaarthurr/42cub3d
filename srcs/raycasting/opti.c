@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opti.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/19 13:29:16 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/24 14:02:02 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	//printf(" %d <-> %d -> x = %d\n", lStart, lEnd, raystate->x);
 	while (y < lStart)
 	{
-		pixel_put_opti(&(data->img), raystate->x, y, 0x000000);
 		y++;
 	}
 	while(y < lEnd)

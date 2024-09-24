@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/23 17:38:46 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:30:43 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,41 @@ void	set_pos(t_data *data, int x, int y, char dir)
 	data->player.posY = ((double)y)+ 0.5;
 	
 	if (dir == 'S')
-		set_vector(data, 0, -1);
-	else if (dir == 'N')
+	{
 		set_vector(data, 0, 1);
+		data->player.base_dir = 0;
+	}
+	else if (dir == 'N')
+	{
+		set_vector(data, 0, -1);
+		data->player.base_dir = 0;
+	}
 	else if (dir == 'E')
-		set_vector(data, -1, 0);
-	else if (dir == 'W')
+	{
 		set_vector(data, 1, 0);
+		data->player.base_dir = 1;
+	}
+	else if (dir == 'W')
+	{
+		set_vector(data, -1, 0);
+		data->player.base_dir = 1;
+	}
 }
 
 void	set_vector(t_data *data, int x, int y)
 {
 	data->player.dirX = x;
 	data->player.dirY = y;
-	data->player.planX = y * 0.70;
-	data->player.planY = x * 0.70;
+	if (data->player.base_dir == 0)
+	{
+		data->player.planX = y * 0.70;
+		data->player.planY = x * -0.70;
+	}
+	else
+	{
+		data->player.planX = y * -0.70;
+		data->player.planY = x * 0.70;
+	}
 	data->player.speed = 50;
 	data->player.jump_speed = 0.02;
 	data->player.posZ = 0.65;

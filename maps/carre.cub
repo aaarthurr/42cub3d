@@ -1,6 +1,13 @@
+
+NO  ./textutes/wall_v2.xpm
+SO  ./textutes/wall_v2.xpm
+WE  ./textutes/wall_v2.xpm
+EA  ./textutes/wall_v2.xpm
+
 111111
-100001
-10S001
+101001
+10W101
 100001
 100001
 111111
+

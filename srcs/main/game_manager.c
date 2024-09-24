@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/24 10:48:11 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:32:23 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ int	multi_key(t_data *data)
 	if (data->key_info.key_w == 1)
 		move_player(data, 1, 0);
 	if (data->key_info.key_a == 1)
-		move_player(data, 0, -1);
-	if (data->key_info.key_d == 1)
 		move_player(data, 0, 1);
+	if (data->key_info.key_d == 1)
+		move_player(data, 0, -1);
 	
 	if (data->key_info.key_left == 1)
-		rotate_player(data, 0.02);
-	if (data->key_info.key_right == 1)
 		rotate_player(data, -0.02);
+	if (data->key_info.key_right == 1)
+		rotate_player(data, 0.02);
 		
 	
 	
@@ -130,6 +130,7 @@ int	multi_key(t_data *data)
 	fps = 1000 / (frame_time - data->last_frame);
 	data->last_frame = frame_time;
 	printf("fps : %d\n", fps);
+	print_tab(data->map_info.map);
 	//mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, ft_itoa(fps));
 	//printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);

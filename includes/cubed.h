@@ -73,6 +73,8 @@ void	drawVerticalLine(t_data *data, t_raystate *raystate, int yMin, int yMax, t_
 void	clearScreen(t_img *img, int width, int height);
 
 void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end);
+/*------srcs/raycasting/roof_Cast.c---*/
+void    cast_floor(t_data *data);
 
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);

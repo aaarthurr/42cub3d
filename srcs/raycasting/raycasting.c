@@ -20,6 +20,7 @@ void	send_rays(t_data *data)
 	double	raydiry;
 
 	x = 0;
+	cast_floor(data);
 	//printf("{%f, %f}\n", data->player.posX, data->player.posY);
 	while (x < data->win_width)
 	{

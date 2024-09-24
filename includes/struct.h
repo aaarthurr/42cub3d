@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/24 10:44:47 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/24 14:43:23 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,16 @@ typedef struct map_info_s
 typedef struct	texture_s
 {
 	t_img	wall;
+	
+	t_img	Nwall;
+	t_img	Swall;
+	t_img	Wwall;
+	t_img	Ewall;
+	char	*Nwall_path;
+	char	*Swall_path;
+	char	*Wwall_path;
+	char	*Ewall_path;
+	t_img	ceiling;
 }			t_texture;
 
 typedef struct s_player
@@ -97,6 +107,8 @@ typedef struct s_player
 
 	int		speed;
 	double	jump_speed;
+
+	int		base_dir;
 }			t_player;
 
 typedef struct data_s
@@ -136,5 +148,20 @@ typedef struct raystate_s
 	double	deltaDistY;
 	double	perpWallDist;
 }				t_raystate;
+
+typedef struct roofstate_s
+{
+    int        x;
+    int        y;
+    float    rayDirX0;
+    float    rayDirY0;
+    float    rayDirX1;
+    float    rayDirY1;
+    int        p;
+    float    floorStepX;
+    float    floorStepY;
+    float    floorX;
+    float    floorY;
+}                t_roofstate;
 
 #endif
