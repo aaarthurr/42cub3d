@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:22:13 by arpages           #+#    #+#             */
-/*   Updated: 2024/07/20 16:26:50 by arpages          ###   ########.fr       */
+/*   Updated: 2024/09/23 18:40:27 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+
+
+
 
 void move_player(t_data *data, int x, int y)
 {
@@ -90,3 +93,4 @@ void rotate_player(t_data *data, double angle)
 	data->player.planX = (c_x * cos(angle)) - (c_y * sin(angle));
 	data->player.planY = (c_x * sin(angle)) + (c_y * cos(angle));
 }
+

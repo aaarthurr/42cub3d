@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/23 16:22:51 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:44:47 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct s_actpos
 }				t_actpos;
 //pour path finding
 
+typedef struct s_mouse
+{
+	int origin_x;
+	int origin_y;
+	int	mouse_lock;
+} t_mouse;
+
 typedef struct key_info_s
 {
 	int key_w;
@@ -36,6 +43,9 @@ typedef struct key_info_s
 	int key_right;
 	int key_esc;
 	int key_jump;
+	int key_mouse;
+	
+
 }			t_key_info;
 
 typedef struct img_s
@@ -99,6 +109,7 @@ typedef struct data_s
 	t_player	player;
 	t_map_info  map_info;
 	t_key_info	key_info;
+	t_mouse		mouse;
 	t_img		img;
 	t_texture	texture;
 }				t_data;

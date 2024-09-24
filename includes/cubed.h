@@ -37,6 +37,7 @@ void	move_player(t_data *data, int x, int y);
 void	rotate_player(t_data *data, double angle);
 void	jump(t_data *data);
 void	walk_height(t_data *data);
+int     mouse_move(int x, int y, t_data *data);
 
 /*------srcs/main/init-----*/
 void	get_all(char **argv, t_data *data);

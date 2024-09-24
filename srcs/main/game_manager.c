@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/07/20 16:26:38 by arpages          ###   ########.fr       */
+/*   Updated: 2024/09/24 10:48:11 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,17 @@ int	multi_key(t_data *data)
 		move_player(data, 0, -1);
 	if (data->key_info.key_d == 1)
 		move_player(data, 0, 1);
+	
 	if (data->key_info.key_left == 1)
 		rotate_player(data, 0.02);
 	if (data->key_info.key_right == 1)
 		rotate_player(data, -0.02);
+		
+	
+	
+	
+	//ajouter souris
+		
 	if (data->key_info.key_jump == 1)
 		jump(data);
     send_rays(data);
@@ -122,7 +129,7 @@ int	multi_key(t_data *data)
 	frame_time = get_current_time();
 	fps = 1000 / (frame_time - data->last_frame);
 	data->last_frame = frame_time;
-	printf("fps -> %d\n", fps);
+	printf("fps : %d\n", fps);
 	//mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, ft_itoa(fps));
 	//printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
     return (0);
@@ -132,6 +139,7 @@ void ft_test(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, key_pressed, data);	
 	mlx_hook(data->win, 3, 1L << 1, key_released, data);
+	mlx_hook(data->win, 6, (1L << 6), mouse_move, data);
 	mlx_loop_hook(data->mlx, multi_key, data);
 	mlx_loop(data->mlx);
 }
@@ -141,6 +149,7 @@ int     game_manager(t_data *data)
 {
 	data->win_height = 500;
 	data->win_width = 700;
+	data->mouse.mouse_lock = 1;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);
