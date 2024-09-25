@@ -1,9 +1,21 @@
 NO  textures/textwall_v2.xpm
+
+C   textures/ceiling.xpm
+
 SO  textures/textwall_v2.xpm
-WE  textures/textwall_v2.xpm
+
+
 EA  textures/textwall_v2.xpm
-F   40,10,10
-C   255,30,59
+
+
+F   2550,10,10
+
+WE  textures/textwall_v2.xpm
+
+
+
+
+
 
 11111111111111111111111
 10000000001000000000001

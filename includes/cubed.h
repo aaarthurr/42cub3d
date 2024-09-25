@@ -31,6 +31,7 @@
 int     game_manager(t_data *data);
 int		multi_key(t_data *data);
 void	generate_base_img(t_data *data);
+int     close_window(t_data *data);
 
 /*------srcs/main/move------*/
 void	move_player(t_data *data, int x, int y);
@@ -77,6 +78,7 @@ void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end);
 void    cast_floor(t_data *data);
 /*------srcs/raycasting/texture.c---*/
 char *generate_path(t_data *data,int index, char *which_texture);
+char	*find_arg(t_data *data, char *which_texture);
 /*------srcs/raycasting/get_floor.c---*/
 int search_floor_color(t_data *data);
 int search_ceiling_color(t_data *data);
@@ -84,6 +86,7 @@ int search_ceiling_color(t_data *data);
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);
 void    free_tab(char **tab);
+void    exit_manager(t_data *data);
 
 /*------srcs/utils/tools*/
 void	print_tab(char **tab);
@@ -120,5 +123,8 @@ int     check_path(t_data *data);
 int     give_lsd(int color);
 
 void	print_map(t_data *data);
+
+void    take_drugs(t_data *data);
+void    death(t_data *data);
 
 #endif

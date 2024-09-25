@@ -74,7 +74,7 @@ int search_floor_color(t_data *data)
 	char	*floor_color_digit;
 
 
-	floor_color_digit = generate_path(data, 4, "F");
+	floor_color_digit = find_arg(data, "F");
 	if (floor_color_digit == NULL)
 		return (printf("Error : Floor Digit Invalid. ABORTING\n"), free(floor_color_digit), 1);
 	if (is_digit_part(floor_color_digit) == 1)
@@ -87,12 +87,14 @@ int search_floor_color(t_data *data)
 	if (data->texture.r > 255 || data->texture.g > 255 || data->texture.b > 255)
 	{
 		printf("Error : Floor Digit Invalid. ABORTING\n");
-		exit(0);
+		free(floor_color_digit);
+		exit_manager(data);
 	}
 	if (data->texture.r < 0 || data->texture.g < 0 || data->texture.b < 0)
 	{
 		printf("Error : Floor Digit Invalid. ABORTING\n");
-		exit(0);
+		free(floor_color_digit);
+		exit_manager(data);
 	}
 	data->texture.floor_color = rgb_to_hex(data->texture.r, data->texture.g, data->texture.b);
 	data->texture.r = 0;
@@ -105,8 +107,7 @@ int search_ceiling_color(t_data *data)
 {
 	char	*ceiling_color_digit;
 
-
-	ceiling_color_digit = generate_path(data, 5, "C");
+	ceiling_color_digit = find_arg(data, "C");
 	if (ceiling_color_digit == NULL)
 		return (free(ceiling_color_digit), 1);
 	if (is_digit_part(ceiling_color_digit) == 1)

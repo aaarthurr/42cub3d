@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/25 15:00:46 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:51:22 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,12 @@ typedef struct	texture_s
 	int r;
 	int g;
 	int b;
-
 }			t_texture;
 
 typedef struct s_player
 {
+	int			drug_level;
+	long int	drug_time;
 	// position en int
 	int	IntposX;
 	int	IntposY;

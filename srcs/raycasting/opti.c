@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 15:22:36 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:00:53 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	y = 0;
 	while (y < lStart)
 	{
-		if (data->texture.ceiling_color_or_texture == 0)
+		if (data->player.drug_level <= 1)
 		{
-			pixel_put_opti(&(data->img), raystate->x, y, data->texture.ceiling_color);
+			if (data->texture.ceiling_color_or_texture == 0)
+			{
+				pixel_put_opti(&(data->img), raystate->x, y, data->texture.ceiling_color);
+			}
 		}
 		y++;
 	}
@@ -50,6 +53,8 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 		color = get_pixel_color(img, raystate->texX, texY);
 		//color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
 		color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
+		if (data->player.drug_level >= 1)
+			color = give_lsd(color);
 		pixel_put_opti(&(data->img), raystate->x, y, color);
 		y++;
 	}

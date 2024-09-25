@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:21:58 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/25 16:49:45 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:59:03 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,54 +81,49 @@ void	init_image(t_data *data)
 }
 
 
-int	find_arg(char c, char f, char **map)
+char	*find_arg(t_data *data, char *which_texture)
 {
-	int	i;
-	int	j;
+	int i;
+	char *path;
 
-	j = -1;
 	i = 0;
-	while (map[i])
+	path = NULL;
+	while ((data->map_info.global[i][0] != '0' || data->map_info.global[i][0] != '1') || data->map_info.global[i] != NULL)
 	{
-		if (map[i][0] == c && map[i][1] == f)
-		{
-			if (j != -1)
-				return (-1);
-			if (f == '\0')
-				return (3);
-			if (f == ' ')
-				j = i + 1;
-			if (f != ' ' && ft_lenxd(map[i]) == 3)
-				j = i + 1;
-		}
-		i++;
+			if (ft_strncmp(data->map_info.global[i], which_texture, ft_strlen(which_texture)) == 0)
+			{
+				path = generate_path(data, i, which_texture);
+				printf("path -> %s\n", path);
+				return (path);			
+			}
+			i++;
 	}
-	return (j - 1);
+	printf("j'en sors mais ou ?\n");
+	return (NULL);
+
 }
 
 void	get_image(t_data *data)
 {
-	int trigger;
-	
-	trigger = 0;
+
 	data->texture.ceiling_color_or_texture = 0;
 	
 
-	data->texture.Nwall_path = generate_path(data, 0, "NO");
-	data->texture.Swall_path = generate_path(data, 1, "SO");
-	data->texture.Wwall_path = generate_path(data, 2, "WE");
-	data->texture.Ewall_path = generate_path(data, 3, "EA");
+	data->texture.Nwall_path = find_arg(data, "NO");
+	data->texture.Swall_path = find_arg(data, "SO");
+	data->texture.Wwall_path = find_arg(data, "WE");
+	data->texture.Ewall_path = find_arg(data, "EA");
 	if(search_floor_color(data) == 1)
-		exit(0);
+		exit_manager(data);
 	if (search_ceiling_color(data) == 1)
 	{
 		data->texture.ceiling_color_or_texture = 1;
-		data->texture.ceiling_path = generate_path(data, 5, "C");
+		data->texture.ceiling_path = find_arg(data, "C");
 		printf("path -> %s\n", data->texture.ceiling_path);
 	}
 
 	if (check_path(data) == 1)
-		exit(0);
+		exit_manager(data);
 
 
 	//data->texture.floor_color = 0x000000;
@@ -158,3 +153,6 @@ void    create_image(t_data *data)
 		data->texture.ceiling.global_color = blend_color(&data->texture.ceiling);
 	}
 }
+
+
+

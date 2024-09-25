@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/25 12:07:00 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:55:51 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	key_pressed(int keycode, t_data *data)
 		data->key_info.key_a = 1;
 	if (keycode == KEY_D)
 		data->key_info.key_d = 1;
+	if (keycode == KEY_L)
+		take_drugs(data);
 	if (keycode == KEY_RIGHT)
 		data->key_info.key_right = 1;
 	if (keycode == KEY_LEFT)
@@ -127,6 +129,8 @@ int	multi_key(t_data *data)
 	data->last_frame = frame_time;
 	if (fps < 30)
 		printf("fps : %d\n", fps);
+	if (data->player.drug_time != -1 && (size_t)(data->player.drug_time) < get_current_time())
+		death(data);
 	//print_tab(data->map_info.map);
 	//mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, ft_itoa(fps));
 	//printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
@@ -147,9 +151,11 @@ void ft_test(t_data *data)
 int     game_manager(t_data *data)
 {
 	//500 / 700
+	data->player.drug_time = -1;
 	data->win_height = 500;
 	data->win_width = 780;
 	data->mouse.mouse_lock = 1;
+	data->player.drug_level = 0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);

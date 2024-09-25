@@ -72,5 +72,13 @@ void free_tab(char **tab)
 
 void exit_manager(t_data *data)
 {
+
+	free_tab(data->map_info.global);
+	free_tab(data->map_info.map);
+	free(data->texture.Nwall_path);
+	free(data->texture.Swall_path);
+	free(data->texture.Wwall_path);
+	free(data->texture.Ewall_path);
+	printf("Je suis cense free wsh\n");
 	exit(0);
 }
