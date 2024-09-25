@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 13:27:12 by leoherna          #+#    #+#             */
-/*   Updated: 2023/11/06 13:27:14 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:29:43 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	free_stock(t_list *stock)
 		current = next;
 	}
 }
-
+#include <stdio.h>
 int	ft_strlen(const char *str)
 {
 	int	i;
@@ -86,7 +86,14 @@ int	ft_strlen(const char *str)
 	i = 0;
 	while (str[i])
 	{
+		
 		i++;
+		printf("i : %d\n", i);
+		if (str[i] == '\0')
+			printf("\\0\n");
+		if (str[i] == '\n')
+			printf("\\n\n");
+		
 	}
 	return (i);
 }

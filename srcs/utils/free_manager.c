@@ -24,9 +24,17 @@ void	free_img(t_data *data)
 
 void	free_line(t_data *data)
 {
+
+	// printf("1---------------\n");
+	// print_tab(data->map_info.global);
+	// 	printf("2---------------\n");
+	// print_tab(data->map_info.map);
+	// 	printf("3---------------\n");
+	// //print_tab(data->map_info.info);
+
 	free_tab(data->map_info.global);
 	free_tab(data->map_info.map);
-	free_tab(data->map_info.info);
+	//free_tab(data->map_info.info);
 
 	free(data->texture.Nwall_path);
 	free(data->texture.Swall_path);

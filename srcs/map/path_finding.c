@@ -35,6 +35,7 @@ char	**duplicata_map(t_data *data)
 
     x = 0;
     y = 0;
+	//map = NULL;
 	//printf("taille de la map : %d\n", data->map_info.height);
 	data->map_info.height = count_line(data->map_info.map);
     nb_line = data->map_info.height;
@@ -42,8 +43,6 @@ char	**duplicata_map(t_data *data)
     map = malloc(sizeof(char *) * (data->map_info.height + 1));
     while (y != nb_line)
     {
-		if (!data->map_info.map[y])
-			return (map);
         map[y] = malloc(sizeof(char) * (ft_strlen(data->map_info.map[y]) + 1));
         if (!map[y])
             return (NULL);
@@ -52,7 +51,7 @@ char	**duplicata_map(t_data *data)
             map[y][x] = data->map_info.map[y][x];
             x++;
         }
-        map[y][x] ='\n';
+        map[y][x] ='\0';
 		//printf("%s\n",map[y]);
         x = 0;
         y++;
@@ -72,6 +71,7 @@ int should_i_be_here(int wcase , t_actpos act, char **map, t_data *data)
 	if (wcase == 3)
     	if (act.act_x - 1 < 0)
 			return (1);
+	printf("taille de act_y : %d\n", act.act_y);
 	if (wcase == 4)
 		if (act.act_x + 1 > ft_strlen(map[act.act_y]))
 			return (1);

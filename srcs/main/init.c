@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/24 17:58:55 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:14:04 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	copy_file(t_map_info *map_info)
 	while (temp != NULL)
 	{
 		free(temp);
-		map_info->height++;
+		map_info->height = map_info->height + 1;
 		temp = get_next_line(fd);
 	}
 	free(temp);
@@ -59,6 +59,7 @@ void	get_map(t_map_info *map_info)
 {
 	int size;
 	int i;
+	int j = -1;
 	char **map;
 
 	
@@ -69,9 +70,21 @@ void	get_map(t_map_info *map_info)
 		i++;
 	while (is_map_part(map_info->global[i]) == 1 && i < size)
 	{
-		map = tab_realloc(map, 1, map_info->global[i]);
+		if (j == -1)
+			j = i;
+		//map = tab_realloc(map, 1, map_info->global[i]);
 		i++;
 	}
+	map = malloc(sizeof(char *) * ((i - j) + 1));
+	i = 0;
+	while (is_map_part(map_info->global[j]) == 1 && j < size)
+	{
+		map[i] = ft_strdup(map_info->global[j]);
+		j++;
+		i++;
+	}
+	map[i] = NULL;
+	get_next_line(-1);
 	map_info->map = map;
 }
 

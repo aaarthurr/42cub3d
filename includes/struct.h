@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/24 18:26:10 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:08:15 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct map_info_s
 {
 	char *map_path;
 	char **global;
-	char **info;
+	//char **info;
 	char **map;
 	int height;
 

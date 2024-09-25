@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:09:32 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/24 15:40:48 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:32:19 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ char **tab_realloc(char **tab, int m_size, char *content)
 	char **new_tab;
 
 	i = 0;
+	if (!tab)
+		printf("we are here %d %d\n", m_size, tab_size(tab));
+	//print_tab(tab);
 	new_tab = malloc(sizeof(char *) * (tab_size(tab) + m_size + 1));
 	while (tab != NULL && tab[i] != NULL)
 	{
@@ -33,6 +36,9 @@ char **tab_realloc(char **tab, int m_size, char *content)
 	new_tab[i] = NULL;
 	if (tab != NULL)
 		free(tab);
+	print_tab(new_tab);
+	printf("d\n\n");
+	
 	return(new_tab);
 }
 
