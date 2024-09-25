@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/25 10:08:15 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:00:46 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,13 @@ typedef struct	texture_s
 	char	*Wwall_path;
 	char	*Ewall_path;
 	char	*ceiling_path;
+	
+	unsigned int floor_color;
+	unsigned int ceiling_color;
+	int ceiling_color_or_texture;
+	int r;
+	int g;
+	int b;
 
 }			t_texture;
 

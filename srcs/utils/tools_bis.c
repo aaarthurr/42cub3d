@@ -10,5 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cubed.h"
 
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+	{
+		return (1);
+	}
+	return (0);
+}
+
+
+int	ft_atoi(const char *nptr)
+{
+	unsigned int	signe;
+	unsigned int	i;
+	unsigned int	result;
+
+	signe = 1;
+	i = 0;
+	result = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			signe = -1;
+		i++;
+	}
+	while (ft_isdigit(nptr[i]))
+	{
+		result = result * 10;
+		result = result + (nptr[i] - '0');
+		i++;
+	}
+	return (result * signe);
+}
 

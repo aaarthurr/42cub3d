@@ -10,9 +10,9 @@ LIBPATH = minilibx
 
 HEADER = cub3d.h
 
-MAIN = main init game_manager error move mouse_movement
+MAIN = main init error
 
-RAYCASTING = raycasting opti textures roof_cast
+RAYCASTING = raycasting opti textures roof_cast effect get_floor
 
 UTILS = tools tools_bis ft_tools free_manager ft_itoa
 
@@ -20,12 +20,14 @@ MAP = map_checker mapping checker path_finding
 
 GNL = get_next_line get_next_line_utils
 
+GAME = game_manager move mouse_movement minimap
+
 SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 	$(addsuffix .c, $(addprefix srcs/get_next_line/, $(GNL))) \
 	$(addsuffix .c, $(addprefix srcs/utils/, $(UTILS))) \
 	$(addsuffix .c, $(addprefix srcs/map/, $(MAP))) \
 	$(addsuffix .c, $(addprefix srcs/raycasting/, $(RAYCASTING))) \
-	#$(addsuffix .c, $(addprefix srcs/pipex/, $(PIPEX))) \
+	$(addsuffix .c, $(addprefix srcs/game_management/, $(GAME))) \
 	#$(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
 	  
 

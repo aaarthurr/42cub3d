@@ -20,8 +20,8 @@ void	send_rays(t_data *data)
 	double	raydiry;
 
 	x = 0;
-	cast_floor(data);
-	//printf("{%f, %f}\n", data->player.posX, data->player.posY);
+	if (data->texture.ceiling_color_or_texture == 1)
+		cast_floor(data);
 	while (x < data->win_width)
 	{
 		camx = ((2 * x) / (double)(data->win_width)) - 1;
@@ -31,6 +31,7 @@ void	send_rays(t_data *data)
 		x++;
 		//printf("{%f, %f}\n", raydirx, raydiry);
 	}
+	print_map(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 }
 

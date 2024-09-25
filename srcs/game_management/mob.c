@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   mob.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 10:53:12 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/25 10:53:12 by leoherna         ###   ########.fr       */
+/*   Created: 2024/09/25 10:56:18 by leoherna          #+#    #+#             */
+/*   Updated: 2024/09/25 10:56:18 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
 
-void error_manager(char *line, int code)
+void    activate_ennemy(t_data *data)
 {
-    printf("%s\n", line);
-    if (code > 100)
-        exit(1);
+    printf("wallah ya des monstre\n");
 }

@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/24 14:02:02 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:22:36 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	step = 1.0 * TEX_SIZE / raystate->line_height;
 	texPos = ((lStart - raystate->offset) - data->win_height / 2 + raystate->line_height / 2) * step;
 	y = 0;
-
-	//printf(" %d <-> %d -> x = %d\n", lStart, lEnd, raystate->x);
 	while (y < lStart)
 	{
+		if (data->texture.ceiling_color_or_texture == 0)
+		{
+			pixel_put_opti(&(data->img), raystate->x, y, data->texture.ceiling_color);
+		}
 		y++;
 	}
 	while(y < lEnd)
@@ -53,19 +55,9 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	}
 	while (y < data->win_height)
 	{
-		pixel_put_opti(&(data->img), raystate->x, y, 0x000000);
+		pixel_put_opti(&(data->img), raystate->x, y, data->texture.floor_color); //chamger sol
 		y++;
 	}
-}
-
-void clearScreen(t_img *img, int width, int height) 
-{
-    int x, y;
-    for (x = 0; x < width; x++) {
-        for (y = 0; y < height; y++) {
-            pixel_put_opti(img, x, y, 0x000000); // Noir en hexadécimal
-        }
-    }
 }
 
 int	get_smoothed_color(t_img *img, int base_color, double power)

@@ -71,7 +71,6 @@ int should_i_be_here(int wcase , t_actpos act, char **map, t_data *data)
 	if (wcase == 3)
     	if (act.act_x - 1 < 0)
 			return (1);
-	printf("taille de act_y : %d\n", act.act_y);
 	if (wcase == 4)
 		if (act.act_x + 1 > ft_strlen(map[act.act_y]))
 			return (1);

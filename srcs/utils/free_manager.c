@@ -14,7 +14,8 @@
 
 void	free_img(t_data *data)
 {
-	mlx_destroy_image(data->mlx, data->texture.ceiling.img_ptr);
+	if(data->texture.ceiling_color_or_texture == 1)
+		mlx_destroy_image(data->mlx, data->texture.ceiling.img_ptr);
 	mlx_destroy_image(data->mlx, data->texture.Nwall.img_ptr);
     mlx_destroy_image(data->mlx, data->texture.Swall.img_ptr);
 	mlx_destroy_image(data->mlx, data->texture.Wwall.img_ptr);
@@ -40,7 +41,8 @@ void	free_line(t_data *data)
 	free(data->texture.Swall_path);
 	free(data->texture.Wwall_path);
 	free(data->texture.Ewall_path);
-	//free(data->texture.ceiling_path);
+	if (data->texture.ceiling_color_or_texture == 1)
+		free(data->texture.ceiling_path);
 }
 
 void    free_mapinfo(t_data *data)
@@ -66,4 +68,9 @@ void free_tab(char **tab)
     }
     free(tab);
     tab = NULL; // Idem, bonne pratique pour sécuriser
+}
+
+void exit_manager(t_data *data)
+{
+	exit(0);
 }

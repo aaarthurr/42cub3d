@@ -6,11 +6,45 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:21:58 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/24 19:34:40 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:49:45 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+
+
+char *generate_path(t_data *data,int index, char *which_texture)
+{
+	int i;
+	int len;
+	int j;
+	char *temp;
+
+	i = 2;
+	j = 0;
+	len = 0;
+	temp = NULL;
+	if (ft_strncmp(data->map_info.global[index], which_texture, ft_strlen(which_texture)) == 0)
+	{
+		while (data->map_info.global[index][i] != '\0' && data->map_info.global[index][i] == ' ')
+			i++;
+		while (data->map_info.global[index][i] !='\0')
+		{
+			len++;
+			i++;
+		}
+		temp = malloc(sizeof(char) * (len));
+		i = i - len;
+		while (data->map_info.global[index][i] != '\0')
+		{
+			temp[j] = data->map_info.global[index][i];
+			i++;
+			j++;
+		}
+		temp[j - 1] = '\0';
+	}
+	return(temp);
+}
 
 void	init_image(t_data *data)
 {
@@ -32,6 +66,7 @@ void	init_image(t_data *data)
 	printf("SO path : |%s|\n", data->texture.Swall_path);
 	printf("WE path : |%s|\n", data->texture.Wwall_path);
 	printf("EA path : |%s|\n", data->texture.Ewall_path);
+	//printf("C path : |%s|\n", data->texture.ceiling_path);
 	
 	data->texture.Nwall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Nwall_path, &x, &y);
 	data->texture.Swall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Swall_path, &x, &y);
@@ -39,128 +74,65 @@ void	init_image(t_data *data)
 	data->texture.Ewall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Ewall_path, &x, &y);
 	
 	//if (data->texture != "null")
-	data->texture.ceiling.img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/ceiling.xpm"/*data->texture.ceilling_path*/, &x, &y);
+	if (data->texture.ceiling_color_or_texture == 1)
+		data->texture.ceiling.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.ceiling_path, &x, &y);
+
+	
 }
 
 
+int	find_arg(char c, char f, char **map)
+{
+	int	i;
+	int	j;
+
+	j = -1;
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] == c && map[i][1] == f)
+		{
+			if (j != -1)
+				return (-1);
+			if (f == '\0')
+				return (3);
+			if (f == ' ')
+				j = i + 1;
+			if (f != ' ' && ft_lenxd(map[i]) == 3)
+				j = i + 1;
+		}
+		i++;
+	}
+	return (j - 1);
+}
+
 void	get_image(t_data *data)
 {
-	int i;
-	int len;
-	int j;
-	char *temp;
-
-	i = 2;
-	j = 0;
-	len = 0;
-	temp = NULL;
-	if (ft_strncmp(data->map_info.global[0], "NO", 2) == 0)
-	{
-		while (data->map_info.global[0][i] != '\0' && data->map_info.global[0][i] == ' ')
-			i++;
-		while (data->map_info.global[0][i] !='\0')
-		{
-			len++;
-			i++;
-		}
-		printf("\n");
-		temp = malloc(sizeof(char) * (len));
-		i = i - len;
-		while (data->map_info.global[0][i] != '\0')
-		{
-			temp[j] = data->map_info.global[0][i];
-			i++;
-			j++;
-		}
-		temp[j - 1] = '\0';
-		data->texture.Nwall_path = ft_strdup(temp);
-		free(temp);
-	}
+	int trigger;
 	
-	if (ft_strncmp(data->map_info.global[1], "SO", 2) == 0)
+	trigger = 0;
+	data->texture.ceiling_color_or_texture = 0;
+	
+
+	data->texture.Nwall_path = generate_path(data, 0, "NO");
+	data->texture.Swall_path = generate_path(data, 1, "SO");
+	data->texture.Wwall_path = generate_path(data, 2, "WE");
+	data->texture.Ewall_path = generate_path(data, 3, "EA");
+	if(search_floor_color(data) == 1)
+		exit(0);
+	if (search_ceiling_color(data) == 1)
 	{
-		i = 2;
-		j = 0;
-		len = 0;
-		temp = NULL;
-		while (data->map_info.global[1][i] != '\0' && data->map_info.global[1][i] == ' ')
-			i++;
-		while (data->map_info.global[1][i] !='\0')
-		{
-			
-			len++;
-			i++;
-		}
-		temp = malloc(sizeof(char) * (len));
-		i = i - len;
-		while (data->map_info.global[1][i] != '\0')
-		{
-			temp[j] = data->map_info.global[1][i];
-			i++;
-			j++;
-		}
-		temp[j - 1] = '\0';
-		data->texture.Swall_path = ft_strdup(temp);
-		free(temp);
-	}
-	if (ft_strncmp(data->map_info.global[2], "WE", 2) == 0)
-	{
-		i = 2;
-		j = 0;
-		len = 0;
-		temp = NULL;
-		while (data->map_info.global[2][i] != '\0' && data->map_info.global[2][i] == ' ')
-			i++;
-		while (data->map_info.global[2][i] !='\0')
-		{
-			
-			len++;
-			i++;
-		}
-		temp = malloc(sizeof(char) * (len));
-		i = i - len;
-		while (data->map_info.global[2][i] != '\0')
-		{
-			temp[j] = data->map_info.global[2][i];
-			i++;
-			j++;
-		}
-		temp[j - 1] = '\0';
-		data->texture.Wwall_path = ft_strdup(temp);
-		free(temp);
-	}
-	if (ft_strncmp(data->map_info.global[3], "EA", 2) == 0)
-	{
-		i = 2;
-		j = 0;
-		len = 0;
-		temp = NULL;
-		while (data->map_info.global[3][i] != '\0' && data->map_info.global[3][i] == ' ')
-			i++;
-		while (data->map_info.global[3][i] !='\0')
-		{
-			
-			len++;
-			i++;
-		}
-		temp = malloc(sizeof(char) * (len));
-		i = i - len;
-		while (data->map_info.global[3][i] != '\0')
-		{
-			temp[j] = data->map_info.global[3][i];
-			i++;
-			j++;
-		}
-		temp[j - 1] = '\0';
-		data->texture.Ewall_path = ft_strdup(temp);
-		free(temp);
+		data->texture.ceiling_color_or_texture = 1;
+		data->texture.ceiling_path = generate_path(data, 5, "C");
+		printf("path -> %s\n", data->texture.ceiling_path);
 	}
 
 	if (check_path(data) == 1)
-	{
-		printf("Error : Texture Path. ABORTING\n");
 		exit(0);
-	}
+
+
+	//data->texture.floor_color = 0x000000;
+	//a enlever hein!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	init_image(data);
 }
 
@@ -180,6 +152,9 @@ void    create_image(t_data *data)
     data->texture.Ewall.img_char = mlx_get_data_addr(data->texture.Ewall.img_ptr, &data->texture.Ewall.bits_pix, &data->texture.Ewall.len, &data->texture.Ewall.endian);
     data->texture.Ewall.global_color = blend_color(&data->texture.Ewall);
 	
-    data->texture.ceiling.img_char = mlx_get_data_addr(data->texture.ceiling.img_ptr, &data->texture.ceiling.bits_pix, &data->texture.ceiling.len, &data->texture.ceiling.endian);
-    data->texture.ceiling.global_color = blend_color(&data->texture.ceiling);
+	if (data->texture.ceiling_color_or_texture == 1)
+	{
+		data->texture.ceiling.img_char = mlx_get_data_addr(data->texture.ceiling.img_ptr, &data->texture.ceiling.bits_pix, &data->texture.ceiling.len, &data->texture.ceiling.endian);
+		data->texture.ceiling.global_color = blend_color(&data->texture.ceiling);
+	}
 }

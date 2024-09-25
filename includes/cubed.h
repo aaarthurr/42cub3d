@@ -75,6 +75,11 @@ void	clearScreen(t_img *img, int width, int height);
 void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end);
 /*------srcs/raycasting/roof_Cast.c---*/
 void    cast_floor(t_data *data);
+/*------srcs/raycasting/texture.c---*/
+char *generate_path(t_data *data,int index, char *which_texture);
+/*------srcs/raycasting/get_floor.c---*/
+int search_floor_color(t_data *data);
+int search_ceiling_color(t_data *data);
 
 /*------srcs/utils/free_manager----- */
 void    free_mapinfo(t_data *data);
@@ -87,6 +92,10 @@ int		tab_size(char **tab);
 size_t	get_current_time(void);
 
 char	*ft_strdup(char *src);
+
+/*------srcs/utils/tools_bis*/
+int	ft_atoi(const char *nptr);
+int	ft_isdigit(int c);
 
 //------srcs/utils/ft_itoa.c*/
 char	*ft_itoa(int n);
@@ -106,6 +115,10 @@ void	create_image(t_data *data);
 int		get_smoothed_color(t_img *img, int color, double power);
 int		blend_color(t_img *img);
 
-int check_path(t_data *data);
+int     check_path(t_data *data);
+
+int     give_lsd(int color);
+
+void	print_map(t_data *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/24 19:42:06 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:07:00 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 #include "cubed.h"
 
 #define GRID_SIZE 20
+#define KEY_CTRL 65507
 #define KEY_ESC 65307
 #define KEY_A 100
 #define KEY_D 97
 #define KEY_S 115
 #define KEY_W 119
+#define KEY_E 101
+#define KEY_L 108
 #define KEY_SPACE_BAR 32
 #define KEY_LEFT 65361
 #define KEY_RIGHT 65363
@@ -37,6 +40,9 @@ int     close_window(t_data *data)
 
 int	key_pressed(int keycode, t_data *data)
 {
+	printf("%d\n", keycode);
+	// keycode = 108 pour L
+	//keycode = 101 pour E
 	if (keycode == KEY_ESC)
 		data->key_info.key_esc = 1;
 	if (keycode == KEY_S)
@@ -55,6 +61,8 @@ int	key_pressed(int keycode, t_data *data)
 	 	data->player.speed = 30;
 	if (keycode == KEY_SPACE_BAR)
 	 	data->key_info.key_jump = 1;
+	if (keycode == KEY_CTRL)
+		data->mouse.mouse_lock = 0;
 	return (0);
 }
 
@@ -76,6 +84,8 @@ int	key_released(int keycode, t_data *data)
 		data->key_info.key_left = 0;
 	if (keycode == KEY_SHIFT)
 	 	data->player.speed = 50;
+	if (keycode == KEY_CTRL)
+		data->mouse.mouse_lock = 1;
 	return (0);
 }
 
