@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/25 18:55:51 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:27:13 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@
 
 int     close_window(t_data *data)
 {   
-    free_mapinfo(data);
+    free_function(data);
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
-	// printf("exiting\n");
     exit(0);
 }
 

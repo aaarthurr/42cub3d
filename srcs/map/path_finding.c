@@ -39,7 +39,6 @@ char	**duplicata_map(t_data *data)
 	//printf("taille de la map : %d\n", data->map_info.height);
 	data->map_info.height = count_line(data->map_info.map);
     nb_line = data->map_info.height;
-	printf("mapinfo height : %d\n", data->map_info.height);
     map = malloc(sizeof(char *) * (data->map_info.height + 1));
     while (y != nb_line)
     {

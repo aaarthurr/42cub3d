@@ -12,6 +12,23 @@
 
 #include "cubed.h"
 
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		tab[i] = NULL;
+		i++;
+	}
+	free(tab);
+	tab = NULL;
+}
+
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
@@ -20,7 +37,6 @@ int	ft_isdigit(int c)
 	}
 	return (0);
 }
-
 
 int	ft_atoi(const char *nptr)
 {
@@ -47,4 +63,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * signe);
 }
-

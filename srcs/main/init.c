@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 10:50:18 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:41:58 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	copy_file(t_map_info *map_info)
 		j++;
 	}
 	map_info->global[j] = NULL;
+	map_info->global_len = j;
 	close(fd);
 }
 

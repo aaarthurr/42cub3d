@@ -17,6 +17,9 @@ int check_path_xpm_file(char *str)
 {
 	int i;
 
+
+	if (str == NULL)
+		return (1);
 	i = ft_strlen(str);
 	while (i > 0)
 	{
@@ -29,41 +32,34 @@ int check_path_xpm_file(char *str)
 		&&  (str[i + 3] != '\0' && str[i + 3] == 'm')
 		&& str[i + 4] == '\0')
 		return (0);
-	printf("str[i] -> %c\n", str[i + 4]);
 	return (1);
 }
 
 int check_path(t_data *data)
 {
 	int fd;
-printf("3here\n");
+
+	printf("data->texture.Ewall_path %s\n",data->texture.Ewall_path);
 	fd = open(data->texture.Ewall_path, O_RDONLY);
 	if (check_path_xpm_file(data->texture.Ewall_path) == 1 || fd == -1)
-		return(printf("Error : Texture Path. ABORTING\n"), 1);
-printf("here2\n");
+		return(printf("Error E : Texture Path. ABORTING\n"), 1);
+
 	fd = open(data->texture.Wwall_path, O_RDONLY);
 	if (check_path_xpm_file(data->texture.Wwall_path) == 1 || fd == -1)
-		return(printf("Error : Texture Path. ABORTING\n"), 1);
+		return(printf("Error W : Texture Path. ABORTING\n"), 1);
 
-printf("1here\n");
 	fd = open(data->texture.Nwall_path, O_RDONLY);
 	if (check_path_xpm_file(data->texture.Nwall_path) == 1 || fd == -1)
-		return(printf("Error : Texture Path. ABORTING\n"), 1);
+		return(printf("Error N : Texture Path. ABORTING\n"), 1);
 
-printf("here\n");
 	fd = open(data->texture.Swall_path, O_RDONLY);
 	if (check_path_xpm_file(data->texture.Swall_path) == 1 || fd == -1)
-		return(printf("Error : Texture Path. ABORTING\n"), 1);
-	
+		return(printf("Error S : Texture Path. ABORTING\n"), 1);
 	if (data->texture.ceiling_color_or_texture == 1)
 	{
-		
 		fd = open(data->texture.ceiling_path, O_RDONLY);
 		if (check_path_xpm_file(data->texture.ceiling_path) == 1 || fd == -1)
-			return(printf("Error : Texture Path. ABORTING\n"), 1);
-
+			return(printf("Error C : Texture Path. ABORTING\n"), 1);
 	}
-
-
 	return(0);
 }

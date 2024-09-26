@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/25 18:51:22 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:42:21 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct map_info_s
 {
 	char *map_path;
 	char **global;
-	//char **info;
+	int	global_len;
 	char **map;
 	int height;
 
@@ -76,6 +76,7 @@ typedef struct	texture_s
 	t_img	Wwall;
 	t_img	Ewall;
 	t_img	ceiling;
+	t_img	pills;
 	char	*Nwall_path;
 	char	*Swall_path;
 	char	*Wwall_path;
@@ -159,17 +160,17 @@ typedef struct raystate_s
 
 typedef struct roofstate_s
 {
-    int        x;
-    int        y;
-    float    rayDirX0;
-    float    rayDirY0;
-    float    rayDirX1;
-    float    rayDirY1;
-    int        p;
-    float    floorStepX;
-    float    floorStepY;
-    float    floorX;
-    float    floorY;
-}                t_roofstate;
+	int		x;
+	int		y;
+	float	rayDirX0;
+	float	rayDirY0;
+	float	rayDirX1;
+	float	rayDirY1;
+	int		p;
+	float	floorStepX;
+	float	floorStepY;
+	float	floorX;
+	float	floorY;
+}			t_roofstate;
 
 #endif

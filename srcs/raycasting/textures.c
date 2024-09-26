@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:21:58 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/25 17:59:03 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:38:25 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,22 @@ char *generate_path(t_data *data,int index, char *which_texture)
 	{
 		while (data->map_info.global[index][i] != '\0' && data->map_info.global[index][i] == ' ')
 			i++;
-		while (data->map_info.global[index][i] !='\0')
+		while (data->map_info.global[index][i] != '\n' && data->map_info.global[index][i] != '\0')
 		{
 			len++;
 			i++;
 		}
-		temp = malloc(sizeof(char) * (len));
+		
+		temp = malloc(sizeof(char) * (len + 1));
 		i = i - len;
-		while (data->map_info.global[index][i] != '\0')
+		while (data->map_info.global[index][i] != '\n' && data->map_info.global[index][i] != '\0')
 		{
 			temp[j] = data->map_info.global[index][i];
+
 			i++;
 			j++;
 		}
-		temp[j - 1] = '\0';
+		temp[j] = '\0';
 	}
 	return(temp);
 }
@@ -88,19 +90,16 @@ char	*find_arg(t_data *data, char *which_texture)
 
 	i = 0;
 	path = NULL;
-	while ((data->map_info.global[i][0] != '0' || data->map_info.global[i][0] != '1') || data->map_info.global[i] != NULL)
+	while (i < data->map_info.global_len)//data->map_info.global[i] != NULL || (data->map_info.global[i][0] != '0' || data->map_info.global[i][0] != '1'))
 	{
 			if (ft_strncmp(data->map_info.global[i], which_texture, ft_strlen(which_texture)) == 0)
 			{
 				path = generate_path(data, i, which_texture);
-				printf("path -> %s\n", path);
 				return (path);			
 			}
 			i++;
 	}
-	printf("j'en sors mais ou ?\n");
 	return (NULL);
-
 }
 
 void	get_image(t_data *data)
@@ -113,15 +112,16 @@ void	get_image(t_data *data)
 	data->texture.Swall_path = find_arg(data, "SO");
 	data->texture.Wwall_path = find_arg(data, "WE");
 	data->texture.Ewall_path = find_arg(data, "EA");
+	
 	if(search_floor_color(data) == 1)
 		exit_manager(data);
 	if (search_ceiling_color(data) == 1)
 	{
 		data->texture.ceiling_color_or_texture = 1;
 		data->texture.ceiling_path = find_arg(data, "C");
-		printf("path -> %s\n", data->texture.ceiling_path);
 	}
-
+	else if (search_ceiling_color(data) == 2)
+		exit_manager(data);
 	if (check_path(data) == 1)
 		exit_manager(data);
 
