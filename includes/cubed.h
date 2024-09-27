@@ -113,8 +113,6 @@ int		get_pixel_color(t_img *img, int x, int y);
 int		assombrirCouleur(int couleurOriginale, int assombrissement);
 void	get_image(t_data *data);
 void	create_image(t_data *data);
-int		get_smoothed_color(t_img *img, int color, double power);
-int		blend_color(t_img *img);
 int		check_path(t_data *data);
 int		give_lsd(int color);
 void	print_map(t_data *data);
@@ -122,4 +120,5 @@ void	take_drugs(t_data *data);
 void	death(t_data *data);
 void    set_sprite(t_data *data, int number);
 void    cast_sprite(t_data *data);
+
 #endif

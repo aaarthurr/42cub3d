@@ -6,14 +6,11 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:49:42 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/24 13:53:33 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:04:15 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
-
-
-
 
 void cast_floor_ter(t_data *data, t_roofstate *rstate)
 {

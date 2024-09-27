@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/28 14:53:21 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:27:18 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct img_s
 	int		bits_pix;
 	int		endian;
 	int		len;
-	int		global_color;
 }				t_img;
 
 
@@ -71,32 +70,32 @@ typedef struct map_info_s
 
 typedef struct s_pills
 {
-    double        x;
-    double        y;
-    int            taken;
+	double		x;
+	double		y;
+	int			taken;
 }            t_pills;
 
 typedef    struct s_sprite
 {
-    int        number;
-    double    *Zbuffer;
-    t_pills    *pills;
+	int        number;
+	double    *Zbuffer;
+	t_pills    *pills;
 }            t_sprite;
 
 typedef struct s_spritestate
 {
-    double    spriteX;
-    double    spriteY;
-    double    invDet;
-    double    transformX;
-    double    transformY;
-    int        spriteScreenX;
-    int        spriteHeight;
-    int        spriteWidth;
-    int        drawStartY;
-    int        drawEndY;
-    int        drawStartX;
-    int        drawEndX;
+	double    spriteX;
+	double    spriteY;
+	double    invDet;
+	double    transformX;
+	double    transformY;
+	int        spriteScreenX;
+	int        spriteHeight;
+	int        spriteWidth;
+	int        drawStartY;
+	int        drawEndY;
+	int        drawStartX;
+	int        drawEndX;
 }            t_spritestate;
 
 typedef struct	texture_s

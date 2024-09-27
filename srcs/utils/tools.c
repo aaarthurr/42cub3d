@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:09:32 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/27 16:39:57 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:07:48 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,11 @@ char	*ft_strdup(char *src)
 	copy = malloc (size * sizeof(char));
 	if (!copy)
 		return (0);
-	printf("size de la line : %d\n", size);
-	printf("[%d]", src[i]);
 	while (src[i] != '\0')
 	{
 		copy[i] = src[i];
-
 		i++;
-		if (src[i] == '\0')
-			printf("\\0");
-		else if (src[i] == 14)// || src[i] == '\n')
-			printf("\\n");
-		else
-			printf("[%d]", src[i]);
-
 	}
-	printf("\n");
 	copy[i] = '\0';
 	return (copy);
 }

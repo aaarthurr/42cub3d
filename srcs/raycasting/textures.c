@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:21:58 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/28 14:52:23 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:33:56 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,25 @@ void	init_image(t_data *data)
 	s = SPRITE_SIZE;
 	x = TEX_SIZE;
 	y = TEX_SIZE;
-	
 	data->texture.Nwall.img_ptr = NULL;
 	data->texture.Swall.img_ptr = NULL;
 	data->texture.Wwall.img_ptr = NULL;
 	data->texture.Ewall.img_ptr = NULL;
 	data->texture.ceiling.img_ptr = NULL;
 	data->texture.pills.img_ptr = NULL;
-	
-	printf("NO path : |%s|\n", data->texture.Nwall_path);
-	printf("SO path : |%s|\n", data->texture.Swall_path);
-	printf("WE path : |%s|\n", data->texture.Wwall_path);
-	printf("EA path : |%s|\n", data->texture.Ewall_path);
-	//printf("C path : |%s|\n", data->texture.ceiling_path);
-	
+
 	data->texture.Nwall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Nwall_path, &x, &y);
 	data->texture.Swall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Swall_path, &x, &y);
 	data->texture.Wwall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Wwall_path, &x, &y);
 	data->texture.Ewall.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.Ewall_path, &x, &y);
 	data->texture.pills.img_ptr = mlx_xpm_file_to_image(data->mlx, "textures/pills.xpm", &s, &s);
-	
-	//if (data->texture != "null")
 	if (data->texture.ceiling_color_or_texture == 1)
 		data->texture.ceiling.img_ptr = mlx_xpm_file_to_image(data->mlx, data->texture.ceiling_path, &x, &y);
-
-	
 }
-
 
 char	*find_arg(t_data *data, char *which_texture)
 {
-	int i;
+	int		i;
 	char *path;
 
 	i = 0;
@@ -106,15 +94,11 @@ char	*find_arg(t_data *data, char *which_texture)
 
 void	get_image(t_data *data)
 {
-
 	data->texture.ceiling_color_or_texture = 0;
-	
-
 	data->texture.Nwall_path = find_arg(data, "NO");
 	data->texture.Swall_path = find_arg(data, "SO");
 	data->texture.Wwall_path = find_arg(data, "WE");
 	data->texture.Ewall_path = find_arg(data, "EA");
-	
 	if(search_floor_color(data) == 1)
 		exit_manager(data);
 	if (search_ceiling_color(data) == 1)
@@ -126,37 +110,24 @@ void	get_image(t_data *data)
 		exit_manager(data);
 	if (check_path(data) == 1)
 		exit_manager(data);
-
-
-	//data->texture.floor_color = 0x000000;
-	//a enlever hein!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	init_image(data);
 }
 
 void    create_image(t_data *data)
 {
-
-//nwall
-    data->texture.Nwall.img_char = mlx_get_data_addr(data->texture.Nwall.img_ptr, &data->texture.Nwall.bits_pix, &data->texture.Nwall.len, &data->texture.Nwall.endian);
-    data->texture.Nwall.global_color = blend_color(&data->texture.Nwall);
-//swall
-    data->texture.Swall.img_char = mlx_get_data_addr(data->texture.Swall.img_ptr, &data->texture.Swall.bits_pix, &data->texture.Swall.len, &data->texture.Swall.endian);
-    data->texture.Swall.global_color = blend_color(&data->texture.Swall);
-//wwall
-    data->texture.Wwall.img_char = mlx_get_data_addr(data->texture.Wwall.img_ptr, &data->texture.Wwall.bits_pix, &data->texture.Wwall.len, &data->texture.Wwall.endian);
-    data->texture.Wwall.global_color = blend_color(&data->texture.Wwall);
-//ewall
-    data->texture.Ewall.img_char = mlx_get_data_addr(data->texture.Ewall.img_ptr, &data->texture.Ewall.bits_pix, &data->texture.Ewall.len, &data->texture.Ewall.endian);
-    data->texture.Ewall.global_color = blend_color(&data->texture.Ewall);
-	
+	data->texture.Nwall.img_char = mlx_get_data_addr(data->texture.Nwall.img_ptr,
+		&data->texture.Nwall.bits_pix, &data->texture.Nwall.len, &data->texture.Nwall.endian);
+	data->texture.Swall.img_char = mlx_get_data_addr(data->texture.Swall.img_ptr,
+		&data->texture.Swall.bits_pix, &data->texture.Swall.len, &data->texture.Swall.endian);
+	data->texture.Wwall.img_char = mlx_get_data_addr(data->texture.Wwall.img_ptr,
+		&data->texture.Wwall.bits_pix, &data->texture.Wwall.len, &data->texture.Wwall.endian);
+	data->texture.Ewall.img_char = mlx_get_data_addr(data->texture.Ewall.img_ptr,
+		&data->texture.Ewall.bits_pix, &data->texture.Ewall.len, &data->texture.Ewall.endian);
 	if (data->texture.ceiling_color_or_texture == 1)
 	{
-		data->texture.ceiling.img_char = mlx_get_data_addr(data->texture.ceiling.img_ptr, &data->texture.ceiling.bits_pix, &data->texture.ceiling.len, &data->texture.ceiling.endian);
-		data->texture.ceiling.global_color = blend_color(&data->texture.ceiling);
+		data->texture.ceiling.img_char = mlx_get_data_addr(data->texture.ceiling.img_ptr,
+			&data->texture.ceiling.bits_pix, &data->texture.ceiling.len, &data->texture.ceiling.endian);
 	}
-	
-	data->texture.pills.img_char = mlx_get_data_addr(data->texture.pills.img_ptr, &data->texture.pills.bits_pix, &data->texture.pills.len, &data->texture.pills.endian);
+	data->texture.pills.img_char = mlx_get_data_addr(data->texture.pills.img_ptr,
+		&data->texture.pills.bits_pix, &data->texture.pills.len, &data->texture.pills.endian);
 }
-
-
-

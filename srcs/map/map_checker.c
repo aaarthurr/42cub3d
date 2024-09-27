@@ -6,16 +6,16 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 13:58:21 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 21:22:30 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 15:21:57 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
 
-int check_walls(t_data *data)
+int	check_walls(t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (data->map_info.map[y] != NULL)
@@ -26,7 +26,7 @@ int check_walls(t_data *data)
 			if (ft_strchr(data->map_info.map[y][x], " 10NSEW") == 0)
 				return (1);
 			if (ft_strchr(data->map_info.map[y][x], "NSEW") == 1)
-				set_pos(data, x ,y, data->map_info.map[y][x]);
+				set_pos(data, x, y, data->map_info.map[y][x]);
 			if (ft_strchr(data->map_info.map[y][x], "0NSEW") == 1)
 			{
 				if (check_walls_bis(data, x, y) == 1)
@@ -39,7 +39,7 @@ int check_walls(t_data *data)
 	return (0);
 }
 
-int check_walls_bis(t_data *data, int x, int y)
+int	check_walls_bis(t_data *data, int x, int y)
 {
 	if (ft_strchr(data->map_info.map[y][x - 1], "10NSEW") == 0)
 		return (1);
