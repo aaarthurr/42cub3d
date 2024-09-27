@@ -20,7 +20,7 @@ MAP = map_checker mapping checker path_finding
 
 GNL = get_next_line get_next_line_utils
 
-GAME = game_manager move mouse_movement minimap
+GAME = game_manager move mouse_movement minimap item
 
 SRC = $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
 	$(addsuffix .c, $(addprefix srcs/get_next_line/, $(GNL))) \

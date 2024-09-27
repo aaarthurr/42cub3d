@@ -20,10 +20,12 @@ int is_digit_part(char *floor_code)
 	i = 0;
 	if (floor_code == NULL)
 		return (1);
+	printf("floor code : [%s]\n", floor_code);
 	while(floor_code[i] != '\0')
 	{
-		if (ft_strchr(floor_code[i], " 0123456789,\n") == 0)
-			return (1);
+		if (ft_strchr(floor_code[i], " 0123456789,") == 0)
+			return (printf("i = %d\n", i), 1);
+
 		i++;
 		if (floor_code[i] == 0)
 			return (0);
@@ -71,6 +73,7 @@ int search_floor_color(t_data *data)
 	char	*floor_color_digit;
 
 	floor_color_digit = find_arg(data, "F");
+	printf("floor _ color -> %s\n", floor_color_digit);
 	if (floor_color_digit == NULL)
 		return (printf("Error 1 : Floor Digit Invalid. ABORTING\n"), free(floor_color_digit), 1);
 	if (is_digit_part(floor_color_digit) == 1)
@@ -100,7 +103,7 @@ int search_ceiling_color(t_data *data)
 
 	ceiling_color_digit = find_arg(data, "C");
 	if (ceiling_color_digit == NULL)
-		return (free(ceiling_color_digit), 1);
+		return (2);//peut etre faut free sah
 	if (is_digit_part(ceiling_color_digit) == 1)
 		return (free(ceiling_color_digit), 1);
 	get_rgb_value(data, ceiling_color_digit);

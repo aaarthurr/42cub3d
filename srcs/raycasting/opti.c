@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 19:00:53 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:57:21 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	step = 1.0 * TEX_SIZE / raystate->line_height;
 	texPos = ((lStart - raystate->offset) - data->win_height / 2 + raystate->line_height / 2) * step;
 	y = 0;
+	data->sprite.Zbuffer[raystate->x] = raystate->perpWallDist;
 	while (y < lStart)
 	{
 		if (data->player.drug_level <= 1)

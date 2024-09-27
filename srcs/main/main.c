@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:04:05 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 21:04:06 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:54:56 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int main(int argc, char **argv)
 
     if (argc < 2)
     {
-        printf("Mettez map : %s\n", argv[0]);
+        printf("No map given : %s\n", argv[0]);
     }
     else
     {
-        
+        srand(time(NULL));
         get_all(argv, &data);
         if (check_map(&data) == 0)
 	    {

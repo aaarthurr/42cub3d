@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 20:41:58 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:42:32 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	get_all(char **argv, t_data *data)
 	data->map_info.map_path = argv[1];
     copy_file(&data->map_info);
     get_map(&data->map_info);
-	print_tab(data->map_info.map);
 }
 
 
@@ -33,7 +32,7 @@ void	copy_file(t_map_info *map_info)
 
 	j = 0;
 	map_info->height = 0;
-	fd = open(map_info->map_path, O_RDWR);
+	fd = open(map_info->map_path, O_RDONLY);
 	temp = get_next_line(fd);
 	while (temp != NULL)
 	{
@@ -44,10 +43,11 @@ void	copy_file(t_map_info *map_info)
 	free(temp);
 	close(fd);
 	map_info->global = malloc(sizeof(char *) * (map_info->height + 1));
-	fd = open(map_info->map_path, O_RDWR);
+	fd = open(map_info->map_path, O_RDONLY);
 	while (j < map_info->height)
 	{
 		map_info->global[j] = get_next_line(fd);
+		printf("line : [%s]\n", map_info->global[j]);
 		j++;
 	}
 	map_info->global[j] = NULL;
@@ -80,7 +80,9 @@ void	get_map(t_map_info *map_info)
 	i = 0;
 	while (is_map_part(map_info->global[j]) == 1 && j < size)
 	{
+		printf("--------------\n");
 		map[i] = ft_strdup(map_info->global[j]);
+		printf("--------------\n");
 		j++;
 		i++;
 	}

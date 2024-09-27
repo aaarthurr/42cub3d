@@ -32,7 +32,9 @@ void	send_rays(t_data *data)
 		//printf("{%f, %f}\n", raydirx, raydiry);
 	}
 	print_map(data);
+	cast_sprite(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
+
 }
 
 void	one_ray(t_data *data, double rdX, double rdY, int x)

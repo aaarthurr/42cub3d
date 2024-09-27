@@ -20,11 +20,14 @@
 # include <math.h>
 # include <sys/time.h>
 # include "get_next_line.h"
+# include <sys/time.h>
+# include <time.h>
 # include "../minilibx/mlx.h"
 
 # include "struct.h"
 
 # define TEX_SIZE 256
+# define SPRITE_SIZE 128
 
 /*------srcs/main/game_manager------*/
 int		game_manager(t_data *data);
@@ -117,4 +120,6 @@ int		give_lsd(int color);
 void	print_map(t_data *data);
 void	take_drugs(t_data *data);
 void	death(t_data *data);
+void    set_sprite(t_data *data, int number);
+void    cast_sprite(t_data *data);
 #endif

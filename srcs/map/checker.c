@@ -6,7 +6,7 @@
 /*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:21:00 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/26 13:24:38 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:01:18 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,44 @@ int check_map(t_data *data)
     return (0);
 }
 
-int check_file(char *str)
+int check_path_cub_file(char *str)
 {
 	int i;
 
+
+	if (str == NULL)
+		return (1);
 	i = ft_strlen(str);
-	if (ft_strncmp(str + (i - 4), ".cub", 4) != 0)
+	while (i > 0)
+	{
+		i--;
+		if (str[i] == '.')
+			break ;
+	}
+	if((str[i + 1] != '\0' && str[i + 1] == 'c')
+		&& (str[i + 2] != '\0' && str[i + 2] == 'u')
+		&&  (str[i + 3] != '\0' && str[i + 3] == 'b')
+		&& str[i + 4] == '\0')
+		return (0);
+	return (1);
+}
+
+
+int check_file(char *str)
+{
+	int fd;
+
+	if (check_path_cub_file(str) == 1)
 	{
 		error_manager("file name should end with .cub", 101);
 		return(1);
 	}
-	i = open(str, O_RDONLY);
-	if (i == -1)
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
 	{
 		error_manager("Error while opening file", 102);
 		return(1);
 	}
-	close(i);
+	close(fd);
 	return (0);
 }

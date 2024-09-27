@@ -2,8 +2,8 @@ NO  textures/textwall_v2.xpm
 SO  textures/textwall_v2.xpm
 WE  textures/textwall_v2.xpm
 EA  textures/textwall_v2.xpm
-F   25,9,144wteh
-C   25,9,144agtr
+F   40,10,10
+C   textures/ceiling.xpm
 
 
 

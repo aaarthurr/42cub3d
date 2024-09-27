@@ -4,8 +4,11 @@ WE  textures/textwall_v2.xpm
 EA  textures/textwall_v2.xpm
 F   40,10,10
 C   textures/ceiling.xpm
-111111111
-100000001
-100000011
-111111N11
-111111111
+
+
+111111
+100001
+100001
+10N001
+100001
+111111
