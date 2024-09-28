@@ -20,8 +20,8 @@ void    death(t_data *data)
 void    take_drugs(t_data *data)
 {
     if (data->player.drug_level == 0)
-        data->player.drug_time = get_current_time() + 10000;
-    data->player.drug_level++;
+        data->player.drug_time = get_current_time() + 100000;
+    data->player.drug_level--;
 }
 
 int give_lsd(int color)

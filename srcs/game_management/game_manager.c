@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/28 14:48:58 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/28 20:36:56 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int     game_manager(t_data *data)
 
 	printf("%d\n",tab_size(data->map_info.map));
 	data->last_frame = get_current_time();
-	set_sprite(data, 4);
+	set_sprite(data, 10);
 	send_rays(data);
 	//mlx_mouse_hook(data->win, mouse_move, &data);
 	

@@ -117,28 +117,31 @@ void	cast_sprite(t_data *data)
 	while (i < data->sprite.number)
 	{
 		spriteOrder[i] = i;
+		data->sprite.pills[i].index = i;
 		spriteDistance[i] = ((data->player.posX - data->sprite.pills[i].x) * (data->player.posX - data->sprite.pills[i].x) + (data->player.posY - data->sprite.pills[i].y) * (data->player.posY - data->sprite.pills[i].y));
+		data->sprite.pills[i].distance = spriteDistance[i];
 		i++;
 	}
 	sort_sprite(spriteOrder, spriteDistance, data->sprite.number);
-	for (int x = 0; x < data->sprite.number; x++)
-		printf("--> %f is at rank %d  [index %d]\n", spriteDistance[spriteOrder[x]], spriteOrder[x], x);
 	i = 0;
 	printf("--------------\n");
+	printf("distance to 1 = %f, distance to 2 = %f\n", spriteDistance[0], spriteDistance[1]);
 	while (i < data->sprite.number)
 	{
-		if (spriteDistance[spriteOrder[i]] < 0.5 && data->sprite.pills[spriteOrder[i]].taken == 0)
+		printf("test [%f]\n", spriteDistance[i]);
+		if (data->sprite.pills[spriteOrder[i]].distance < 0.5 && data->sprite.pills[spriteOrder[i]].taken == 0)
 		{
 			take_drugs(data);
 			data->sprite.pills[spriteOrder[i]].taken = 1;
 		}
 		if (data->sprite.pills[spriteOrder[i]].taken == 0)
 		{
-			printf("printing an item at distance -> %f\n", spriteDistance[spriteOrder[i]]);
 			draw_sprite(data, spriteOrder, i);
 		}
 		i++;
 	}
+	free(spriteDistance);
+	free(spriteOrder);
 }
 
 int		is_a_pill_here(t_data *data, float x, float y)
