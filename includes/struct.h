@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/28 20:25:16 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/29 15:30:51 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,9 @@ typedef struct s_player
 {
 	int			drug_level;
 	long int	drug_time;
-	// position en int
+	int	shake_phase;
+	int	fov_phase;
+	int	color_phase;
 	int	IntposX;
 	int	IntposY;
 	//vecteur position

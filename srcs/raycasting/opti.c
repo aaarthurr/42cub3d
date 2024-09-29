@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opti.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/28 15:29:28 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:34:03 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	data->sprite.Zbuffer[raystate->x] = raystate->perpWallDist;
 	while (y < lStart)
 	{
-		if (data->player.drug_level <= 1)
+		if (data->player.drug_level < 7)
 		{
 			if (data->texture.ceiling_color_or_texture == 0)
 			{
@@ -48,23 +48,21 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	}
 	while(y < lEnd)
 	{
-		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		int texY = (int)texPos & (TEX_SIZE - 1);
 		texPos += step;
-		
-		//color = 0x1FF4DE;
-		
 		color = get_pixel_color(img, raystate->texX, texY);
-		//color = get_smoothed_color(img, color, (raystate->perpWallDist / (data->win_width / 200)));
 		color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
-		if (data->player.drug_level >= 1)
-			color = give_lsd(color);
+		if (data->player.drug_level >= 5)
+			color = give_lsd(data, color);
 		pixel_put_opti(&(data->img), raystate->x, y, color);
 		y++;
 	}
 	while (y < data->win_height)
 	{
-		pixel_put_opti(&(data->img), raystate->x, y, data->texture.floor_color); //chamger sol
+		if (data->player.drug_level < 7)
+		{
+			pixel_put_opti(&(data->img), raystate->x, y, data->texture.floor_color); //chamger sol
+		}
 		y++;
 	}
 }

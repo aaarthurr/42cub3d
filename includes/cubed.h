@@ -114,11 +114,13 @@ int		assombrirCouleur(int couleurOriginale, int assombrissement);
 void	get_image(t_data *data);
 void	create_image(t_data *data);
 int		check_path(t_data *data);
-int		give_lsd(int color);
+int		give_lsd(t_data *date, int color);
 void	print_map(t_data *data);
 void	take_drugs(t_data *data);
-void	death(t_data *data);
+void    death(t_data *data, const char *str);
 void    set_sprite(t_data *data, int number);
 void    cast_sprite(t_data *data);
+void	give_effect(t_data *data);
+int		is_odd(int x);
 
 #endif

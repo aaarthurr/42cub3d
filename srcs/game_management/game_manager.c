@@ -6,7 +6,7 @@
 /*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/28 20:36:56 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/29 16:02:22 by arthur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,9 @@ int	multi_key(t_data *data)
 	if (fps < 30)
 		printf("fps : %d\n", fps);
 	if (data->player.drug_time != -1 && (size_t)(data->player.drug_time) < get_current_time())
-		death(data);
-	//print_tab(data->map_info.map);
-	//mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, ft_itoa(fps));
-	//printf("%f , %f [%f, %f]\n", data->player.posX, data->player.posY, data->player.dirX, data->player.dirY);
+		death(data, "You passed out... Game Over");
+	if (data->player.drug_level == 10)
+		death(data, "You did an Overdose... Victory");
     return (0);
 }
 
@@ -155,18 +154,19 @@ int     game_manager(t_data *data)
 	data->win_width = 780;
 	data->mouse.mouse_lock = 1;
 	data->player.drug_level = 0;
+	data->player.shake_phase = 5;
+	data->player.fov_phase = 150;
+	data->player.color_phase = 0;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
 	generate_base_img(data);
 	get_image(data);
 	create_image(data);
-
 	printf("%d\n",tab_size(data->map_info.map));
 	data->last_frame = get_current_time();
-	set_sprite(data, 10);
+	set_sprite(data, 20);
 	send_rays(data);
 	//mlx_mouse_hook(data->win, mouse_move, &data);
-	
 	ft_test(data);
     return (0);
 }

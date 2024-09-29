@@ -124,11 +124,8 @@ void	cast_sprite(t_data *data)
 	}
 	sort_sprite(spriteOrder, spriteDistance, data->sprite.number);
 	i = 0;
-	printf("--------------\n");
-	printf("distance to 1 = %f, distance to 2 = %f\n", spriteDistance[0], spriteDistance[1]);
 	while (i < data->sprite.number)
 	{
-		printf("test [%f]\n", spriteDistance[i]);
 		if (data->sprite.pills[spriteOrder[i]].distance < 0.5 && data->sprite.pills[spriteOrder[i]].taken == 0)
 		{
 			take_drugs(data);

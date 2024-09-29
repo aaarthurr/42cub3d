@@ -31,13 +31,9 @@ int	is_item_from_player(t_data *data, double x, double y)
 	i = 0;
 	while (i < data->sprite.number)
 	{
-		//printf("DEBUG [%f, %f] <-> [%f, %f]\n", m_x, m_y, data->sprite.pills[i].x, data->sprite.pills[i].y);
 		if (data->sprite.pills[i].x == m_x && data->sprite.pills[i].y == m_y &&
 				data->sprite.pills[i].taken == 0 && data->sprite.pills[i].x != 0)
-		{
-			printf("a pill is here!!\n");
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -75,7 +71,7 @@ void	draw_carre_mini_map(t_data *data, int pos_x, int pos_y)
 		y = -2;
 		while (y < 2)
 		{
-			pixel_put_opti(&(data->img), x + pos_x, y + pos_y, 0x22FF22);
+			pixel_put_opti(&(data->img), x + pos_x, y + pos_y, 0x229922);
 			y++;
 		}
 		x++;

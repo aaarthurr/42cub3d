@@ -63,3 +63,8 @@ int	ft_atoi(const char *nptr)
 	}
 	return (result * signe);
 }
+
+int is_odd(int x)
+{
+	return(x % 2);
+}
