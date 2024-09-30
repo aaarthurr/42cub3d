@@ -82,15 +82,11 @@ int	search_floor_color(t_data *data)
 			free(floor_color_digit), 1);
 	get_rgb_value(data, floor_color_digit);
 	if (data->texture.r > 255 || data->texture.g > 255 || data->texture.b > 255)
-	{
-		printf("Error 3 : Floor Digit Invalid. ABORTING\n");
-		return (free(floor_color_digit), 1);
-	}
+		return (printf("Error 3 : Floor Digit Invalid. ABORTING\n"),
+			free(floor_color_digit), 1);
 	if (data->texture.r < 0 || data->texture.g < 0 || data->texture.b < 0)
-	{
-		printf("Error 4 : Floor Digit Invalid. ABORTING\n");
-		return (free(floor_color_digit), 1);
-	}
+		return (printf("Error 4 : Floor Digit Invalid. ABORTING\n"),
+			free(floor_color_digit), 1);
 	data->texture.floor_color
 		= rgb_to_hex(data->texture.r, data->texture.g, data->texture.b);
 	data->texture.r = 0;

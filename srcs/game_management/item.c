@@ -12,20 +12,6 @@
 
 #include "cubed.h"
 
-int	comparesprites(const void *a, const void *b)
-{
-	t_sort	*sprite_a;
-	t_sort	*sprite_b;
-
-	sprite_a = (t_sort *)a;
-	sprite_b = (t_sort *)b;
-	if (sprite_a->dist < sprite_b->dist)
-		return (1);
-	if (sprite_a->dist > sprite_b->dist)
-		return (-1);
-	return (0);
-}
-
 void	sort_sprite(int *order, double *dist, int amount)
 {
 	int		i;
@@ -58,48 +44,55 @@ void	sort_sprite(int *order, double *dist, int amount)
 void	draw_sprite_line(t_data *data, t_spritestate *sp)
 {
 	t_var	var;
-	int		stripe;
-	double	y;
-	int		d;
 
-	stripe = sp->drawStartX;
-	while (stripe < sp->drawEndX)
+	var.a = sp->drawStartX;
+	while (var.a < sp->drawEndX)
 	{
-		var.x = (int)((256 * (stripe - (-sp->spriteWidth / 2
+		var.x = (int)((256 * (var.a - (-sp->spriteWidth / 2
 							+ sp->spriteScreenX))
 					* SPRITE_SIZE / sp->spriteWidth) / 256);
-		y = sp->drawStartY;
-		if (sp->transformY > 0 && stripe > 0 && stripe < data->win_width
-			&& sp->transformY < data->sprite.Zbuffer[stripe])
+		var.d_a = sp->drawStartY;
+		if (sp->transformY > 0 && var.a > 0 && var.a < data->win_width
+			&& sp->transformY < data->sprite.Zbuffer[var.a])
 		{
-			while (y < sp->drawEndY)
+			while (var.d_a < sp->drawEndY)
 			{
-				d = (y) * 256 - data->win_height * 128 + sp->spriteHeight * 128;
-				var.y = ((d * SPRITE_SIZE) / sp->spriteHeight) / 256;
+				var.b = (var.d_a) * 256 - data->win_height
+					* 128 + sp->spriteHeight * 128;
+				var.y = ((var.b * SPRITE_SIZE) / sp->spriteHeight) / 256;
 				var.c = get_pixel_color(&(data->texture.pills), var.x, var.y);
 				if (var.c > 0)
-					pixel_put_opti(&(data->img), stripe, y, var.c);
-				y++;
+					pixel_put_opti(&(data->img), var.a, var.d_a, var.c);
+				var.d_a++;
 			}
 		}
-		stripe++;
+		var.a++;
 	}
+}
+
+void	draw_sprite_bis(t_data *data, int *Order, int i, t_spritestate *sp)
+{
+	sp->spriteX = data->sprite.pills[Order[i]].x - data->player.posX;
+	sp->spriteY = data->sprite.pills[Order[i]].y - data->player.posY;
+	sp->invDet = 1.0 / (data->player.planX * data->player.dirY
+			- data->player.dirX * data->player.planY);
+	sp->transformX = sp->invDet * (data->player.dirY * sp->spriteX
+			- data->player.dirX * sp->spriteY);
+	sp->transformY = sp->invDet * (-data->player.planY * sp->spriteX
+			+ data->player.planX * sp->spriteY);
+	sp->spriteScreenX = (int)((data->win_width / 2)
+			* (1 + sp->transformX / sp->transformY));
+	sp->spriteHeight = abs((int)(data->win_height / sp->transformY));
+	sp->drawStartY = -(sp->spriteHeight) / 2 + data->win_height / 2;
+	sp->drawEndY = sp->spriteHeight / 2 + data->win_height / 2;
+	sp->calculated_len = sp->drawEndY - sp->drawStartY;
 }
 
 void	draw_sprite(t_data *data, int *spriteOrder, int i)
 {
 	t_spritestate	sp;
 
-	sp.spriteX = data->sprite.pills[spriteOrder[i]].x - data->player.posX;
-	sp.spriteY = data->sprite.pills[spriteOrder[i]].y - data->player.posY;
-	sp.invDet = 1.0 / (data->player.planX * data->player.dirY - data->player.dirX * data->player.planY);
-	sp.transformX = sp.invDet * (data->player.dirY * sp.spriteX - data->player.dirX * sp.spriteY);
-	sp.transformY = sp.invDet * (-data->player.planY * sp.spriteX + data->player.planX * sp.spriteY);
-	sp.spriteScreenX = (int)((data->win_width / 2) * (1 + sp.transformX / sp.transformY));
-	sp.spriteHeight = abs((int)(data->win_height / sp.transformY));
-	sp.drawStartY = -(sp.spriteHeight) / 2 + data->win_height / 2;
-	sp.drawEndY = sp.spriteHeight / 2 + data->win_height / 2;
-	sp.calculated_len = sp.drawEndY - sp.drawStartY;
+	draw_sprite_bis(data, spriteOrder, i, &sp);
 	if (sp.drawStartY < 0)
 		sp.drawStartY = 0;
 	if (sp.drawEndY >= data->win_height)
@@ -125,26 +118,14 @@ void	cast_sprite(t_data *data)
 	i = 0;
 	while (i < data->sprite.number)
 	{
-		spriteorder[i] = i;
-		data->sprite.pills[i].index = i;
-		spritedistance[i] = ((data->player.posX - data->sprite.pills[i].x)
-				* (data->player.posX - data->sprite.pills[i].x)
-				+ (data->player.posY - data->sprite.pills[i].y)
-				* (data->player.posY - data->sprite.pills[i].y));
-		data->sprite.pills[i].distance = spritedistance[i];
+		cast_sprite_bis(data, i, &spriteorder, &spritedistance);
 		i++;
 	}
 	sort_sprite(spriteorder, spritedistance, data->sprite.number);
 	i = 0;
 	while (i < data->sprite.number)
 	{
-		if (data->sprite.pills[spriteorder[i]].distance < 0.5 && data->sprite.pills[spriteorder[i]].taken == 0)
-		{
-			take_drugs(data);
-			data->sprite.pills[spriteorder[i]].taken = 1;
-		}
-		if (data->sprite.pills[spriteorder[i]].taken == 0)
-			draw_sprite(data, spriteorder, i);
+		cast_sprite_ter(data, i, &spriteorder);
 		i++;
 	}
 	free(spritedistance);

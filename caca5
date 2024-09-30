@@ -1,0 +1,32 @@
+
+void	get_map(t_map_info *map_info)
+{
+	int		size;
+	int		i;
+	int		j;
+	char	**map;
+
+	map = NULL;
+	j = -1;
+	i = 0;
+	size = map_info->height;
+	while (is_map_part(map_info->global[i]) == 0 && i < size)
+		i++;
+	while (is_map_part(map_info->global[i]) == 1 && i < size)
+	{
+		if (j == -1)
+			j = i;
+		i++;
+	}
+	map = malloc(sizeof(char *) * ((i - j) + 1));
+	i = 0;
+	while (is_map_part(map_info->global[j]) == 1 && j < size)
+	{
+		map[i] = ft_strdup(map_info->global[j]);
+		j++;
+		i++;
+	}
+	map[i] = NULL;
+	get_next_line(-1);
+	map_info->map = map;
+}

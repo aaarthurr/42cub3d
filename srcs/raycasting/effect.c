@@ -82,26 +82,3 @@ void	give_effect(t_data *data)
 	if (data->player.color_phase < 250 && data->player.drug_level >= 5)
 		data->player.color_phase++;
 }
-
-void	death(t_data *data, const char *str)
-{
-	printf("%s\n", str);
-	close_window(data);
-}
-
-void	take_drugs(t_data *data)
-{
-	if (data->player.drug_level == 0)
-		data->player.drug_time = get_current_time() + 60000;
-	data->player.drug_level++;
-}
-
-int	give_lsd(t_data *data, int color)
-{
-	double	modifier;
-
-	if (data->player.color_phase < 250)
-		return (color + data->player.color_phase);
-	modifier = (double)((get_current_time() / 100) % 200) / 100;
-	return (color * modifier);
-}

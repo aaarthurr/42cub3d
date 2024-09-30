@@ -136,4 +136,11 @@ void	set_sprite(t_data *data, int number);
 void	init_pills(t_data *data);
 t_pills	*set_up_items(t_data *data, int number);
 
+int     comparesprites(const void *a, const void *b);
+void	cast_sprite_ter(t_data *data, int i, int **spriteorder);
+void	cast_sprite_bis(t_data *data, int i, int **spriteorder, double **spritedistance);
+void	draw_sprite(t_data *data, int *spriteOrder, int i);
+void	generate_path_bis(t_data *data, t_var *var, int index);
+
+
 #endif

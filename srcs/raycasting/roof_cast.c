@@ -27,7 +27,8 @@ void	cast_floor_ter(t_data *data, t_roofstate *rstate)
 	rstate->floorX += rstate->floorStepX;
 	rstate->floorY += rstate->floorStepY;
 	color = get_pixel_color(&(data->texture.ceiling), tx, ty);
-	pixel_put_opti(&(data->img), rstate->x, (data->win_height - rstate->y - 1), color);
+	pixel_put_opti(&(data->img), rstate->x,
+		(data->win_height - rstate->y - 1), color);
 }
 
 void	cast_floor_bis(t_data *data, t_roofstate rstate, int y)
@@ -41,8 +42,10 @@ void	cast_floor_bis(t_data *data, t_roofstate rstate, int y)
 	rstate.p = (int)(y - (data->win_height / 2));
 	pos_z = data->player.posZ * data->win_height;
 	row_distance = pos_z / rstate.p;
-	rstate.floorStepX = row_distance * (rstate.rayDirX1 - rstate.rayDirX0) / data->win_width;
-	rstate.floorStepY = row_distance * (rstate.rayDirY1 - rstate.rayDirY0) / data->win_width;
+	rstate.floorStepX = row_distance
+		* (rstate.rayDirX1 - rstate.rayDirX0) / data->win_width;
+	rstate.floorStepY = row_distance
+		* (rstate.rayDirY1 - rstate.rayDirY0) / data->win_width;
 	rstate.floorX = ((data->player.posX) + (row_distance * rstate.rayDirX0));
 	rstate.floorY = ((data->player.posY) + (row_distance * rstate.rayDirY0));
 	while (x < data->win_width)

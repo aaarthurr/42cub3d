@@ -25,6 +25,13 @@ typedef	struct s_var
 	int	x;
 	int	y;
 	int z;
+	int fd;
+	int lstart;
+	int lend;
+	int size;
+	char *temp;
+	char *str;
+	char **tab;
 	double	d_a;
 	double	d_b;
 	double	d_c;
