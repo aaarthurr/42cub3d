@@ -3,22 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:21:58 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/28 15:33:56 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:06:29 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
 
-
-char *generate_path(t_data *data,int index, char *which_texture)
+char	*generate_path(t_data *data,int index, char *which_texture)
 {
-	int i;
-	int len;
-	int j;
-	char *temp;
+	int		i;
+	int		len;
+	int		j;
+	char	*temp;
 
 	i = 2;
 	j = 0;
@@ -36,7 +35,7 @@ char *generate_path(t_data *data,int index, char *which_texture)
 		
 		temp = malloc(sizeof(char) * (len + 1));
 		i = i - len;
-		while (data->map_info.global[index][i] != '\n' && data->map_info.global[index][i] != '\0')//mettre i+1 pour le \n de temps en temps wtf
+		while (data->map_info.global[index][i] != '\n' && data->map_info.global[index][i] != '\0')
 		{
 			temp[j] = data->map_info.global[index][i];
 			i++;

@@ -12,9 +12,9 @@
 
 #include "cubed.h"
 
-void error_manager(char *line, int code)
+void	error_manager(char *line, int code)
 {
-    printf("%s\n", line);
-    if (code > 100)
-        exit(1);
+	printf("%s\n", line);
+	if (code > 100)
+		exit(1);
 }

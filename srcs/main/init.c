@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:20:42 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/26 19:42:32 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:04:16 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	get_all(char **argv, t_data *data)
 {
-	if (check_file(argv[1]) )
-		return;
+	if (check_file(argv[1]))
+		return ;
 	data->map_info.map_path = argv[1];
-    copy_file(&data->map_info);
-    get_map(&data->map_info);
+	copy_file(&data->map_info);
+	get_map(&data->map_info);
 }
-
 
 /* this funtiom copy a file gave in struct map_info->map_path
 	in the variable char **global */
@@ -58,13 +57,13 @@ void	copy_file(t_map_info *map_info)
 /* this fontion create a char ** with only the map part contained in the file*/
 void	get_map(t_map_info *map_info)
 {
-	int size;
-	int i;
-	int j = -1;
-	char **map;
+	int		size;
+	int		i;
+	int		j;
+	char	**map;
 
-	
 	map = NULL;
+	j = -1;
 	i = 0;
 	size = map_info->height;
 	while (is_map_part(map_info->global[i]) == 0 && i < size)
@@ -73,16 +72,13 @@ void	get_map(t_map_info *map_info)
 	{
 		if (j == -1)
 			j = i;
-		//map = tab_realloc(map, 1, map_info->global[i]);
 		i++;
 	}
 	map = malloc(sizeof(char *) * ((i - j) + 1));
 	i = 0;
 	while (is_map_part(map_info->global[j]) == 1 && j < size)
 	{
-		printf("--------------\n");
 		map[i] = ft_strdup(map_info->global[j]);
-		printf("--------------\n");
 		j++;
 		i++;
 	}
@@ -91,16 +87,15 @@ void	get_map(t_map_info *map_info)
 	map_info->map = map;
 }
 
-
 /* checke if the line contain part of a map*/
-int is_map_part(char *line)
+int	is_map_part(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (line == NULL)
 		return (0);
-	while(line[i] != '\0' && ft_strchr(line[i], " 10NSEW") == 1)
+	while (line[i] != '\0' && ft_strchr(line[i], " 10NSEW") == 1)
 	{
 		if (line[i] == '1')
 			return (1);
@@ -114,8 +109,7 @@ void	set_pos(t_data *data, int x, int y, char dir)
 	data->player.IntposX = x;
 	data->player.IntposY = y;
 	data->player.posX = ((double)x) + 0.5;
-	data->player.posY = ((double)y)+ 0.5;
-	
+	data->player.posY = ((double)y) + 0.5;
 	if (dir == 'S')
 		set_vector(data, 0, 1);
 	else if (dir == 'N')

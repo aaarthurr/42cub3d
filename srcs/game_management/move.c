@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 15:22:13 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/25 15:59:03 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:49:38 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
 
-
-
-
-void move_player(t_data *data, int x, int y)
+void	move_player(t_data *data, int x, int y)
 {
-	double prev_x;
-	double prev_y;
+	double	prev_x;
+	double	prev_y;
 
 	prev_x = data->player.posX;
 	prev_y = data->player.posY;
@@ -78,10 +75,10 @@ void	jump(t_data *data)
 	}
 }
 
-void rotate_player(t_data *data, double angle)
+void	rotate_player(t_data *data, double angle)
 {
-	double c_x;
-	double c_y;
+	double	c_x;
+	double	c_y;
 
 	c_x = data->player.dirX;
 	c_y = data->player.dirY;
@@ -92,4 +89,3 @@ void rotate_player(t_data *data, double angle)
 	data->player.planX = (c_x * cos(angle)) - (c_y * sin(angle));
 	data->player.planY = (c_x * sin(angle)) + (c_y * cos(angle));
 }
-

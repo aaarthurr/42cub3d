@@ -1,4 +1,14 @@
-// HEADER
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/30 15:44:31 by arpages           #+#    #+#             */
+/*   Updated: 2024/09/30 15:44:31 by arpages          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cubed.h"
 
@@ -16,7 +26,7 @@ int	is_wall_from_player(t_data *data, double x, double y)
 	if (ft_strlen(data->map_info.map[(int)(m_y)]) < m_x)
 		return (1);
 	if (ft_strchr(data->map_info.map[(int)(m_y)][(int)(m_x)], " 1\n\0") == 1)
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -25,14 +35,14 @@ int	is_item_from_player(t_data *data, double x, double y)
 	double	m_x;
 	double	m_y;
 	int		i;
-	
+
 	m_x = floor((data->player.posX + x) * 10) / 10;
 	m_y = floor((data->player.posY + y) * 10) / 10;
 	i = 0;
 	while (i < data->sprite.number)
 	{
-		if (data->sprite.pills[i].x == m_x && data->sprite.pills[i].y == m_y &&
-				data->sprite.pills[i].taken == 0 && data->sprite.pills[i].x != 0)
+		if (data->sprite.pills[i].x == m_x && data->sprite.pills[i].y == m_y
+			&& data->sprite.pills[i].taken == 0 && data->sprite.pills[i].x != 0)
 			return (1);
 		i++;
 	}
@@ -41,8 +51,8 @@ int	is_item_from_player(t_data *data, double x, double y)
 
 void	draw_player_mini_map(t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;
@@ -61,8 +71,8 @@ void	draw_player_mini_map(t_data *data)
 
 void	draw_carre_mini_map(t_data *data, int pos_x, int pos_y)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = -2;
 	y = -2;
@@ -92,7 +102,8 @@ void	draw_item_on_map(t_data *data)
 		while (y < 6)
 		{
 			if (is_item_from_player(data, x, y) == 1)
-				draw_carre_mini_map(data, (int)(x * 10) + 65, (int)(y * 10 + 65));
+				draw_carre_mini_map(data, (int)(x * 10)
+					+ 65, (int)(y * 10 + 65));
 			y += 0.1;
 		}
 		x += 0.1;
@@ -112,14 +123,15 @@ void	print_map(t_data *data)
 		while (y < 6)
 		{
 			if (is_wall_from_player(data, x, y) == 1)
-				pixel_put_opti(&(data->img), (int)(x * 10) + 65, (int)((y * 10) + 65), 0x000000);
+				pixel_put_opti(&(data->img), (int)(x * 10) + 65,
+					(int)((y * 10) + 65), 0x000000);
 			else
-				pixel_put_opti(&(data->img), (int)(x * 10) + 65, (int)((y * 10) + 65), 0xFFFFFF);
+				pixel_put_opti(&(data->img), (int)(x * 10) + 65,
+					(int)((y * 10) + 65), 0xFFFFFF);
 			y += 0.1;
 		}
 		x += 0.1;
 	}
 	draw_item_on_map(data);
 	draw_player_mini_map(data);
-	
 }

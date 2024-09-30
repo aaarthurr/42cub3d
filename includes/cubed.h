@@ -36,6 +36,11 @@ int		multi_key(t_data *data);
 void	generate_base_img(t_data *data);
 int		close_window(t_data *data);
 
+/*-----game_bis-----*/
+int		key_released(int keycode, t_data *data);
+int		key_pressed(int keycode, t_data *data);
+int		multi_key(t_data *data);
+
 /*------srcs/main/move------*/
 void	move_player(t_data *data, int x, int y);
 void	rotate_player(t_data *data, double angle);
@@ -122,7 +127,11 @@ void    death(t_data *data, const char *str);
 void    set_sprite(t_data *data, int number);
 void    cast_sprite(t_data *data);
 void	give_effect(t_data *data);
-int		is_odd(int x);
-void	reajust_line_pills(t_data *data, t_spritestate *sp, int *l_start, int *l_end);
+
+int		set_items_coordonnates(t_data *data, t_pills *pill);
+int		is_a_pill_here(t_data *data, float x, float y);
+void	set_sprite(t_data *data, int number);
+void	init_pills(t_data *data);
+t_pills	*set_up_items(t_data *data, int number);
 
 #endif

@@ -12,7 +12,6 @@
 
 #include "cubed.h"
 
-
 int	set_mouse_center_screen(t_data *data)
 {
 	data->mouse.origin_x = (data->win_width / 2);
@@ -26,18 +25,16 @@ int	mouse_move(int x, int y, t_data *data)
 {
 	int		x_distance;
 	double	rot_coef;
-    double sensibilite;
+	double	sensibilite;
 
 	(void)y;
 	x_distance = 0;
-    sensibilite = 1000;
-	
+	sensibilite = 1000;
 	if (x < (data->win_width / 2))
 		x_distance = x - (data->win_width / 2);
 	else if (x > (data->win_width / 2))
 		x_distance = x - (data->win_width / 2);
 	rot_coef = (double)x_distance / sensibilite;
-	//mettre a 1;
 	if (data->mouse.mouse_lock == 1)
 	{
 		rotate_player(data, rot_coef);

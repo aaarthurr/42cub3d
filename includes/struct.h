@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arpages <arpages@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/30 11:25:35 by leoherna         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:23:32 by arpages          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,5 +208,11 @@ typedef struct roofstate_s
 	float	floorX;
 	float	floorY;
 }			t_roofstate;
+
+typedef struct s_gptruc
+{
+    double dist;
+    int order;
+}		t_gptruc;
 
 #endif
