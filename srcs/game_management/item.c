@@ -68,7 +68,7 @@ void	draw_sprite_line(t_data *data, t_spritestate *sp)
 				int texY = ((d * SPRITE_SIZE) / sp->spriteHeight) / 256;
 				int color = get_pixel_color(&(data->texture.pills), texX, texY);
 				if (color > 0)
-					pixel_put_opti(&(data->img), stripe, y, color);
+					pixel_put_opti(&(data->img), stripe, y - ( * data->player.posZ), color);
 				y++;
 			}
 		}
@@ -89,10 +89,14 @@ void	draw_sprite(t_data *data, int *spriteOrder, int i)
 	sp.spriteHeight = abs((int)(data->win_height / sp.transformY));
 	sp.drawStartY = -(sp.spriteHeight) / 2 + data->win_height / 2;
 	sp.drawEndY = sp.spriteHeight / 2 + data->win_height / 2;
+	// sp.drawStartY += 100 * data->player.posZ;
+	// sp.drawEndY += 100 * data->player.posZ;
+	sp.calculated_len = sp.drawEndY - sp.drawStartY;
 	if (sp.drawStartY < 0)
 		sp.drawStartY = 0;
 	if (sp.drawEndY	>= data->win_height)
 		sp.drawEndY = data->win_height - 1;
+	// reajust_line_pills(data, &sp, &sp.drawStartY, &sp.drawEndY);
 	sp.spriteWidth = abs((int)(data->win_height / sp.transformY));
 	sp.drawStartX = -(sp.spriteWidth) / 2 + sp.spriteScreenX;
 	sp.drawEndX = sp.spriteWidth / 2 + sp.spriteScreenX;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:04:51 by arthur            #+#    #+#             */
-/*   Updated: 2024/09/29 15:30:51 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/30 11:25:35 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ typedef struct s_spritestate
 	int        drawEndY;
 	int        drawStartX;
 	int        drawEndX;
+	int			offset;
+	int			calculated_len;
 }            t_spritestate;
 
 typedef struct	texture_s

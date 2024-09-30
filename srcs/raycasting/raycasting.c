@@ -20,7 +20,7 @@ void	send_rays(t_data *data)
 	double	raydiry;
 
 	x = 0;
-	if (data->texture.ceiling_color_or_texture == 1 && data->player.drug_level < 7)
+	if (data->texture.ceiling_color_or_texture == 1 && data->player.drug_level < 5)
 		cast_floor(data);
 	while (x < data->win_width)
 	{

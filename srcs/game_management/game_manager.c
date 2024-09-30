@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 14:29:44 by leoherna          #+#    #+#             */
-/*   Updated: 2024/09/29 16:02:22 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/30 10:56:38 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == KEY_SPACE_BAR)
 	 	data->key_info.key_jump = 1;
 	if (keycode == KEY_CTRL)
-		data->mouse.mouse_lock = 0;
+	{
+		if (data->mouse.mouse_lock == 1)
+			data->mouse.mouse_lock = 0;
+		else	
+			data->mouse.mouse_lock = 1;
+		
+	}
 	return (0);
 }
 
@@ -85,8 +91,6 @@ int	key_released(int keycode, t_data *data)
 		data->key_info.key_left = 0;
 	if (keycode == KEY_SHIFT)
 	 	data->player.speed = 50;
-	if (keycode == KEY_CTRL)
-		data->mouse.mouse_lock = 1;
 	return (0);
 }
 
@@ -152,7 +156,7 @@ int     game_manager(t_data *data)
 	data->player.drug_time = -1;
 	data->win_height = 500;
 	data->win_width = 780;
-	data->mouse.mouse_lock = 1;
+	data->mouse.mouse_lock = ACTIVATE_MOUSE;
 	data->player.drug_level = 0;
 	data->player.shake_phase = 5;
 	data->player.fov_phase = 150;

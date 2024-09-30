@@ -28,6 +28,7 @@
 
 # define TEX_SIZE 256
 # define SPRITE_SIZE 128
+# define ACTIVATE_MOUSE 1
 
 /*------srcs/main/game_manager------*/
 int		game_manager(t_data *data);
@@ -122,5 +123,6 @@ void    set_sprite(t_data *data, int number);
 void    cast_sprite(t_data *data);
 void	give_effect(t_data *data);
 int		is_odd(int x);
+void	reajust_line_pills(t_data *data, t_spritestate *sp, int *l_start, int *l_end);
 
 #endif

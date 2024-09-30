@@ -78,7 +78,7 @@ void	give_effect(t_data *data)
 		shake_screen(data);
 	if (data->player.drug_level > 2)
 		parasite_screen(data);
-	if (data->player.drug_level > 8)
+	if (data->player.drug_level > 6)
 		fuck_fov(data);
 	if (data->player.color_phase < 250 && data->player.drug_level >= 5)
 		data->player.color_phase++;

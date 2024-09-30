@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opti.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arthur <arthur@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leoherna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 17:53:52 by arpages           #+#    #+#             */
-/*   Updated: 2024/09/29 15:34:03 by arthur           ###   ########.fr       */
+/*   Updated: 2024/09/30 10:48:39 by leoherna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 	data->sprite.Zbuffer[raystate->x] = raystate->perpWallDist;
 	while (y < lStart)
 	{
-		if (data->player.drug_level < 7)
+		if (data->player.drug_level < 5)
 		{
 			if (data->texture.ceiling_color_or_texture == 0)
 			{
@@ -52,14 +52,14 @@ void drawVerticalLine(t_data *data, t_raystate *raystate, int lStart, int lEnd, 
 		texPos += step;
 		color = get_pixel_color(img, raystate->texX, texY);
 		color = assombrirCouleur(color, raystate->perpWallDist * (raystate->perpWallDist / 2));
-		if (data->player.drug_level >= 5)
+		if (data->player.drug_level >= 9)
 			color = give_lsd(data, color);
 		pixel_put_opti(&(data->img), raystate->x, y, color);
 		y++;
 	}
 	while (y < data->win_height)
 	{
-		if (data->player.drug_level < 7)
+		if (data->player.drug_level < 5)
 		{
 			pixel_put_opti(&(data->img), raystate->x, y, data->texture.floor_color); //chamger sol
 		}
