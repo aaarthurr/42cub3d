@@ -55,7 +55,6 @@ void	jump(t_data *data)
 {
 	if (data->player.jump_speed < 0.001)
 		data->player.jump_speed = 0.001;
-	printf("%f - %f - %d\n", data->player.posZ, data->player.jump_speed, data->player.is_falling);
 	if (data->player.posZ > 0.25 && data->player.is_falling == 0)
 	{
 		data->player.posZ -= data->player.jump_speed;

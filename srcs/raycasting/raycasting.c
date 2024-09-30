@@ -98,11 +98,9 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 			raystate->mapY += raystate->stepY;
 			raystate->side = 1;
 		}
-		//Check if ray has hit a wall
 		if (data->map_info.map[raystate->mapY][raystate->mapX] == '1')
 			raystate->hit = 1;
 	}
-	//printf("vectors -> {%f, %f}\n", raystate->sideDistX , raystate->sideDistY);
 	if (raystate->side == 0)
 		raystate->perpWallDist = (raystate->sideDistX - raystate->deltaDistX);
 	else

@@ -39,7 +39,7 @@ int     close_window(t_data *data)
 
 int	key_pressed(int keycode, t_data *data)
 {
-	printf("%d\n", keycode);
+	
 	// keycode = 108 pour L
 	//keycode = 101 pour E
 	if (keycode == KEY_ESC)
@@ -59,7 +59,7 @@ int	key_pressed(int keycode, t_data *data)
 	if (keycode == KEY_LEFT)
 		data->key_info.key_left = 1;
 	if (keycode == KEY_SHIFT)
-	 	data->player.speed = 30;
+	 	data->player.speed = 20;
 	if (keycode == KEY_SPACE_BAR)
 	 	data->key_info.key_jump = 1;
 	if (keycode == KEY_CTRL)
@@ -90,7 +90,7 @@ int	key_released(int keycode, t_data *data)
 	if (keycode == KEY_LEFT)
 		data->key_info.key_left = 0;
 	if (keycode == KEY_SHIFT)
-	 	data->player.speed = 50;
+	 	data->player.speed = 40;
 	return (0);
 }
 
@@ -130,8 +130,6 @@ int	multi_key(t_data *data)
 	frame_time = get_current_time();
 	fps = 1000 / (frame_time - data->last_frame);
 	data->last_frame = frame_time;
-	if (fps < 30)
-		printf("fps : %d\n", fps);
 	if (data->player.drug_time != -1 && (size_t)(data->player.drug_time) < get_current_time())
 		death(data, "You passed out... Game Over");
 	if (data->player.drug_level == 10)
@@ -155,14 +153,14 @@ int     game_manager(t_data *data)
 	//500 / 700
 	data->player.drug_time = -1;
 	data->win_height = 500;
-	data->win_width = 780;
+	data->win_width = 700;
 	data->mouse.mouse_lock = ACTIVATE_MOUSE;
 	data->player.drug_level = 0;
 	data->player.shake_phase = 5;
 	data->player.fov_phase = 150;
 	data->player.color_phase = 0;
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "Backroom cub3d"); 
+	data->win = mlx_new_window(data->mlx, data->win_width, data->win_height, "OVERDOSE SIMULATOR : Backroom edition");
 	generate_base_img(data);
 	get_image(data);
 	create_image(data);

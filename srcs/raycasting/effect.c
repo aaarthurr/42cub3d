@@ -73,7 +73,6 @@ void	fuck_fov(t_data *data)
 
 void	give_effect(t_data *data)
 {
-	printf("debug %f\n", data->player.planX);
 	if (data->player.drug_level > 0)
 		shake_screen(data);
 	if (data->player.drug_level > 2)
@@ -93,7 +92,7 @@ void    death(t_data *data, const char *str)
 void    take_drugs(t_data *data)
 {
     if (data->player.drug_level == 0)
-        data->player.drug_time = get_current_time() + 100000;
+        data->player.drug_time = get_current_time() + 60000;
     data->player.drug_level++;
 }
 

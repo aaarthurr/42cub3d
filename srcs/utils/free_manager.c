@@ -20,6 +20,9 @@ void	free_img(t_data *data)
 	mlx_destroy_image(data->mlx, data->texture.Swall.img_ptr);
 	mlx_destroy_image(data->mlx, data->texture.Wwall.img_ptr);
 	mlx_destroy_image(data->mlx, data->texture.Ewall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.pills.img_ptr);
+	free(data->sprite.Zbuffer);
+	free(data->sprite.pills);
 	mlx_destroy_image(data->mlx, data->img.img_ptr);
 }
 

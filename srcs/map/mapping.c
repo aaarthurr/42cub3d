@@ -75,5 +75,9 @@ int	check_path(t_data *data)
 		if (check_path_xpm_file(data->texture.ceiling_path) == 1 || fd == -1)
 			return (printf("Error C : Texture Path. ABORTING\n"), 1);
 	}
+
+	fd = open("textures/pills.xpm", O_RDONLY);
+	if (check_path_xpm_file("textures/pills.xpm") == 1 || fd == -1)
+		return (printf("Error sprite : Texture Path. ABORTING\n"), 1);
 	return (0);
 }

@@ -84,7 +84,6 @@ char	*find_arg(t_data *data, char *which_texture)
 			if (ft_strncmp(data->map_info.global[i], which_texture, ft_strlen(which_texture)) == 0)
 			{
 				path = generate_path(data, i, which_texture);
-				printf("path : %s\n", path);
 				return (path);			
 			}
 			i++;
