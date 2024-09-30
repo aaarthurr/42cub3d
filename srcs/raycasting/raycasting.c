@@ -108,23 +108,23 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 	get_line_data(data, raystate);
 }
 
-void which_texture(t_data *data, t_raystate *raystate, 	int l_start, int l_end)
+void	which_texture(t_data *data, t_raystate *raystate, int l_start, int l_end)
 {
 	if (raystate->side == 0 && raystate->mapX > data->player.posX)
-		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Ewall));
+		drawverticalline(data, raystate, l_start, l_end, &(data->texture.Ewall));
 	if (raystate->side == 0 && raystate->mapX < data->player.posX)
-		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Wwall));
+		drawverticalline(data, raystate, l_start, l_end, &(data->texture.Wwall));
 	if (raystate->side == 1 && raystate->mapY > data->player.posY)
-		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Swall));
+		drawverticalline(data, raystate, l_start, l_end, &(data->texture.Swall));
 	if (raystate->side == 1 && raystate->mapY < data->player.posY)
-		drawVerticalLine(data, raystate, l_start, l_end, &(data->texture.Nwall));
+		drawverticalline(data, raystate, l_start, l_end, &(data->texture.Nwall));
 }
 
-void get_line_data(t_data *data, t_raystate *raystate)
+void	get_line_data(t_data *data, t_raystate *raystate)
 {
-	int line_height;
-	int l_start;
-	int l_end;
+	int	line_height;
+	int	l_start;
+	int	l_end;
 
 	line_height = (int)(data->win_height / raystate->perpWallDist);
 	raystate->line_height = line_height;
@@ -145,10 +145,11 @@ void get_line_data(t_data *data, t_raystate *raystate)
 	which_texture(data, raystate, l_start, l_end);
 }
 
-void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end)
+void	reajust_line(t_data *data,
+	t_raystate *raystate, int *l_start, int *l_end)
 {
-	int len;
-	int mid_pix;
+	int	len;
+	int	mid_pix;
 
 	len = *l_end - *l_start;
 	mid_pix = round(len * data->player.posZ);
@@ -162,32 +163,30 @@ void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end)
 	if (*l_start >= data->win_height)
 		*l_start = data->win_height - 1;
 	if (*l_end >= data->win_height)
-		*l_end = data->win_height- 1;
+		*l_end = data->win_height - 1;
 }
 
-int assombrirCouleur(int couleurOriginale, int assombrissement)
+int	assombrircouleur(int couleuroriginale, int assombrissement)
 {
+	int	nouvellecouleur;
+	int	rouge;
+	int	vert;
+	int	bleu;
+
 	if (assombrissement < 1)
-		return(couleurOriginale);
-    // Extraire les composantes RVB de la couleur originale
-    int rouge = (couleurOriginale >> 16) & 0xFF;
-    int vert = (couleurOriginale >> 8) & 0xFF;
-    int bleu = couleurOriginale & 0xFF;
-
-    // Assombrir chaque composante RVB en soustrayant l'assombrissement
-    rouge -= assombrissement ;
-    vert -= assombrissement ;
-    bleu -= assombrissement ;
-
-	//* (int)(257 / (bleu + 1)))
-
-    // S'assurer que les valeurs RVB restent dans la plage valide (0-255)
-    if (rouge < 0) rouge = 0;
-    if (vert < 0) vert = 0;
-    if (bleu < 0) bleu = 0;
-
-    // Reconstruire la nouvelle valeur de couleur
-    int nouvelleCouleur = (rouge << 16) | (vert << 8) | bleu;
-    
-    return nouvelleCouleur;
+		return (couleuroriginale);
+	rouge = (couleuroriginale >> 16) & 0xFF;
+	vert = (couleuroriginale >> 8) & 0xFF;
+	bleu = couleuroriginale & 0xFF;
+	rouge -= assombrissement ;
+	vert -= assombrissement ;
+	bleu -= assombrissement ;
+	if (rouge < 0)
+		rouge = 0;
+	if (vert < 0)
+		vert = 0;
+	if (bleu < 0)
+		bleu = 0;
+	nouvellecouleur = (rouge << 16) | (vert << 8) | bleu;
+	return (nouvellecouleur);
 }

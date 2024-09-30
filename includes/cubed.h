@@ -40,6 +40,8 @@ int		close_window(t_data *data);
 int		key_released(int keycode, t_data *data);
 int		key_pressed(int keycode, t_data *data);
 int		multi_key(t_data *data);
+int	is_wall_from_player(t_data *data, double x, double y);
+int	is_item_from_player(t_data *data, double x, double y);
 
 /*------srcs/main/move------*/
 void	move_player(t_data *data, int x, int y);
@@ -77,7 +79,7 @@ void	calculate_init_dist(t_data *data, t_raystate *raystate, double rdx, double 
 void	ray_loop(t_data *data, t_raystate *raystate);
 void	get_line_data(t_data *data, t_raystate *raystate);
 void	pixel_put_opti(t_img *img, int x, int y, int color);
-void	drawVerticalLine(t_data *data, t_raystate *raystate, int yMin, int yMax, t_img *img);
+void	drawverticalline(t_data *data, t_raystate *raystate, int yMin, int yMax, t_img *img);
 void	clearScreen(t_img *img, int width, int height);
 void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end);
 
@@ -116,7 +118,7 @@ int		ft_strchr(char c, char *str);
 int		ft_strncmp(const char *str1, const char *str2, unsigned int n);
 char	*ft_strdup(char *s);
 int		get_pixel_color(t_img *img, int x, int y);
-int		assombrirCouleur(int couleurOriginale, int assombrissement);
+int		assombrircouleur(int couleurOriginale, int assombrissement);
 void	get_image(t_data *data);
 void	create_image(t_data *data);
 int		check_path(t_data *data);

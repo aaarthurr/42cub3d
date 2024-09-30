@@ -13,6 +13,23 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef	struct s_var
+{
+	int	a;
+	int	b;
+	int	c;
+	int	i;
+	int	j;
+	int	k;
+	int	o;
+	int	x;
+	int	y;
+	int z;
+	double	d_a;
+	double	d_b;
+	double	d_c;
+}			t_var;
+
 typedef struct s_pos
 {
 	int	x;
@@ -209,10 +226,10 @@ typedef struct roofstate_s
 	float	floorY;
 }			t_roofstate;
 
-typedef struct s_gptruc
+
+typedef struct s_sort
 {
     double dist;
     int order;
-}		t_gptruc;
-
+} 		t_sort;
 #endif

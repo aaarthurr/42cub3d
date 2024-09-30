@@ -60,20 +60,21 @@ void	set_sprite(t_data *data, int number)
 	data->sprite.pills = set_up_items(data, number);
 }
 
-int		is_a_pill_here(t_data *data, float x, float y)
+int	is_a_pill_here(t_data *data, float x, float y)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->sprite.number)
 	{
-		if (data->sprite.pills[i].x == x + 0.5 && data->sprite.pills[i].y == y + 0.5)
+		if (data->sprite.pills[i].x == x + 0.5
+			&& data->sprite.pills[i].y == y + 0.5)
 		{
-			return(1);
+			return (1);
 		}
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 void	init_pills(t_data *data)

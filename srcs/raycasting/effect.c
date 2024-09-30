@@ -14,7 +14,7 @@
 
 void	shake_screen(t_data *data)
 {
-	double x;
+	double	x;
 
 	x = (rand() % 11);
 	x = x / 3000;
@@ -34,10 +34,10 @@ void	shake_screen(t_data *data)
 
 void	parasite_screen(t_data *data)
 {
-	int i;
-	int x;
-	int y;
-	int bw;
+	int	i;
+	int	x;
+	int	y;
+	int	bw;
 
 	i = 0;
 	while (i < 400)
@@ -83,25 +83,25 @@ void	give_effect(t_data *data)
 		data->player.color_phase++;
 }
 
-void    death(t_data *data, const char *str)
+void	death(t_data *data, const char *str)
 {
 	printf("%s\n", str);
-    close_window(data);
+	close_window(data);
 }
 
-void    take_drugs(t_data *data)
+void	take_drugs(t_data *data)
 {
-    if (data->player.drug_level == 0)
-        data->player.drug_time = get_current_time() + 60000;
-    data->player.drug_level++;
+	if (data->player.drug_level == 0)
+		data->player.drug_time = get_current_time() + 60000;
+	data->player.drug_level++;
 }
 
-int give_lsd(t_data *data, int color)
+int	give_lsd(t_data *data, int color)
 {
-    double modifier;
+	double	modifier;
 
 	if (data->player.color_phase < 250)
-		return(color + data->player.color_phase);
-    modifier = (double)((get_current_time() / 100) % 200) / 100;
-    return (color * modifier);
+		return (color + data->player.color_phase);
+	modifier = (double)((get_current_time() / 100) % 200) / 100;
+	return (color * modifier);
 }

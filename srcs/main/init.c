@@ -46,7 +46,6 @@ void	copy_file(t_map_info *map_info)
 	while (j < map_info->height)
 	{
 		map_info->global[j] = get_next_line(fd);
-		printf("line : [%s]\n", map_info->global[j]);
 		j++;
 	}
 	map_info->global[j] = NULL;
