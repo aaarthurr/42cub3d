@@ -33,20 +33,20 @@ void	init_image(t_data *data)
 
 	s = SPRITE_SIZE;
 	x = TEX_SIZE;
-	data->texture.Nwall.img_ptr = NULL;
-	data->texture.Swall.img_ptr = NULL;
-	data->texture.Wwall.img_ptr = NULL;
-	data->texture.Ewall.img_ptr = NULL;
+	data->texture.nwall.img_ptr = NULL;
+	data->texture.swall.img_ptr = NULL;
+	data->texture.wwall.img_ptr = NULL;
+	data->texture.ewall.img_ptr = NULL;
 	data->texture.ceiling.img_ptr = NULL;
 	data->texture.pills.img_ptr = NULL;
-	data->texture.Nwall.img_ptr = mlx_xpm_file_to_image
-		(data->mlx, data->texture.Nwall_path, &x, &x);
-	data->texture.Swall.img_ptr = mlx_xpm_file_to_image
-		(data->mlx, data->texture.Swall_path, &x, &x);
-	data->texture.Wwall.img_ptr = mlx_xpm_file_to_image
-		(data->mlx, data->texture.Wwall_path, &x, &x);
-	data->texture.Ewall.img_ptr = mlx_xpm_file_to_image
-		(data->mlx, data->texture.Ewall_path, &x, &x);
+	data->texture.nwall.img_ptr = mlx_xpm_file_to_image
+		(data->mlx, data->texture.nwall_path, &x, &x);
+	data->texture.swall.img_ptr = mlx_xpm_file_to_image
+		(data->mlx, data->texture.swall_path, &x, &x);
+	data->texture.wwall.img_ptr = mlx_xpm_file_to_image
+		(data->mlx, data->texture.wwall_path, &x, &x);
+	data->texture.ewall.img_ptr = mlx_xpm_file_to_image
+		(data->mlx, data->texture.ewall_path, &x, &x);
 	data->texture.pills.img_ptr = mlx_xpm_file_to_image
 		(data->mlx, "textures/pills.xpm", &s, &s);
 	if (data->texture.ceiling_color_or_texture == 1)
@@ -77,10 +77,10 @@ char	*find_arg(t_data *data, char *which_texture)
 void	get_image(t_data *data)
 {
 	data->texture.ceiling_color_or_texture = 0;
-	data->texture.Nwall_path = find_arg(data, "NO");
-	data->texture.Swall_path = find_arg(data, "SO");
-	data->texture.Wwall_path = find_arg(data, "WE");
-	data->texture.Ewall_path = find_arg(data, "EA");
+	data->texture.nwall_path = find_arg(data, "NO");
+	data->texture.swall_path = find_arg(data, "SO");
+	data->texture.wwall_path = find_arg(data, "WE");
+	data->texture.ewall_path = find_arg(data, "EA");
 	if (search_floor_color(data) == 1)
 		exit_manager(data);
 	if (search_ceiling_color(data) == 1)
@@ -97,18 +97,18 @@ void	get_image(t_data *data)
 
 void	create_image(t_data *data)
 {
-	data->texture.Nwall.img_char = mlx_get_data_addr
-		(data->texture.Nwall.img_ptr, &data->texture.Nwall.bits_pix,
-			&data->texture.Nwall.len, &data->texture.Nwall.endian);
-	data->texture.Swall.img_char = mlx_get_data_addr
-		(data->texture.Swall.img_ptr, &data->texture.Swall.bits_pix,
-			&data->texture.Swall.len, &data->texture.Swall.endian);
-	data->texture.Wwall.img_char = mlx_get_data_addr
-		(data->texture.Wwall.img_ptr, &data->texture.Wwall.bits_pix,
-			&data->texture.Wwall.len, &data->texture.Wwall.endian);
-	data->texture.Ewall.img_char = mlx_get_data_addr
-		(data->texture.Ewall.img_ptr, &data->texture.Ewall.bits_pix,
-			&data->texture.Ewall.len, &data->texture.Ewall.endian);
+	data->texture.nwall.img_char = mlx_get_data_addr
+		(data->texture.nwall.img_ptr, &data->texture.nwall.bits_pix,
+			&data->texture.nwall.len, &data->texture.nwall.endian);
+	data->texture.swall.img_char = mlx_get_data_addr
+		(data->texture.swall.img_ptr, &data->texture.swall.bits_pix,
+			&data->texture.swall.len, &data->texture.swall.endian);
+	data->texture.wwall.img_char = mlx_get_data_addr
+		(data->texture.wwall.img_ptr, &data->texture.wwall.bits_pix,
+			&data->texture.wwall.len, &data->texture.wwall.endian);
+	data->texture.ewall.img_char = mlx_get_data_addr
+		(data->texture.ewall.img_ptr, &data->texture.ewall.bits_pix,
+			&data->texture.ewall.len, &data->texture.ewall.endian);
 	if (data->texture.ceiling_color_or_texture == 1)
 	{
 		data->texture.ceiling.img_char = mlx_get_data_addr

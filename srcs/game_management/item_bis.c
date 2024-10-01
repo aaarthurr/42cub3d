@@ -56,7 +56,7 @@ t_pills	*set_up_items(t_data *data, int number)
 void	set_sprite(t_data *data, int number)
 {
 	data->sprite.number = number;
-	data->sprite.Zbuffer = malloc(sizeof(double) * data->win_width);
+	data->sprite.zbuffer = malloc(sizeof(double) * data->win_width);
 	data->sprite.pills = set_up_items(data, number);
 }
 

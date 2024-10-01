@@ -14,10 +14,10 @@
 
 void	set_pos(t_data *data, int x, int y, char dir)
 {
-	data->player.IntposX = x;
-	data->player.IntposY = y;
-	data->player.posX = ((double)x) + 0.5;
-	data->player.posY = ((double)y) + 0.5;
+	data->player.intposx = x;
+	data->player.intposy = y;
+	data->player.posx = ((double)x) + 0.5;
+	data->player.posy = ((double)y) + 0.5;
 	if (dir == 'S')
 		set_vector(data, 0, 1);
 	else if (dir == 'N')
@@ -30,13 +30,13 @@ void	set_pos(t_data *data, int x, int y, char dir)
 
 void	set_vector(t_data *data, int x, int y)
 {
-	data->player.dirX = x;
-	data->player.dirY = y;
-	data->player.planX = y * -0.70;
-	data->player.planY = x * 0.70;
+	data->player.dirx = x;
+	data->player.diry = y;
+	data->player.planx = y * -0.70;
+	data->player.plany = x * 0.70;
 	data->player.speed = 50;
 	data->player.jump_speed = 0.02;
-	data->player.posZ = 0.65;
+	data->player.posz = 0.65;
 	data->player.is_falling = 0;
 	data->player.is_jumping = 0;
 	data->player.walk_phase = 1;

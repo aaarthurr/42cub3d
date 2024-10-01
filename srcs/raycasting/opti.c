@@ -27,9 +27,9 @@ void	drawverticalline_bis(t_data *data, t_raystate *raystate,
 	{
 		var->x = (int)var->d_b & (TEX_SIZE - 1);
 		var->d_b += var->d_a;
-		var->c = get_pixel_color(img, raystate->texX, var->x);
-		var->c = assombrircouleur(var->c, raystate->perpWallDist
-				* (raystate->perpWallDist / 2));
+		var->c = get_pixel_color(img, raystate->texx, var->x);
+		var->c = assombrircouleur(var->c, raystate->perpwalldist
+				* (raystate->perpwalldist / 2));
 		if (data->player.drug_level >= 9)
 			var->c = give_lsd(data, var->c);
 		pixel_put_opti(&(data->img),
@@ -52,7 +52,7 @@ void	drawverticalline(t_data *data, t_raystate *raystate,
 	var->d_b = ((var->lstart - raystate->offset) - data->win_height
 			/ 2 + raystate->line_height / 2) * var->d_a;
 	var->y = 0;
-	data->sprite.Zbuffer[raystate->x] = raystate->perpWallDist;
+	data->sprite.zbuffer[raystate->x] = raystate->perpwalldist;
 	while (var->y < var->lstart)
 	{
 		if (data->player.drug_level < 5)

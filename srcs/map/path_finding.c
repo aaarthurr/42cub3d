@@ -97,8 +97,8 @@ int	path_finding(t_data *data)
 	var.top = 1;
 	act.act_x = 0;
 	act.act_y = 0;
-	pos[0].x = data->player.IntposX;
-	pos[0].y = data->player.IntposY;
+	pos[0].x = data->player.intposx;
+	pos[0].y = data->player.intposy;
 	while (var.top > 0)
 	{
 		var.top--;

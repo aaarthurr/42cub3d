@@ -16,12 +16,12 @@ void	free_img(t_data *data)
 {
 	if (data->texture.ceiling_color_or_texture == 1)
 		mlx_destroy_image(data->mlx, data->texture.ceiling.img_ptr);
-	mlx_destroy_image(data->mlx, data->texture.Nwall.img_ptr);
-	mlx_destroy_image(data->mlx, data->texture.Swall.img_ptr);
-	mlx_destroy_image(data->mlx, data->texture.Wwall.img_ptr);
-	mlx_destroy_image(data->mlx, data->texture.Ewall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.nwall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.swall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.wwall.img_ptr);
+	mlx_destroy_image(data->mlx, data->texture.ewall.img_ptr);
 	mlx_destroy_image(data->mlx, data->texture.pills.img_ptr);
-	free(data->sprite.Zbuffer);
+	free(data->sprite.zbuffer);
 	free(data->sprite.pills);
 	mlx_destroy_image(data->mlx, data->img.img_ptr);
 }
@@ -34,14 +34,14 @@ void	free_line(t_data *data)
 
 void	free_texture(t_data *data)
 {
-	if (data->texture.Nwall_path)
-		free(data->texture.Nwall_path);
-	if (data->texture.Swall_path)
-		free(data->texture.Swall_path);
-	if (data->texture.Wwall_path)
-		free(data->texture.Wwall_path);
-	if (data->texture.Ewall_path)
-		free(data->texture.Ewall_path);
+	if (data->texture.nwall_path)
+		free(data->texture.nwall_path);
+	if (data->texture.swall_path)
+		free(data->texture.swall_path);
+	if (data->texture.wwall_path)
+		free(data->texture.wwall_path);
+	if (data->texture.ewall_path)
+		free(data->texture.ewall_path);
 	if (data->texture.ceiling_color_or_texture == 1)
 		free(data->texture.ceiling_path);
 }

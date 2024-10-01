@@ -26,8 +26,8 @@ void	send_rays(t_data *data)
 	while (x < data->win_width)
 	{
 		camx = ((2 * x) / (double)(data->win_width)) - 1;
-		raydirx = data->player.dirX + (data->player.planX * camx);
-		raydiry = data->player.dirY + (data->player.planY * camx);
+		raydirx = data->player.dirx + (data->player.planx * camx);
+		raydiry = data->player.diry + (data->player.plany * camx);
 		one_ray(data, raydirx, raydiry, x);
 		x++;
 	}
@@ -37,25 +37,25 @@ void	send_rays(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0, 0);
 }
 
-void	one_ray(t_data *data, double rdX, double rdY, int x)
+void	one_ray(t_data *data, double rdx, double rdy, int x)
 {
 	t_raystate	raystate;
 
 	raystate.x = x;
 	raystate.hit = 0;
-	raystate.mapX = (int)(data->player.posX);
-	raystate.mapY = (int)(data->player.posY);
-	raystate.rayDirX = rdX;
-	raystate.rayDirY = rdY;
-	if (rdX == 0)
-		raystate.deltaDistX = 1e30;
+	raystate.mapx = (int)(data->player.posx);
+	raystate.mapy = (int)(data->player.posy);
+	raystate.raydirx = rdx;
+	raystate.raydiry = rdy;
+	if (rdx == 0)
+		raystate.deltadistx = 1e30;
 	else
-		raystate.deltaDistX = fabs(1 / rdX);
-	if (rdY == 0)
-		raystate.deltaDistY = 1e30;
+		raystate.deltadistx = fabs(1 / rdx);
+	if (rdy == 0)
+		raystate.deltadisty = 1e30;
 	else
-		raystate.deltaDistY = fabs(1 / rdY);
-	calculate_init_dist(data, &raystate, rdX, rdY);
+		raystate.deltadisty = fabs(1 / rdy);
+	calculate_init_dist(data, &raystate, rdx, rdy);
 	ray_loop(data, &raystate);
 }
 
@@ -64,27 +64,27 @@ void	calculate_init_dist(t_data *data,
 {
 	if (rdx < 0)
 	{
-		raystate->stepX = -1;
-		raystate->sideDistX = (data->player.posX - raystate->mapX)
-			* raystate->deltaDistX;
+		raystate->stepx = -1;
+		raystate->sidedistx = (data->player.posx - raystate->mapx)
+			* raystate->deltadistx;
 	}
 	else
 	{
-		raystate->stepX = 1;
-		raystate->sideDistX = (raystate->mapX + 1.0 - data->player.posX)
-			* raystate->deltaDistX;
+		raystate->stepx = 1;
+		raystate->sidedistx = (raystate->mapx + 1.0 - data->player.posx)
+			* raystate->deltadistx;
 	}
 	if (rdy < 0)
 	{
-		raystate->stepY = -1;
-		raystate->sideDistY = (data->player.posY - raystate->mapY)
-			* raystate->deltaDistY;
+		raystate->stepy = -1;
+		raystate->sidedisty = (data->player.posy - raystate->mapy)
+			* raystate->deltadisty;
 	}
 	else
 	{
-		raystate->stepY = 1;
-		raystate->sideDistY = (raystate->mapY + 1.0 - data->player.posY)
-			* raystate->deltaDistY;
+		raystate->stepy = 1;
+		raystate->sidedisty = (raystate->mapy + 1.0 - data->player.posy)
+			* raystate->deltadisty;
 	}
 }
 
@@ -92,25 +92,25 @@ void	ray_loop(t_data *data, t_raystate *raystate)
 {
 	while (raystate->hit == 0)
 	{
-		if (raystate->sideDistX < raystate->sideDistY)
+		if (raystate->sidedistx < raystate->sidedisty)
 		{
-			raystate->sideDistX += raystate->deltaDistX;
-			raystate->mapX += raystate->stepX;
+			raystate->sidedistx += raystate->deltadistx;
+			raystate->mapx += raystate->stepx;
 			raystate->side = 0;
 		}
 		else
 		{
-			raystate->sideDistY += raystate->deltaDistY;
-			raystate->mapY += raystate->stepY;
+			raystate->sidedisty += raystate->deltadisty;
+			raystate->mapy += raystate->stepy;
 			raystate->side = 1;
 		}
-		if (data->map_info.map[raystate->mapY][raystate->mapX] == '1')
+		if (data->map_info.map[raystate->mapy][raystate->mapx] == '1')
 			raystate->hit = 1;
 	}
 	if (raystate->side == 0)
-		raystate->perpWallDist = (raystate->sideDistX - raystate->deltaDistX);
+		raystate->perpwalldist = (raystate->sidedistx - raystate->deltadistx);
 	else
-		raystate->perpWallDist = (raystate->sideDistY - raystate->deltaDistY);
+		raystate->perpwalldist = (raystate->sidedisty - raystate->deltadisty);
 	get_line_data(data, raystate);
 }
 
@@ -121,12 +121,12 @@ void	which_texture(t_data *data, t_raystate *raystate,
 
 	var.lend = l_end;
 	var.lstart = l_start;
-	if (raystate->side == 0 && raystate->mapX > data->player.posX)
-		drawverticalline(data, raystate, &(data->texture.Ewall), &var);
-	if (raystate->side == 0 && raystate->mapX < data->player.posX)
-		drawverticalline(data, raystate, &(data->texture.Wwall), &var);
-	if (raystate->side == 1 && raystate->mapY > data->player.posY)
-		drawverticalline(data, raystate, &(data->texture.Swall), &var);
-	if (raystate->side == 1 && raystate->mapY < data->player.posY)
-		drawverticalline(data, raystate, &(data->texture.Nwall), &var);
+	if (raystate->side == 0 && raystate->mapx > data->player.posx)
+		drawverticalline(data, raystate, &(data->texture.ewall), &var);
+	if (raystate->side == 0 && raystate->mapx < data->player.posx)
+		drawverticalline(data, raystate, &(data->texture.wwall), &var);
+	if (raystate->side == 1 && raystate->mapy > data->player.posy)
+		drawverticalline(data, raystate, &(data->texture.swall), &var);
+	if (raystate->side == 1 && raystate->mapy < data->player.posy)
+		drawverticalline(data, raystate, &(data->texture.nwall), &var);
 }

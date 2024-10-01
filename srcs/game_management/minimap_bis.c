@@ -17,8 +17,8 @@ int	is_wall_from_player(t_data *data, double x, double y)
 	double	m_x;
 	double	m_y;
 
-	m_x = data->player.posX + x;
-	m_y = data->player.posY + y;
+	m_x = data->player.posx + x;
+	m_y = data->player.posy + y;
 	if (m_x < 0 || m_y < 0)
 		return (1);
 	if (data->map_info.height < m_y)
@@ -36,8 +36,8 @@ int	is_item_from_player(t_data *data, double x, double y)
 	double	m_y;
 	int		i;
 
-	m_x = floor((data->player.posX + x) * 10) / 10;
-	m_y = floor((data->player.posY + y) * 10) / 10;
+	m_x = floor((data->player.posx + x) * 10) / 10;
+	m_y = floor((data->player.posy + y) * 10) / 10;
 	i = 0;
 	while (i < data->sprite.number)
 	{

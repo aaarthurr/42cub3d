@@ -17,10 +17,10 @@ void	cast_sprite_bis(t_data *data, int i, int **spriteorder,
 {
 	(*spriteorder)[i] = i;
 	data->sprite.pills[i].index = i;
-	(*spritedistance)[i] = ((data->player.posX - data->sprite.pills[i].x)
-			* (data->player.posX - data->sprite.pills[i].x)
-			+ (data->player.posY - data->sprite.pills[i].y)
-			* (data->player.posY - data->sprite.pills[i].y));
+	(*spritedistance)[i] = ((data->player.posx - data->sprite.pills[i].x)
+			* (data->player.posx - data->sprite.pills[i].x)
+			+ (data->player.posy - data->sprite.pills[i].y)
+			* (data->player.posy - data->sprite.pills[i].y));
 	data->sprite.pills[i].distance = (*spritedistance)[i];
 }
 

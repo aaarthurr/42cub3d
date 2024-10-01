@@ -14,6 +14,11 @@
 
 int	check_map(t_data *data)
 {
+	if (data->map_info.height > 300)
+	{
+		printf("Error unvalid map : Too Huge (Like ya cock buddy)\n");
+		return (free_line(data), 1);
+	}
 	if (check_walls(data) == 1)
 	{
 		printf("Error unvalid map : Unrecognized charset\n");

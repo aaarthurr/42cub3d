@@ -37,18 +37,18 @@ int	check_path_tools2(t_data *data)
 {
 	int	fd;
 
-	if (data->texture.Nwall_path != NULL)
+	if (data->texture.nwall_path != NULL)
 	{
-		fd = open(data->texture.Nwall_path, O_RDONLY);
-		if (check_path_xpm_file(data->texture.Nwall_path) == 1 || fd == -1)
+		fd = open(data->texture.nwall_path, O_RDONLY);
+		if (check_path_xpm_file(data->texture.nwall_path) == 1 || fd == -1)
 			return (printf("Error N : Texture Path. ABORTING\n"), 1);
 	}
 	else
 		return (1);
-	if (data->texture.Swall_path != NULL)
+	if (data->texture.swall_path != NULL)
 	{
-		fd = open(data->texture.Swall_path, O_RDONLY);
-		if (check_path_xpm_file(data->texture.Swall_path) == 1 || fd == -1)
+		fd = open(data->texture.swall_path, O_RDONLY);
+		if (check_path_xpm_file(data->texture.swall_path) == 1 || fd == -1)
 			return (printf("Error S : Texture Path. ABORTING\n"), 1);
 	}
 	else
@@ -60,18 +60,18 @@ int	check_path_tools(t_data *data)
 {
 	int	fd;
 
-	if (data->texture.Ewall_path != NULL)
+	if (data->texture.ewall_path != NULL)
 	{
-		fd = open(data->texture.Ewall_path, O_RDONLY);
-		if (check_path_xpm_file(data->texture.Ewall_path) == 1 || fd == -1)
+		fd = open(data->texture.ewall_path, O_RDONLY);
+		if (check_path_xpm_file(data->texture.ewall_path) == 1 || fd == -1)
 			return (printf("Error E : Texture Path. ABORTING\n"), 1);
 	}
 	else
 		return (1);
-	if (data->texture.Wwall_path != NULL)
+	if (data->texture.wwall_path != NULL)
 	{
-		fd = open(data->texture.Wwall_path, O_RDONLY);
-		if (check_path_xpm_file(data->texture.Wwall_path) == 1 || fd == -1)
+		fd = open(data->texture.wwall_path, O_RDONLY);
+		if (check_path_xpm_file(data->texture.wwall_path) == 1 || fd == -1)
 			return (printf("Error W : Texture Path. ABORTING\n"), 1);
 	}
 	else

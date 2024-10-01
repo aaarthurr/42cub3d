@@ -22,12 +22,12 @@ void	shake_screen(t_data *data)
 		data->player.shake_phase = -10;
 	if (data->player.shake_phase >= 0)
 	{
-		data->player.posZ += x;
+		data->player.posz += x;
 		data->player.shake_phase += 1;
 	}
 	else if (data->player.shake_phase < 0)
 	{
-		data->player.posZ -= x;
+		data->player.posz -= x;
 		data->player.shake_phase += 1;
 	}
 }
@@ -59,14 +59,14 @@ void	fuck_fov(t_data *data)
 		data->player.fov_phase = -300;
 	if (data->player.fov_phase >= 0)
 	{
-		data->player.planX -= 0.01;
-		data->player.planY += 0.01;
+		data->player.planx -= 0.01;
+		data->player.plany += 0.01;
 		data->player.fov_phase += rand() % 10;
 	}
 	else if (data->player.fov_phase < 0)
 	{
-		data->player.planX += 0.01;
-		data->player.planY -= 0.01;
+		data->player.planx += 0.01;
+		data->player.plany -= 0.01;
 		data->player.fov_phase += rand() % 10;
 	}
 }
