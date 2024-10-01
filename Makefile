@@ -12,11 +12,11 @@ HEADER = cub3d.h
 
 MAIN = main init error init_bis
 
-RAYCASTING = raycasting opti textures textures_bis roof_cast effect effect_bis get_floor
+RAYCASTING = raycasting raycasting_bis opti textures textures_bis roof_cast effect effect_bis get_floor
 
 UTILS = tools tools_bis ft_tools free_manager ft_itoa
 
-MAP = map_checker mapping checker path_finding
+MAP = map_checker mapping checker path_finding path_finding_bis
 
 GNL = get_next_line get_next_line_utils
 

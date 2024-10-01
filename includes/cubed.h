@@ -40,8 +40,8 @@ int		close_window(t_data *data);
 int		key_released(int keycode, t_data *data);
 int		key_pressed(int keycode, t_data *data);
 int		multi_key(t_data *data);
-int	is_wall_from_player(t_data *data, double x, double y);
-int	is_item_from_player(t_data *data, double x, double y);
+int		is_wall_from_player(t_data *data, double x, double y);
+int		is_item_from_player(t_data *data, double x, double y);
 
 /*------srcs/main/move------*/
 void	move_player(t_data *data, int x, int y);
@@ -75,13 +75,16 @@ void	error_manager(char *line, int code);
 /*------srcs/raycasting/raycasting.c---*/
 void	send_rays(t_data *data);
 void	one_ray(t_data *data, double rdX, double rdY, int x);
-void	calculate_init_dist(t_data *data, t_raystate *raystate, double rdx, double rdy);
+void	calculate_init_dist(t_data *data, t_raystate *raystate,
+			double rdx, double rdy);
 void	ray_loop(t_data *data, t_raystate *raystate);
 void	get_line_data(t_data *data, t_raystate *raystate);
 void	pixel_put_opti(t_img *img, int x, int y, int color);
-void	drawverticalline(t_data *data, t_raystate *raystate, int yMin, int yMax, t_img *img);
+void	drawverticalline(t_data *data, t_raystate *raystate,
+			t_img *img, t_var *var);
 void	clearScreen(t_img *img, int width, int height);
-void	reajust_line(t_data *data, t_raystate *raystate, int *l_start, int *l_end);
+void	reajust_line(t_data *data, t_raystate *raystate,
+			int *l_start, int *l_end);
 
 /*------srcs/raycasting/roof_Cast.c---*/
 void	cast_floor(t_data *data);
@@ -125,9 +128,9 @@ int		check_path(t_data *data);
 int		give_lsd(t_data *date, int color);
 void	print_map(t_data *data);
 void	take_drugs(t_data *data);
-void    death(t_data *data, const char *str);
-void    set_sprite(t_data *data, int number);
-void    cast_sprite(t_data *data);
+void	death(t_data *data, const char *str);
+void	set_sprite(t_data *data, int number);
+void	cast_sprite(t_data *data);
 void	give_effect(t_data *data);
 
 int		set_items_coordonnates(t_data *data, t_pills *pill);
@@ -136,11 +139,17 @@ void	set_sprite(t_data *data, int number);
 void	init_pills(t_data *data);
 t_pills	*set_up_items(t_data *data, int number);
 
-int     comparesprites(const void *a, const void *b);
+int		comparesprites(const void *a, const void *b);
 void	cast_sprite_ter(t_data *data, int i, int **spriteorder);
-void	cast_sprite_bis(t_data *data, int i, int **spriteorder, double **spritedistance);
+void	cast_sprite_bis(t_data *data, int i, int **spriteorder,
+			double **spritedistance);
 void	draw_sprite(t_data *data, int *spriteOrder, int i);
 void	generate_path_bis(t_data *data, t_var *var, int index);
+int		should_i_be_here(int wcase, t_actpos act, char **map, t_data *data);
 
+int		try_up_down(t_data *data, t_actpos act, t_pos *pos, t_var *var);
+int		try_left_right(t_data *data, t_actpos act, t_pos *pos, t_var *var);
+void	which_texture(t_data *data, t_raystate *raystate,
+			int l_start, int l_end);
 
 #endif

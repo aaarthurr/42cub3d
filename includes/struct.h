@@ -25,10 +25,12 @@ typedef	struct s_var
 	int	x;
 	int	y;
 	int z;
+	int top;
 	int fd;
 	int lstart;
 	int lend;
 	int size;
+	int nb_line;
 	char *temp;
 	char *str;
 	char **tab;
@@ -187,7 +189,7 @@ typedef struct data_s
 	int			win_width;
 	size_t		last_frame;
 	t_player	player;
-	t_map_info  map_info;
+	t_map_info	map_info;
 	t_key_info	key_info;
 	t_mouse		mouse;
 	t_img		img;
@@ -233,10 +235,10 @@ typedef struct roofstate_s
 	float	floorY;
 }			t_roofstate;
 
-
 typedef struct s_sort
 {
-    double dist;
-    int order;
-} 		t_sort;
+	double	dist;
+	int		order;
+}			t_sort;
+
 #endif
